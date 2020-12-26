@@ -1,11 +1,15 @@
 package com.gen.com.Insurance_portal.entites;
 
 import com.gen.com.Insurance_portal.common.enums.SysAdminType;
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 
+@AllArgsConstructor
+@NoArgsConstructor
 @EqualsAndHashCode(callSuper = true)
 @Data
 @Entity

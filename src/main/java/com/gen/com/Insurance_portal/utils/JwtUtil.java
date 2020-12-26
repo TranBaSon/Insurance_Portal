@@ -1,5 +1,8 @@
 package com.gen.com.Insurance_portal.utils;
 
+import com.gen.com.Insurance_portal.entites.Authorities;
+import com.gen.com.Insurance_portal.entites.Role;
+import com.gen.com.Insurance_portal.entites.User;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
@@ -9,6 +12,7 @@ import org.springframework.stereotype.Service;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Set;
 import java.util.function.Function;
 
 @Service
@@ -37,9 +41,24 @@ public class JwtUtil {
         return extractExpiration(token).before(new Date());
     }
 
-    public String generateToken(UserDetails userDetail) {
-        Map<String, Object> claims = new HashMap<>();
+    public String generateToken(UserDetails userDetail, Map<String, Object> claims) {
         return createToken(claims, userDetail.getUsername());
+    }
+
+    public Map<String, Object> generateClaims(User user) {
+        Role role = user.getRole();
+
+        Map<String, Object> claims = new HashMap<>();
+        claims.put("surname", user.getSurname());
+        claims.put("givenName", user.getGivenName());
+
+        if (role != null) {
+            claims.put("role", role.getName());
+            Set<Authorities> authorities = role.getAuthoritiesSet();
+            claims.put("authorities", authorities);
+        }
+
+        return claims;
     }
 
     private String createToken(Map<String, Object> claims, String subject) {

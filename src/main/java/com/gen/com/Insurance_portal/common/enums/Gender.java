@@ -1,5 +1,7 @@
 package com.gen.com.Insurance_portal.common.enums;
 
+import java.util.stream.Stream;
+
 public enum Gender {
     MALE("nam"), // 0
     FEMALE(""), // 1
@@ -13,5 +15,10 @@ public enum Gender {
 
     public String getValue() {
         return value;
+    }
+
+    @Override
+    public String toString() {
+        return this.value;
     }
 }

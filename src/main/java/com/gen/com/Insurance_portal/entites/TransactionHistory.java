@@ -4,7 +4,9 @@ import com.gen.com.Insurance_portal.common.enums.PaymentMethod;
 import com.gen.com.Insurance_portal.common.enums.PolicyGroup;
 import com.gen.com.Insurance_portal.common.enums.TransactionProcessName;
 import com.gen.com.Insurance_portal.common.enums.TransactionStatus;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -12,6 +14,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import java.util.Date;
 
+@AllArgsConstructor
+@NoArgsConstructor
 @Data
 @Entity
 public class TransactionHistory {

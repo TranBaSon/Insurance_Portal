@@ -1,12 +1,18 @@
 package com.gen.com.Insurance_portal.entites;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.gen.com.Insurance_portal.common.enums.Gender;
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import java.util.Date;
 
+@AllArgsConstructor
+@NoArgsConstructor
 @EqualsAndHashCode(callSuper = true)
 @Data
 @Entity
@@ -20,13 +26,23 @@ public class User extends AbstractEntity{
 
     private String givenName;
 
-    @Column(nullable = false)
-    private String userName;
+    private String username;
 
+    @Column(nullable = false)
+    private String password;
+
+    private String phoneNumber;
+
+    private String phoneCode;
+
+    private String email;
+
+    @Temporal(TemporalType.DATE)
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date dod;
 
-    @Column(nullable = false)
-    private Gender gender;
+    @Enumerated(value = EnumType.STRING)
+    private Gender gender = Gender.NONE;
 
     @Column(length = 50)
     private String idNumber;
@@ -38,26 +54,23 @@ public class User extends AbstractEntity{
     @Column(nullable = false)
     private boolean fromLegacySystem;
 
-    private boolean isCancelled;
+    private boolean isCancelled = false;
 
     private String cancellationReason;
 
-    private Date cancelDate;
+    private Date cancelDate = null;
 
-    private Boolean isDeleted;
+    private Boolean isDeleted = false;
 
     private Date deletedAt;
 
-    public User() {
-        this.address = "";
-        this.idNumber = "";
-        this.gender = Gender.NONE;
-        this.isCancelled = false;
-        this.cancelDate = null;
-    }
+    private Boolean isActive;
 
     @ManyToOne
     @JoinColumn(name = "role_id")
     private Role role;
 
+    @JsonIgnore
+    @OneToOne( mappedBy = "user")
+    private RefreshToken refreshToken;
 }
