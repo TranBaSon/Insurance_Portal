@@ -1,7 +1,16 @@
 # ===============================
 # TWILIO
 # ===============================
+twilio:
+  account_sid: AC3f8c0049f658a78fd9b40603a0e017a9
+  auth_token: fd22aa70f51fd979e739543998849364
 
+
+
+app:
+  token:
+    refresh:
+      duration: 2592000000
 
 
 
