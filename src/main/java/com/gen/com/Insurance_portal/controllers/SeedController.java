@@ -29,6 +29,11 @@ public class SeedController {
         this.productCategoryService = productCategoryService;
     }
 
+    @GetMapping
+    public String hello() {
+        return "Welcome to here!";
+    }
+
     @GetMapping("/role")
     public String seedRole() {
 

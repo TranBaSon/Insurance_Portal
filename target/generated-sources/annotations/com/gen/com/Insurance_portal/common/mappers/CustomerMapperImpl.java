@@ -4,7 +4,7 @@ import javax.annotation.Generated;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2020-12-26T22:56:28+0700",
+    date = "2020-12-27T00:05:23+0700",
     comments = "version: 1.3.0.Final, compiler: javac, environment: Java 1.8.0_265 (AdoptOpenJDK)"
 )
 public class CustomerMapperImpl implements CustomerMapper {
