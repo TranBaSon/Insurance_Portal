@@ -7,7 +7,7 @@ import javax.annotation.Generated;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2020-12-27T00:05:23+0700",
+    date = "2020-12-27T02:10:21+0700",
     comments = "version: 1.3.0.Final, compiler: javac, environment: Java 1.8.0_265 (AdoptOpenJDK)"
 )
 public class UserMapperImpl implements UserMapper {
@@ -20,6 +20,16 @@ public class UserMapperImpl implements UserMapper {
 
         User user = new User();
 
+        user.setSurname( userModel.getSurname() );
+        user.setGivenName( userModel.getGivenName() );
+        user.setUsername( userModel.getUsername() );
+        user.setPassword( userModel.getPassword() );
+        user.setPhoneNumber( userModel.getPhoneNumber() );
+        user.setEmail( userModel.getEmail() );
+        user.setGender( userModel.getGender() );
+        user.setIdNumber( userModel.getIdNumber() );
+        user.setAddress( userModel.getAddress() );
+
         return user;
     }
 
@@ -30,6 +40,14 @@ public class UserMapperImpl implements UserMapper {
         }
 
         ResponseUserInfor responseUserInfor = new ResponseUserInfor();
+
+        responseUserInfor.setId( user.getId() );
+        responseUserInfor.setUsername( user.getUsername() );
+        responseUserInfor.setEmail( user.getEmail() );
+        responseUserInfor.setSurname( user.getSurname() );
+        responseUserInfor.setGivenName( user.getGivenName() );
+        responseUserInfor.setPhoneNumber( user.getPhoneNumber() );
+        responseUserInfor.setRole( user.getRole() );
 
         return responseUserInfor;
     }

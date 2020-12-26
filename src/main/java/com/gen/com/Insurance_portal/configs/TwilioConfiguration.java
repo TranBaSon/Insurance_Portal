@@ -8,6 +8,7 @@ import org.springframework.context.annotation.Configuration;
 public class TwilioConfiguration {
     private String accountSid;
     private String authToken;
+    private String phoneNumber;
 
     public TwilioConfiguration() {}
 
@@ -25,5 +26,13 @@ public class TwilioConfiguration {
 
     public void setAuthToken(String authToken) {
         this.authToken = authToken;
+    }
+
+    public String getPhoneNumber() {
+        return phoneNumber;
+    }
+
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
     }
 }
