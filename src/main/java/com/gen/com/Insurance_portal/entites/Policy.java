@@ -4,12 +4,16 @@ import com.gen.com.Insurance_portal.common.enums.PaymentStatus;
 import com.gen.com.Insurance_portal.common.enums.PolicyGroup;
 import com.gen.com.Insurance_portal.common.enums.PolicyStatus;
 import com.gen.com.Insurance_portal.common.enums.PurchaseMethod;
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.util.Date;
 
+@AllArgsConstructor
+@NoArgsConstructor
 @EqualsAndHashCode(callSuper = true)
 @Data
 @Entity

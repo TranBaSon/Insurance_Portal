@@ -1,13 +1,17 @@
 package com.gen.com.Insurance_portal.entites;
 
 import com.gen.com.Insurance_portal.common.enums.AttributeFormat;
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.util.Date;
 import java.util.Set;
 
+@AllArgsConstructor
+@NoArgsConstructor
 @EqualsAndHashCode(callSuper = true)
 @Data
 @Entity

@@ -1,10 +1,14 @@
 package com.gen.com.Insurance_portal.entites;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 
+@AllArgsConstructor
+@NoArgsConstructor
 @EqualsAndHashCode(callSuper = true)
 @Data
 @Entity
@@ -17,7 +21,6 @@ public class ProductCategory extends AbstractEntity{
     @Column(nullable = false)
     private String name;
 
-    @Column(nullable = false)
     private String nameDisplayOnClient;
 
     @Column(name = "`order`")
@@ -25,4 +28,7 @@ public class ProductCategory extends AbstractEntity{
 
     private String description;
 
+    public ProductCategory(String name) {
+        this.name = name;
+    }
 }
