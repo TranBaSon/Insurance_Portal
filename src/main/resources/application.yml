@@ -2,7 +2,14 @@
 # TWILIO
 # ===============================
 
-
+twilio:
+  account_sid: AC3f8c0049f658a78fd9b40603a0e017a9
+  auth_token: 0fc2899299830b824a2f81b11ac40b6a
+  phone_number: +14793483276
+app:
+  token:
+    refresh:
+      duration: 2592000000
 
 # ===============================
 # DATABASE
