@@ -9,10 +9,7 @@ import io.jsonwebtoken.SignatureAlgorithm;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
-import java.util.Date;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 import java.util.function.Function;
 
 @Service
@@ -54,7 +51,7 @@ public class JwtUtil {
 
         if (role != null) {
             claims.put("role", role.getName());
-            Set<Authorities> authorities = role.getAuthoritiesSet();
+            List<Authorities> authorities = role.getAuthorities();
             claims.put("authorities", authorities);
         }
 

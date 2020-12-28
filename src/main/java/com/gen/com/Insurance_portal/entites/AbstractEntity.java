@@ -23,6 +23,8 @@ public abstract class AbstractEntity {
 
     private Date deletedAt;
 
+    private Boolean isActive = true;
+
     public Date getCreatedAt() {
         return createdAt;
     }
@@ -71,5 +73,21 @@ public abstract class AbstractEntity {
 
     public void setDeletedAt(Date deletedAt) {
         this.deletedAt = deletedAt;
+    }
+
+    public void setCreatedAt(Date createdAt) {
+        this.createdAt = createdAt;
+    }
+
+    public void setUpdatedAt(Date updatedAt) {
+        this.updatedAt = updatedAt;
+    }
+
+    public Boolean getActive() {
+        return isActive;
+    }
+
+    public void setActive(Boolean active) {
+        isActive = active;
     }
 }

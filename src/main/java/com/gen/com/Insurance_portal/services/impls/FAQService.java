@@ -10,6 +10,7 @@ public class FAQService extends AbstractService<FAQ> implements IFAQService {
     private final FAQRepository faqRepository;
 
     public FAQService(FAQRepository faqRepository) {
+        super(faqRepository);
         this.faqRepository = faqRepository;
     }
 }

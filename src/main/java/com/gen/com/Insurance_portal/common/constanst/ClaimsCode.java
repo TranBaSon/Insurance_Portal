@@ -12,7 +12,7 @@ public class ClaimsCode {
 
     //Attribute
     public static final String AttributeCreate = "Attribute_Create";
-    public static final String AttributeEdit = "Attribute_Cdit";
+    public static final String AttributeEdit = "Attribute_Edit";
     public static final String AttributeList = "Attribute_List";
     public static final String AttributeStatus = "Attribute_Status";
     public static final String AttributeDetail = "Attribute_Detail";

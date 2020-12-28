@@ -11,9 +11,11 @@ public interface IAuthService {
 
     TokenResponse refreshToken(String refreshToken);
 
-    RegisterStatus registerUser(User user);
+    RegisterStatus registerUser(User user, Boolean isProvider);
 
     RegisterStatus registerCustomer(CreateUserModel customerModel);
+
+    RegisterStatus registerProvider(CreateProviderModel providerModel);
 
     Boolean activeUser(UserModelActive modelActive);
 

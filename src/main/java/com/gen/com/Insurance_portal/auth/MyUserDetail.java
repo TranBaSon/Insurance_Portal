@@ -23,7 +23,7 @@ public class MyUserDetail implements UserDetails {
             return new HashSet<SimpleGrantedAuthority>();
         }
 
-        return user.getRole().getAuthoritiesSet().stream()
+        return user.getRole().getAuthorities().stream()
                 .map(authority -> new SimpleGrantedAuthority("ROLE_" + authority.getCode()))
                 .collect(Collectors.toSet());
 

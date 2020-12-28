@@ -23,7 +23,7 @@ public class ProductProvider extends AbstractEntity {
     private String name;
 
     @Column(nullable = false)
-    protected String code;
+    private String code;
 
     private String email;
 
@@ -49,6 +49,7 @@ public class ProductProvider extends AbstractEntity {
 
     @OneToMany(mappedBy = "productProvider", cascade = CascadeType.ALL)
     private Set<CustomerContactCode> customerContactCodes;
+
     private Boolean isActive;
 
 }

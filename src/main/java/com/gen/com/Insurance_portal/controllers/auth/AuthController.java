@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 
+@CrossOrigin(origins = "*")
 @RestController
 @RequestMapping("/api/v1/auth")
 public class AuthController {
@@ -37,7 +38,30 @@ public class AuthController {
 
         if (result == RegisterStatus.ExistUser) {
             return new ResponseEntity<>(
-                    new ResponseDataModel(false, "email or phone or uername already exists"),
+                    new ResponseDataModel(false, "email or phone or username already exists"),
+                    HttpStatus.BAD_REQUEST
+            );
+        }else if (result == RegisterStatus.None) {
+            return new ResponseEntity<>(
+                    new ResponseDataModel(false, "bad request."),
+                    HttpStatus.BAD_REQUEST
+            );
+        }
+
+        return new ResponseEntity<>(
+                new ResponseDataModel(true, result.getValue()),
+                HttpStatus.OK
+        );
+    }
+
+    @PostMapping("/register")
+    public ResponseEntity<?> registerProvider(@Valid @RequestBody CreateProviderModel providerModel) {
+
+        RegisterStatus result = authService.registerProvider(providerModel);
+
+        if (result == RegisterStatus.ExistUser) {
+            return new ResponseEntity<>(
+                    new ResponseDataModel(false, "email or phone or username already exists"),
                     HttpStatus.BAD_REQUEST
             );
         }else if (result == RegisterStatus.None) {

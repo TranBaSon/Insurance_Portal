@@ -5,20 +5,16 @@ import com.gen.com.Insurance_portal.auth.MyUserDetailService;
 import com.gen.com.Insurance_portal.common.Helpper;
 import com.gen.com.Insurance_portal.common.TwilioHelper;
 import com.gen.com.Insurance_portal.common.enums.RegisterStatus;
+import com.gen.com.Insurance_portal.common.enums.SysAdminType;
 import com.gen.com.Insurance_portal.common.mappers.UserMapper;
-import com.gen.com.Insurance_portal.entites.Customer;
-import com.gen.com.Insurance_portal.entites.RefreshToken;
-import com.gen.com.Insurance_portal.entites.Role;
-import com.gen.com.Insurance_portal.entites.User;
+import com.gen.com.Insurance_portal.entites.*;
 import com.gen.com.Insurance_portal.exceptions.MessageException;
 import com.gen.com.Insurance_portal.exceptions.TokenRefreshException;
 import com.gen.com.Insurance_portal.models.RequestModels.*;
 import com.gen.com.Insurance_portal.models.responseModels.ResponseUserInfor;
 import com.gen.com.Insurance_portal.models.responseModels.TokenResponse;
 import com.gen.com.Insurance_portal.repositories.CustomerRepository;
-import com.gen.com.Insurance_portal.services.IAuthService;
-import com.gen.com.Insurance_portal.services.IRoleService;
-import com.gen.com.Insurance_portal.services.IUserService;
+import com.gen.com.Insurance_portal.services.*;
 import com.gen.com.Insurance_portal.services.common.RefreshTokenService;
 import com.gen.com.Insurance_portal.utils.JwtUtil;
 import com.gen.com.Insurance_portal.utils.Utils;
@@ -43,12 +39,15 @@ public class AuthService implements IAuthService {
     private final MyUserDetailService userDetailService;
     private final IUserService userService;
     private final IRoleService roleService;
+    private final IProductProviderService productProviderService;
+    private final ISysAdminService sysAdminService;
 
     public AuthService(CustomerRepository customerRepository, PasswordEncoder passwordEncoder,
                        RefreshTokenService refreshTokenService, JwtUtil jwtTokenUtil,
                        AuthenticationManager authenticationManager,
                        MyUserDetailService userDetailService, IUserService userService,
-                       IRoleService roleService) {
+                       IRoleService roleService, IProductProviderService productProviderService,
+                       ISysAdminService sysAdminService) {
 
         this.customerRepository = customerRepository;
         this.passwordEncoder = passwordEncoder;
@@ -58,6 +57,8 @@ public class AuthService implements IAuthService {
         this.userDetailService = userDetailService;
         this.userService = userService;
         this.roleService = roleService;
+        this.productProviderService = productProviderService;
+        this.sysAdminService = sysAdminService;
     }
 
 
@@ -125,7 +126,7 @@ public class AuthService implements IAuthService {
     }
 
     @Override
-    public RegisterStatus registerUser(User user) {
+    public RegisterStatus registerUser(User user, Boolean isProvider) {
         if (user == null || Strings.isBlank(user.getPassword())){
             assert user != null;
             throw new MessageException("Can't register user with name " + user.getUsername());
@@ -154,7 +155,7 @@ public class AuthService implements IAuthService {
     @Override
     public RegisterStatus registerCustomer(CreateUserModel customerModel) {
         User user = UserMapper.INSTANCE.createUserModelToUser(customerModel);
-        RegisterStatus result = registerUser(user);
+        RegisterStatus result = registerUser(user, false);
 
         if (result == RegisterStatus.Succeeded) {
             Customer customer = new Customer();
@@ -165,6 +166,38 @@ public class AuthService implements IAuthService {
             TwilioHelper.send(user.getPhoneNumber(), user.getPhoneCode());
 
             return RegisterStatus.Succeeded;
+        }
+
+        return result;
+    }
+
+    @Override
+    public RegisterStatus registerProvider(CreateProviderModel providerModel) {
+        User user = UserMapper.INSTANCE.createProviderModelToUser(providerModel);
+        RegisterStatus result = registerUser(user, true);
+
+        if (result == RegisterStatus.Succeeded) {
+
+            ProductProvider provider = new ProductProvider();
+            provider.setName(providerModel.getName());
+            provider.setCode(providerModel.getCode());
+            provider.setPhoneNumber(providerModel.getPhoneNumber());
+            provider.setHotline(providerModel.getHotline());
+            provider.setIntroductionContent(providerModel.getIntroductionContent());
+            provider.setAppellation(providerModel.getAppellation());
+            provider.setContact(providerModel.getContact());
+            provider.setEmail(providerModel.getEmail());
+            provider.setIsActive(true);
+            provider.setAvatarImage(providerModel.getAvatarImage());
+            productProviderService.save(provider);
+
+            SysAdmin sysAdmin = new SysAdmin();
+            sysAdmin.setType(SysAdminType.ProductProvider);
+            sysAdmin.setIsActive(false);
+            sysAdmin.setUser(user);
+            sysAdmin.setProductProvider(provider);
+            sysAdminService.save(sysAdmin);
+
         }
 
         return result;

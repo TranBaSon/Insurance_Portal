@@ -23,6 +23,7 @@ public class SysAdmin extends AbstractEntity{
     @JoinColumn(name = "user_id")
     private User user;
 
+    @Enumerated(value = EnumType.STRING)
     private SysAdminType type;
 
     @OneToOne

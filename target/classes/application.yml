@@ -6,13 +6,10 @@ twilio:
   account_sid: AC3f8c0049f658a78fd9b40603a0e017a9
   auth_token: d1a01001553ffa998c1f93790c53fb92
   phone_number: +14793483276
-
 app:
   token:
     refresh:
       duration: 2592000000
-
-
 
 # ===============================
 # DATABASE
@@ -26,7 +23,7 @@ server:
 spring:
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/insurance_portal
+    url: jdbc:mysql://localhost:3308/insurance_portal
     username: root
     password: son1808
 

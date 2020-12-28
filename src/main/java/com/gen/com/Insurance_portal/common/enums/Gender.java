@@ -4,7 +4,7 @@ import java.util.stream.Stream;
 
 public enum Gender {
     MALE("nam"), // 0
-    FEMALE(""), // 1
+    FEMALE("nữ"), // 1
     NONE("chưa có thông tin"); // 2
 
     private String value;

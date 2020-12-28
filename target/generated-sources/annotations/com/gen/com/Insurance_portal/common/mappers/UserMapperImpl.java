@@ -1,13 +1,14 @@
 package com.gen.com.Insurance_portal.common.mappers;
 
 import com.gen.com.Insurance_portal.entites.User;
+import com.gen.com.Insurance_portal.models.RequestModels.CreateProviderModel;
 import com.gen.com.Insurance_portal.models.RequestModels.CreateUserModel;
 import com.gen.com.Insurance_portal.models.responseModels.ResponseUserInfor;
 import javax.annotation.Generated;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2020-12-27T02:29:45+0700",
+    date = "2020-12-28T17:09:33+0700",
     comments = "version: 1.3.0.Final, compiler: javac, environment: Java 1.8.0_265 (AdoptOpenJDK)"
 )
 public class UserMapperImpl implements UserMapper {
@@ -50,5 +51,22 @@ public class UserMapperImpl implements UserMapper {
         responseUserInfor.setRole( user.getRole() );
 
         return responseUserInfor;
+    }
+
+    @Override
+    public User createProviderModelToUser(CreateProviderModel providerModel) {
+        if ( providerModel == null ) {
+            return null;
+        }
+
+        User user = new User();
+
+        user.setUsername( providerModel.getUsername() );
+        user.setPassword( providerModel.getPassword() );
+        user.setPhoneNumber( providerModel.getPhoneNumber() );
+        user.setEmail( providerModel.getEmail() );
+        user.setAddress( providerModel.getAddress() );
+
+        return user;
     }
 }

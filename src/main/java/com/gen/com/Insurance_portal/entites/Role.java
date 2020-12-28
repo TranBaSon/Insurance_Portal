@@ -1,12 +1,11 @@
 package com.gen.com.Insurance_portal.entites;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.Set;
 
 @AllArgsConstructor
@@ -29,11 +28,22 @@ public class Role extends AbstractEntity {
 
     private Date deletedAt;
 
-    @OneToMany
-    private Set<Authorities> authoritiesSet;
+    @ToString.Exclude
+    @ManyToMany
+    @JoinTable(
+            name = "role_authority",
+            joinColumns = @JoinColumn(name = "role_id"),
+            inverseJoinColumns = @JoinColumn(name = "authority_id"))
+    private List<Authorities> authorities = new ArrayList<>();
 
     public Role(String description, String name) {
         this.description = description;
         this.name = name;
+    }
+
+    public Role(String description, String name, List<Authorities> authorities) {
+        this.description = description;
+        this.name = name;
+        this.authorities = authorities;
     }
 }
