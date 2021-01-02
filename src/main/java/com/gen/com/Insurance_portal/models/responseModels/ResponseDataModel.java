@@ -1,6 +1,5 @@
 package com.gen.com.Insurance_portal.models.responseModels;
 
-import lombok.Data;
 
 public class ResponseDataModel {
     private Boolean success;

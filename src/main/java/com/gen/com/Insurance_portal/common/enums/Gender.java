@@ -1,6 +1,5 @@
 package com.gen.com.Insurance_portal.common.enums;
 
-import java.util.stream.Stream;
 
 public enum Gender {
     MALE("nam"), // 0

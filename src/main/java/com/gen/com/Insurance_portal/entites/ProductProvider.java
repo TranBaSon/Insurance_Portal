@@ -1,5 +1,6 @@
 package com.gen.com.Insurance_portal.entites;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.gen.com.Insurance_portal.common.enums.ProductProviderStatus;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -37,7 +38,7 @@ public class ProductProvider extends AbstractEntity {
     private String introductionContent;
 
     @Column(nullable = false)
-    private ProductProviderStatus status;
+    private ProductProviderStatus status = ProductProviderStatus.PENDING;
 
     private String avatarImage;
 
@@ -47,6 +48,7 @@ public class ProductProvider extends AbstractEntity {
     @Column(nullable = false)
     private String contact;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "productProvider", cascade = CascadeType.ALL)
     private Set<CustomerContactCode> customerContactCodes;
 

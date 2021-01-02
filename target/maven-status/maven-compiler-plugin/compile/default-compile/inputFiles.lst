@@ -1,4 +1,5 @@
 /Users/transon/workspace/spring_workspace/Insurance_Portal/src/main/java/com/gen/com/Insurance_portal/common/enums/OrderStatus.java
+/Users/transon/workspace/spring_workspace/Insurance_Portal/src/main/java/com/gen/com/Insurance_portal/services/impls/CloudinaryService.java
 /Users/transon/workspace/spring_workspace/Insurance_Portal/src/main/java/com/gen/com/Insurance_portal/services/impls/FAQService.java
 /Users/transon/workspace/spring_workspace/Insurance_Portal/src/main/java/com/gen/com/Insurance_portal/entites/ProductAttributeOption.java
 /Users/transon/workspace/spring_workspace/Insurance_Portal/src/main/java/com/gen/com/Insurance_portal/common/enums/PaymentMethod.java
@@ -15,6 +16,8 @@
 /Users/transon/workspace/spring_workspace/Insurance_Portal/src/main/java/com/gen/com/Insurance_portal/common/enums/PolicyStatus.java
 /Users/transon/workspace/spring_workspace/Insurance_Portal/src/main/java/com/gen/com/Insurance_portal/entites/ProductAttribute.java
 /Users/transon/workspace/spring_workspace/Insurance_Portal/src/main/java/com/gen/com/Insurance_portal/services/IProductCategoryService.java
+/Users/transon/workspace/spring_workspace/Insurance_Portal/src/main/java/com/gen/com/Insurance_portal/models/RequestModels/CreateProductCategoryModel.java
+/Users/transon/workspace/spring_workspace/Insurance_Portal/src/main/java/com/gen/com/Insurance_portal/models/RequestModels/CreateProductProviderModel.java
 /Users/transon/workspace/spring_workspace/Insurance_Portal/src/main/java/com/gen/com/Insurance_portal/jwt/JwtAuthenticationFilter.java
 /Users/transon/workspace/spring_workspace/Insurance_Portal/src/main/java/com/gen/com/Insurance_portal/common/enums/FeeType.java
 /Users/transon/workspace/spring_workspace/Insurance_Portal/src/main/java/com/gen/com/Insurance_portal/services/impls/AuthService.java
@@ -24,11 +27,14 @@
 /Users/transon/workspace/spring_workspace/Insurance_Portal/src/main/java/com/gen/com/Insurance_portal/services/ISysAdminService.java
 /Users/transon/workspace/spring_workspace/Insurance_Portal/src/main/java/com/gen/com/Insurance_portal/repositories/AuthoritiesRepositoty.java
 /Users/transon/workspace/spring_workspace/Insurance_Portal/src/main/java/com/gen/com/Insurance_portal/common/enums/SysAdminType.java
+/Users/transon/workspace/spring_workspace/Insurance_Portal/src/main/java/com/gen/com/Insurance_portal/models/RequestModels/UpdateProductProviderModel.java
 /Users/transon/workspace/spring_workspace/Insurance_Portal/src/main/java/com/gen/com/Insurance_portal/entites/TargetGroup.java
 /Users/transon/workspace/spring_workspace/Insurance_Portal/src/main/java/com/gen/com/Insurance_portal/services/impls/UserService.java
+/Users/transon/workspace/spring_workspace/Insurance_Portal/src/main/java/com/gen/com/Insurance_portal/controllers/auth/ProductController.java
 /Users/transon/workspace/spring_workspace/Insurance_Portal/src/main/java/com/gen/com/Insurance_portal/repositories/RefreshTokenRepository.java
 /Users/transon/workspace/spring_workspace/Insurance_Portal/src/main/java/com/gen/com/Insurance_portal/models/RequestModels/RefreshTokenModel.java
 /Users/transon/workspace/spring_workspace/Insurance_Portal/src/main/java/com/gen/com/Insurance_portal/common/mappers/CustomerMapper.java
+/Users/transon/workspace/spring_workspace/Insurance_Portal/src/main/java/com/gen/com/Insurance_portal/services/IProductService.java
 /Users/transon/workspace/spring_workspace/Insurance_Portal/src/main/java/com/gen/com/Insurance_portal/entites/ArticleCategory.java
 /Users/transon/workspace/spring_workspace/Insurance_Portal/src/main/java/com/gen/com/Insurance_portal/common/enums/GenderApply.java
 /Users/transon/workspace/spring_workspace/Insurance_Portal/src/main/java/com/gen/com/Insurance_portal/repositories/AuthoritiesGroupRepository.java
@@ -49,6 +55,7 @@
 /Users/transon/workspace/spring_workspace/Insurance_Portal/src/main/java/com/gen/com/Insurance_portal/repositories/FAQRepository.java
 /Users/transon/workspace/spring_workspace/Insurance_Portal/src/main/java/com/gen/com/Insurance_portal/common/enums/TransactionStatus.java
 /Users/transon/workspace/spring_workspace/Insurance_Portal/src/main/java/com/gen/com/Insurance_portal/entites/Product.java
+/Users/transon/workspace/spring_workspace/Insurance_Portal/src/main/java/com/gen/com/Insurance_portal/common/mappers/ProductCategoryMapper.java
 /Users/transon/workspace/spring_workspace/Insurance_Portal/src/main/java/com/gen/com/Insurance_portal/entites/RateCharge.java
 /Users/transon/workspace/spring_workspace/Insurance_Portal/src/main/java/com/gen/com/Insurance_portal/entites/AuthoritiesGroup.java
 /Users/transon/workspace/spring_workspace/Insurance_Portal/src/main/java/com/gen/com/Insurance_portal/InsurancePortalApplication.java
@@ -64,12 +71,15 @@
 /Users/transon/workspace/spring_workspace/Insurance_Portal/src/main/java/com/gen/com/Insurance_portal/models/RequestModels/UserModel.java
 /Users/transon/workspace/spring_workspace/Insurance_Portal/src/main/java/com/gen/com/Insurance_portal/entites/RoleAuthority.java
 /Users/transon/workspace/spring_workspace/Insurance_Portal/src/main/java/com/gen/com/Insurance_portal/entites/AbstractEntity.java
+/Users/transon/workspace/spring_workspace/Insurance_Portal/src/main/java/com/gen/com/Insurance_portal/models/RequestModels/UpdateProductModel.java
 /Users/transon/workspace/spring_workspace/Insurance_Portal/src/main/java/com/gen/com/Insurance_portal/services/IRoleService.java
 /Users/transon/workspace/spring_workspace/Insurance_Portal/src/main/java/com/gen/com/Insurance_portal/services/IUserService.java
 /Users/transon/workspace/spring_workspace/Insurance_Portal/src/main/java/com/gen/com/Insurance_portal/entites/Benefit.java
 /Users/transon/workspace/spring_workspace/Insurance_Portal/src/main/java/com/gen/com/Insurance_portal/common/constanst/ClaimsCode.java
+/Users/transon/workspace/spring_workspace/Insurance_Portal/src/main/java/com/gen/com/Insurance_portal/models/responseModels/ResponseObjectModel.java
 /Users/transon/workspace/spring_workspace/Insurance_Portal/src/main/java/com/gen/com/Insurance_portal/services/impls/AuthoritiesService.java
 /Users/transon/workspace/spring_workspace/Insurance_Portal/src/main/java/com/gen/com/Insurance_portal/entites/TransactionHistory.java
+/Users/transon/workspace/spring_workspace/Insurance_Portal/src/main/java/com/gen/com/Insurance_portal/models/RequestModels/CreateProductModel.java
 /Users/transon/workspace/spring_workspace/Insurance_Portal/src/main/java/com/gen/com/Insurance_portal/exceptions/MessageException.java
 /Users/transon/workspace/spring_workspace/Insurance_Portal/src/main/java/com/gen/com/Insurance_portal/common/enums/RegisterStatus.java
 /Users/transon/workspace/spring_workspace/Insurance_Portal/src/main/java/com/gen/com/Insurance_portal/common/enums/PaymentStatus.java
@@ -90,6 +100,7 @@
 /Users/transon/workspace/spring_workspace/Insurance_Portal/src/main/java/com/gen/com/Insurance_portal/exceptions/CustomGlobalExceptionHandler.java
 /Users/transon/workspace/spring_workspace/Insurance_Portal/src/main/java/com/gen/com/Insurance_portal/controllers/HomeController.java
 /Users/transon/workspace/spring_workspace/Insurance_Portal/src/main/java/com/gen/com/Insurance_portal/configs/ApplicationSecurityConfig.java
+/Users/transon/workspace/spring_workspace/Insurance_Portal/src/main/java/com/gen/com/Insurance_portal/common/mappers/ProductMapper.java
 /Users/transon/workspace/spring_workspace/Insurance_Portal/src/main/java/com/gen/com/Insurance_portal/repositories/UserRepository.java
 /Users/transon/workspace/spring_workspace/Insurance_Portal/src/main/java/com/gen/com/Insurance_portal/models/responseModels/ResponseDataModel.java
 /Users/transon/workspace/spring_workspace/Insurance_Portal/src/main/java/com/gen/com/Insurance_portal/models/RequestModels/CreateProviderModel.java
@@ -100,9 +111,12 @@
 /Users/transon/workspace/spring_workspace/Insurance_Portal/src/main/java/com/gen/com/Insurance_portal/entites/ProductPackDetail.java
 /Users/transon/workspace/spring_workspace/Insurance_Portal/src/main/java/com/gen/com/Insurance_portal/entites/Order.java
 /Users/transon/workspace/spring_workspace/Insurance_Portal/src/main/java/com/gen/com/Insurance_portal/common/enums/ProductStatus.java
+/Users/transon/workspace/spring_workspace/Insurance_Portal/src/main/java/com/gen/com/Insurance_portal/controllers/auth/ProductCategoryController.java
 /Users/transon/workspace/spring_workspace/Insurance_Portal/src/main/java/com/gen/com/Insurance_portal/jwt/UsernameAndPasswordAuthenticationRequest.java
 /Users/transon/workspace/spring_workspace/Insurance_Portal/src/main/java/com/gen/com/Insurance_portal/common/enums/Gender.java
 /Users/transon/workspace/spring_workspace/Insurance_Portal/src/main/java/com/gen/com/Insurance_portal/entites/RoleAuthorityKey.java
+/Users/transon/workspace/spring_workspace/Insurance_Portal/src/main/java/com/gen/com/Insurance_portal/repositories/ProductRepository.java
+/Users/transon/workspace/spring_workspace/Insurance_Portal/src/main/java/com/gen/com/Insurance_portal/controllers/auth/PartnerController.java
 /Users/transon/workspace/spring_workspace/Insurance_Portal/src/main/java/com/gen/com/Insurance_portal/configs/TwilioConfiguration.java
 /Users/transon/workspace/spring_workspace/Insurance_Portal/src/main/java/com/gen/com/Insurance_portal/entites/PromoCode.java
 /Users/transon/workspace/spring_workspace/Insurance_Portal/src/main/java/com/gen/com/Insurance_portal/exceptions/TokenRefreshException.java
@@ -110,6 +124,7 @@
 /Users/transon/workspace/spring_workspace/Insurance_Portal/src/main/java/com/gen/com/Insurance_portal/entites/Authorities.java
 /Users/transon/workspace/spring_workspace/Insurance_Portal/src/main/java/com/gen/com/Insurance_portal/entites/BenefitSetting.java
 /Users/transon/workspace/spring_workspace/Insurance_Portal/src/main/java/com/gen/com/Insurance_portal/repositories/SysAdminRepository.java
+/Users/transon/workspace/spring_workspace/Insurance_Portal/src/main/java/com/gen/com/Insurance_portal/services/impls/ProductService.java
 /Users/transon/workspace/spring_workspace/Insurance_Portal/src/main/java/com/gen/com/Insurance_portal/entites/OrderAttributeSetting.java
 /Users/transon/workspace/spring_workspace/Insurance_Portal/src/main/java/com/gen/com/Insurance_portal/entites/ProductPack.java
 /Users/transon/workspace/spring_workspace/Insurance_Portal/src/main/java/com/gen/com/Insurance_portal/services/impls/AuthoritiesGroupService.java
@@ -121,7 +136,9 @@
 /Users/transon/workspace/spring_workspace/Insurance_Portal/src/main/java/com/gen/com/Insurance_portal/common/Helpper.java
 /Users/transon/workspace/spring_workspace/Insurance_Portal/src/main/java/com/gen/com/Insurance_portal/repositories/CustomerRepository.java
 /Users/transon/workspace/spring_workspace/Insurance_Portal/src/main/java/com/gen/com/Insurance_portal/configs/TwilioInitazer.java
+/Users/transon/workspace/spring_workspace/Insurance_Portal/src/main/java/com/gen/com/Insurance_portal/common/mappers/ProductProviderMapper.java
 /Users/transon/workspace/spring_workspace/Insurance_Portal/src/main/java/com/gen/com/Insurance_portal/common/TwilioHelper.java
+/Users/transon/workspace/spring_workspace/Insurance_Portal/src/main/java/com/gen/com/Insurance_portal/services/ICloudinaryService.java
 /Users/transon/workspace/spring_workspace/Insurance_Portal/src/main/java/com/gen/com/Insurance_portal/entites/District.java
 /Users/transon/workspace/spring_workspace/Insurance_Portal/src/main/java/com/gen/com/Insurance_portal/repositories/RoleRepository.java
 /Users/transon/workspace/spring_workspace/Insurance_Portal/src/main/java/com/gen/com/Insurance_portal/models/RequestModels/UpdateUserModel.java

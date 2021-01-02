@@ -44,18 +44,17 @@ public class Product extends AbstractEntity {
 
     @Lob
     @Column(nullable = false)
-    private String indemnityInstructionContent;
+    private String indemnityInstructionContent = "guide";
+
+    @Enumerated(EnumType.STRING)
+    private EffectiveDateType effectiveDateType = EffectiveDateType.NONE;
 
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
-    private EffectiveDateType effectiveDateType;
-
-    @Enumerated(EnumType.STRING)
-    @Column(nullable = false)
-    private FeeType feeType;
+    private FeeType feeType = FeeType.FIXED;
 
     @Column(nullable = false)
-    private ProductStatus productStatus;
+    private ProductStatus productStatus = ProductStatus.APPROVED;
 
     @Column(nullable = false)
     @Enumerated(EnumType.STRING)
@@ -89,7 +88,9 @@ public class Product extends AbstractEntity {
 
     private String videoUrl;
 
-    private String priceObj;
+    private Double priceObj;
+
+    private String insuredRule;
 
     @OneToMany(mappedBy = "product")
     private Set<Benefit> benefits;
