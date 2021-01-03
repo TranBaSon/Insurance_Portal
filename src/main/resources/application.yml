@@ -3,16 +3,6 @@
 # ===============================
 
 
-cloudinary:
-  cloud_name: dmhmclzpm
-  api_key: 981112714425554
-  api_secret: qZFjzDWOGhM3Rp9EIib7Xo3ofZI
-
-
-twilio:
-  account_sid: AC9199eb804661ab92ac07cf27192b5108
-  auth_token: 821aa6bc640a5f0522af8d2245351748
-  phone_number: +12512208683
 
 
 app:
