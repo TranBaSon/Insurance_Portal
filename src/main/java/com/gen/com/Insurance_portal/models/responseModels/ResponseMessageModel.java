@@ -8,6 +8,5 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class ResponseMessageModel {
-    private String status;
-    private String message;
+    private Boolean status;
 }

@@ -28,7 +28,7 @@ public class SysAdmin extends AbstractEntity{
 
     @OneToOne
     @JoinColumn(name = "product_provider_id")
-    private ProductProvider productProvider;
+    private Partner partner;
 
     private Boolean isActive;
 

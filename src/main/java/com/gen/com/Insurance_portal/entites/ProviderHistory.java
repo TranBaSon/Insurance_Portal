@@ -27,7 +27,7 @@ public class ProviderHistory extends AbstractEntity {
 
     @ManyToOne
     @JoinColumn(name = "product_provider_id")
-    private ProductProvider productProvider;
+    private Partner partner;
 
     private ProductProviderStatus productProviderStatus;
 }

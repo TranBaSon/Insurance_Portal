@@ -3,11 +3,12 @@ package com.gen.com.Insurance_portal.common.mappers;
 import com.gen.com.Insurance_portal.entites.Product;
 import com.gen.com.Insurance_portal.models.RequestModels.CreateProductModel;
 import com.gen.com.Insurance_portal.models.RequestModels.UpdateProductModel;
+import com.gen.com.Insurance_portal.models.responseModels.ResponseProductModel;
 import javax.annotation.Generated;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2021-01-02T18:00:00+0700",
+    date = "2021-01-03T17:49:25+0700",
     comments = "version: 1.3.0.Final, compiler: javac, environment: Java 1.8.0_265 (AdoptOpenJDK)"
 )
 public class ProductMapperImpl implements ProductMapper {
@@ -48,5 +49,19 @@ public class ProductMapperImpl implements ProductMapper {
         product.setPriceObj( productModel.getPriceObj() );
 
         return product;
+    }
+
+    @Override
+    public ResponseProductModel ProductModelToProductResponse(Product productModel) {
+        if ( productModel == null ) {
+            return null;
+        }
+
+        ResponseProductModel responseProductModel = new ResponseProductModel();
+
+        responseProductModel.setName( productModel.getName() );
+        responseProductModel.setCode( productModel.getCode() );
+
+        return responseProductModel;
     }
 }

@@ -53,7 +53,7 @@ public class ProductAttribute extends AbstractEntity{
 
     @ManyToOne
     @JoinColumn(name = "product_provider_id")
-    private ProductProvider productProvider;
+    private Partner partner;
 
     @OneToMany(mappedBy = "productAttribute")
     private Set<ProductAttributeOption> productAttributeOptions;

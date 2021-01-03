@@ -2,7 +2,7 @@ package com.gen.com.Insurance_portal.common.enums;
 
 public enum SysAdminType {
     ADMIN("Admin"),
-    ProductProvider("ProductProvider");
+    ProductProvider("Partner");
 
     private String value;
 

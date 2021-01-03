@@ -39,14 +39,14 @@ public class AuthService implements IAuthService {
     private final MyUserDetailService userDetailService;
     private final IUserService userService;
     private final IRoleService roleService;
-    private final IProductProviderService productProviderService;
+    private final IPartnerService productProviderService;
     private final ISysAdminService sysAdminService;
 
     public AuthService(CustomerRepository customerRepository, PasswordEncoder passwordEncoder,
                        RefreshTokenService refreshTokenService, JwtUtil jwtTokenUtil,
                        AuthenticationManager authenticationManager,
                        MyUserDetailService userDetailService, IUserService userService,
-                       IRoleService roleService, IProductProviderService productProviderService,
+                       IRoleService roleService, IPartnerService productProviderService,
                        ISysAdminService sysAdminService) {
 
         this.customerRepository = customerRepository;
@@ -178,7 +178,7 @@ public class AuthService implements IAuthService {
 
         if (result == RegisterStatus.Succeeded) {
 
-            ProductProvider provider = new ProductProvider();
+            Partner provider = new Partner();
             provider.setName(providerModel.getName());
             provider.setCode(providerModel.getCode());
             provider.setPhoneNumber(providerModel.getPhoneNumber());
@@ -195,7 +195,7 @@ public class AuthService implements IAuthService {
             sysAdmin.setType(SysAdminType.ProductProvider);
             sysAdmin.setIsActive(false);
             sysAdmin.setUser(user);
-            sysAdmin.setProductProvider(provider);
+            sysAdmin.setPartner(provider);
             sysAdminService.save(sysAdmin);
 
         }

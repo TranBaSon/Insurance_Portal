@@ -5,6 +5,8 @@ import com.gen.com.Insurance_portal.models.RequestModels.CreateProductCategoryMo
 import com.gen.com.Insurance_portal.models.responseModels.ResponseMessageModel;
 import com.gen.com.Insurance_portal.models.responseModels.ResponseObjectModel;
 import com.gen.com.Insurance_portal.services.IProductCategoryService;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -22,18 +24,21 @@ public class ProductCategoryController {
         this.productCategoryService = productCategoryService;
     }
 
+    @Operation(summary = "Required Header { Authorization : bearer key }",security = { @SecurityRequirement(name = "bearer key") })
     @PostMapping
     public ResponseEntity<?> create(@RequestBody @Valid CreateProductCategoryModel productCategoryModel) {
         productCategoryService.create(productCategoryModel);
-        return new ResponseEntity<>(new ResponseMessageModel("succeed", "created!."), HttpStatus.OK);
+        return new ResponseEntity<>(new ResponseMessageModel(true), HttpStatus.OK);
     }
 
+    @Operation(summary = "Required Header { Authorization : bearer key }",security = { @SecurityRequirement(name = "bearer key") })
     @GetMapping
     public ResponseEntity<?> getAll() {
         List<ProductCategory> categories = productCategoryService.findAll();
         return new ResponseEntity<>(new ResponseObjectModel(true, categories), HttpStatus.OK);
     }
 
+    @Operation(summary = "Required Header { Authorization : bearer key }",security = { @SecurityRequirement(name = "bearer key") })
     @GetMapping("/{id}")
     public ResponseEntity<?> getOne(@PathVariable Long id) {
         return new ResponseEntity<>(
@@ -41,22 +46,24 @@ public class ProductCategoryController {
                 HttpStatus.OK);
     }
 
+    @Operation(summary = "Required Header { Authorization : bearer key }",security = { @SecurityRequirement(name = "bearer key") })
     @PutMapping("/{id}")
     public ResponseEntity<?> update(@RequestBody @Valid CreateProductCategoryModel productProviderModel,
                                     @PathVariable Long id) {
 
         productCategoryService.update(productProviderModel, id);
 
-        return new ResponseEntity<>(new ResponseMessageModel("succeed", "updated!."), HttpStatus.OK);
+        return new ResponseEntity<>(new ResponseMessageModel(true), HttpStatus.OK);
     }
 
 
+    @Operation(summary = "Required Header { Authorization : bearer key }",security = { @SecurityRequirement(name = "bearer key") })
     @DeleteMapping("/{id}")
     public ResponseEntity<?> delete(@PathVariable Long id) {
 
         productCategoryService.delete(id);
 
-        return new ResponseEntity<>(new ResponseMessageModel("succeed", "deleted!."), HttpStatus.OK);
+        return new ResponseEntity<>(new ResponseMessageModel(true), HttpStatus.OK);
     }
 
 }

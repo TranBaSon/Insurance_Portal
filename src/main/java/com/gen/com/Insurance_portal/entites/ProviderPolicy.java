@@ -27,6 +27,6 @@ public class ProviderPolicy extends AbstractEntity {
 
     @ManyToOne
     @JoinColumn(name = "product_provider_id")
-    private ProductProvider productProvider;
+    private Partner partner;
 
 }

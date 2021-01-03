@@ -2,6 +2,7 @@ package com.gen.com.Insurance_portal.models.RequestModels;
 
 import com.gen.com.Insurance_portal.common.constanst.Constants;
 import com.gen.com.Insurance_portal.common.enums.Gender;
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -33,6 +34,7 @@ public class CreateUserModel {
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date dob;
 
+    @Schema(description = "value in: {0:Male, 1:FEMALE, 2:NONE}", type = "Integer")
     private Gender gender;
 
     @Email(message = "email invalid!")

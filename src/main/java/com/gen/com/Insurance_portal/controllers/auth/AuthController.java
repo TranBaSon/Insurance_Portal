@@ -2,9 +2,10 @@ package com.gen.com.Insurance_portal.controllers.auth;
 
 import com.gen.com.Insurance_portal.common.enums.RegisterStatus;
 import com.gen.com.Insurance_portal.models.RequestModels.*;
-import com.gen.com.Insurance_portal.models.responseModels.ResponseDataModel;
 import com.gen.com.Insurance_portal.models.responseModels.ResponseMessageModel;
 import com.gen.com.Insurance_portal.services.IAuthService;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -38,18 +39,18 @@ public class AuthController {
 
         if (result == RegisterStatus.ExistUser) {
             return new ResponseEntity<>(
-                    new ResponseDataModel(false, "email or phone or username already exists"),
+                    new ResponseMessageModel(false),
                     HttpStatus.BAD_REQUEST
             );
         }else if (result == RegisterStatus.None) {
             return new ResponseEntity<>(
-                    new ResponseDataModel(false, "bad request."),
+                    new ResponseMessageModel(false),
                     HttpStatus.BAD_REQUEST
             );
         }
 
         return new ResponseEntity<>(
-                new ResponseDataModel(true, result.getValue()),
+                new ResponseMessageModel(true),
                 HttpStatus.OK
         );
     }
@@ -61,22 +62,23 @@ public class AuthController {
 
         if (result == RegisterStatus.ExistUser) {
             return new ResponseEntity<>(
-                    new ResponseDataModel(false, "email or phone or username already exists"),
+                    new ResponseMessageModel(false),
                     HttpStatus.BAD_REQUEST
             );
         }else if (result == RegisterStatus.None) {
             return new ResponseEntity<>(
-                    new ResponseDataModel(false, "bad request."),
+                    new ResponseMessageModel(false),
                     HttpStatus.BAD_REQUEST
             );
         }
 
         return new ResponseEntity<>(
-                new ResponseDataModel(true, result.getValue()),
+                new ResponseMessageModel(true),
                 HttpStatus.OK
         );
     }
 
+    @Operation(summary = "Required Header { Authorization : bearer key }",security = { @SecurityRequirement(name = "bearer key") })
     // refresh refresh token ----->
     @PostMapping("/refresh")
     public ResponseEntity<?> refresh(@RequestBody @Valid RefreshTokenModel refreshModel) {
@@ -91,7 +93,7 @@ public class AuthController {
         RegisterStatus result = authService.registerCustomer(userModel);
 
         return new ResponseEntity<>(
-                new ResponseDataModel(true, result.getValue()),
+                new ResponseMessageModel(true),
                 HttpStatus.OK
         );
     }
@@ -104,13 +106,14 @@ public class AuthController {
 
         if (!ok) {
             return new ResponseEntity<>(
-                    new ResponseMessageModel("failed", "bad request."),
+                    new ResponseMessageModel(false),
                     HttpStatus.BAD_REQUEST);
         }
 
-        return new ResponseEntity<>(new ResponseMessageModel("succeed", "activated."), HttpStatus.OK);
+        return new ResponseEntity<>(new ResponseMessageModel(true), HttpStatus.OK);
     }
 
+    @Operation(summary = "Required Header { Authorization : bearer key }",security = { @SecurityRequirement(name = "bearer key") })
     @PutMapping
     public ResponseEntity<?> update(@RequestHeader (name="Authorization") String token,
                                     @Valid @RequestBody UpdateUserModel updateUserModel) {
@@ -119,12 +122,12 @@ public class AuthController {
 
         if (!ok) {
             return new ResponseEntity<>(
-                    new ResponseMessageModel("failed", "bad request."),
+                    new ResponseMessageModel(false),
                     HttpStatus.BAD_REQUEST);
         }
 
         return new ResponseEntity<>(
-                new ResponseMessageModel("succeed", "update succeed."),
+                new ResponseMessageModel(true),
                 HttpStatus.OK);
     }
 

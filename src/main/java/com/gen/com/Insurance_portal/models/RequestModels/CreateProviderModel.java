@@ -1,6 +1,7 @@
 package com.gen.com.Insurance_portal.models.RequestModels;
 
 import com.gen.com.Insurance_portal.common.constanst.Constants;
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -12,6 +13,7 @@ import javax.validation.constraints.Pattern;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
+@Schema(name = "CreateProviderModel")
 public class CreateProviderModel {
 
     @NotBlank(message = "phoneNumber is required!")

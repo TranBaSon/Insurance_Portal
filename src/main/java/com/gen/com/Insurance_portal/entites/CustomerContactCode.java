@@ -26,7 +26,7 @@ public class CustomerContactCode extends AbstractEntity{
     @JoinColumn(name = "product_provider_id")
     @EqualsAndHashCode.Exclude
     @ToString.Exclude
-    private ProductProvider productProvider;
+    private Partner partner;
 
     private String contactCode;
 
