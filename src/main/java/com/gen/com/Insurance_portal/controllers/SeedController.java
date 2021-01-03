@@ -85,10 +85,10 @@ public class SeedController {
     @GetMapping("/common")
     public String seedFAQ() {
 
-        ProductCategory pc1 = new ProductCategory("Bảo hiểm sức khỏe");
-        ProductCategory pc2 = new ProductCategory("Bảo hiểm du lịch");
-        ProductCategory pc3 = new ProductCategory("Bảo hiểm tài sản");
-        ProductCategory pc4 = new ProductCategory("Bảo hiểm xe");
+        ProductCategory pc1 = new ProductCategory("Bảo hiểm sức khỏe", "Bảo hiểm sức khỏe");
+        ProductCategory pc2 = new ProductCategory("Bảo hiểm du lịch", "Bảo hiểm du lịch");
+        ProductCategory pc3 = new ProductCategory("Bảo hiểm tài sản", "Bảo hiểm tài sản");
+        ProductCategory pc4 = new ProductCategory("Bảo hiểm xe", "Bảo hiểm xe");
 
         List<ProductCategory> productCategories = Arrays.asList(pc1, pc2, pc3, pc4);
         productCategoryService.saveAll(productCategories);
@@ -395,4 +395,5 @@ public class SeedController {
 
         return "seed succeed!";
     }
+
 }

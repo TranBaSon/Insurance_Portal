@@ -31,4 +31,9 @@ public class ProductCategory extends AbstractEntity{
     public ProductCategory(String name) {
         this.name = name;
     }
+
+    public ProductCategory(String name, String description) {
+        this.name = name;
+        this.description = description;
+    }
 }
