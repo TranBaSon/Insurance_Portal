@@ -46,16 +46,16 @@ public class ProductService extends AbstractService<Product> implements IProduct
 
     @Override
     public void create(CreateProductModel productModel) throws ExecutionException, InterruptedException {
-        Product product = ProductMapper.INSTANCE.createProductModelToProduct(productModel);
+        Product product = ProductMapper.INSTANCE.createProductModelToProduct(productModel.getPrimitive());
 
-        Boolean existsByNameOrCode = productRepository.existsByNameOrCode(productModel.getName(), productModel.getCode());
+        Boolean existsByNameOrCode = productRepository.existsByNameOrCode(productModel.getPrimitive().getName(), productModel.getPrimitive().getCode());
         if (existsByNameOrCode) {
             throw new MessageException("Name or code already exists.");
         }
 
-        CompletableFuture<String> async1 = cloudinaryService.uploadAsync(productModel.getFiles().getAvatarImage());
-        CompletableFuture<String> async2 = cloudinaryService.uploadAsync(productModel.getFiles().getBannerImage());
-        CompletableFuture<String> async3 = cloudinaryService.uploadPDFAsync(productModel.getFiles().getInsuredRule());
+        CompletableFuture<String> async1 = cloudinaryService.uploadAsync(productModel.getAvatarImage());
+        CompletableFuture<String> async2 = cloudinaryService.uploadAsync(productModel.getBannerImage());
+        CompletableFuture<String> async3 = cloudinaryService.uploadPDFAsync(productModel.getInsuredRule());
 
         CompletableFuture.allOf(async1, async2, async3).join();
 
@@ -63,11 +63,11 @@ public class ProductService extends AbstractService<Product> implements IProduct
         product.setBannerImage(async2.get());
         product.setInsuredRule(async3.get());
 
-        ProductCategory productCategory = productCategoryService.findById(productModel.getProductCategoryId())
-                .orElseThrow(() -> new NotFoundEntityException(productModel.getProductCategoryId(), "productCategory"));
+        ProductCategory productCategory = productCategoryService.findById(productModel.getPrimitive().getProductCategoryId())
+                .orElseThrow(() -> new NotFoundEntityException(productModel.getPrimitive().getProductCategoryId(), "productCategory"));
 
-        Partner provider = productProviderService.findById(productModel.getPartnerId())
-                .orElseThrow(() -> new NotFoundEntityException(productModel.getPartnerId(), "Partner"));
+        Partner provider = productProviderService.findById(productModel.getPrimitive().getPartnerId())
+                .orElseThrow(() -> new NotFoundEntityException(productModel.getPrimitive().getPartnerId(), "Partner"));
 
         product.setProductCategory(productCategory);
         product.setPartner(provider);
@@ -80,48 +80,48 @@ public class ProductService extends AbstractService<Product> implements IProduct
         Product product = findById(id).orElseThrow(() -> new NotFoundEntityException(id, "Product"));
 
         Boolean existsByNameOrCodeAndIdNot = productRepository
-                .existsByNameOrCodeAndIdNot(productModel.getName(), productModel.getCode(), id);
+                .existsByNameOrCodeAndIdNot(productModel.getPrimitive().getName(), productModel.getPrimitive().getCode(), id);
 
         if (existsByNameOrCodeAndIdNot) {
             throw new MessageException("Name or code already exists.");
         }
 
-        if (!Strings.isBlank(productModel.getCode())) {
-            product.setCode(productModel.getCode());
+        if (!Strings.isBlank(productModel.getPrimitive().getCode())) {
+            product.setCode(productModel.getPrimitive().getCode());
         }
-        if (!Strings.isBlank(productModel.getDetailedDescription())) {
-            product.setDetailedDescription(productModel.getDetailedDescription());
+        if (!Strings.isBlank(productModel.getPrimitive().getDetailedDescription())) {
+            product.setDetailedDescription(productModel.getPrimitive().getDetailedDescription());
         }
-        if (!Strings.isBlank(productModel.getName())) {
-            product.setName(productModel.getName());
+        if (!Strings.isBlank(productModel.getPrimitive().getName())) {
+            product.setName(productModel.getPrimitive().getName());
         }
-        if (!Strings.isBlank(productModel.getShortDescription())) {
-            product.setShortDescription(productModel.getShortDescription());
+        if (!Strings.isBlank(productModel.getPrimitive().getShortDescription())) {
+            product.setShortDescription(productModel.getPrimitive().getShortDescription());
         }
-        if (productModel.getPriceObj() != null) {
-            product.setPriceObj(productModel.getPriceObj());
+        if (productModel.getPrimitive().getPriceObj() != null) {
+            product.setPriceObj(productModel.getPrimitive().getPriceObj());
         }
-        if (productModel.getGenderApply() != null) {
-            product.setGenderApply(productModel.getGenderApply());
+        if (productModel.getPrimitive().getGenderApply() != null) {
+            product.setGenderApply(productModel.getPrimitive().getGenderApply());
         }
-        if (productModel.getProductCategoryId() != null) {
-            ProductCategory productCategory = productCategoryService.findById(productModel.getProductCategoryId())
-                    .orElseThrow(() -> new NotFoundEntityException(productModel.getProductCategoryId(), "productCategory"));
+        if (productModel.getPrimitive().getProductCategoryId() != null) {
+            ProductCategory productCategory = productCategoryService.findById(productModel.getPrimitive().getProductCategoryId())
+                    .orElseThrow(() -> new NotFoundEntityException(productModel.getPrimitive().getProductCategoryId(), "productCategory"));
             product.setProductCategory(productCategory);
         }
-        if (productModel.getPartnerId() != null) {
-            Partner provider = productProviderService.findById(productModel.getPartnerId())
-                    .orElseThrow(() -> new NotFoundEntityException(productModel.getPartnerId(), "Partner"));
+        if (productModel.getPrimitive().getPartnerId() != null) {
+            Partner provider = productProviderService.findById(productModel.getPrimitive().getPartnerId())
+                    .orElseThrow(() -> new NotFoundEntityException(productModel.getPrimitive().getPartnerId(), "Partner"));
             product.setPartner(provider);
         }
-        if (productModel.getEffectiveDateRangeSelectionNumber() != null) {
-            product.setEffectiveDateRangeSelectionNumber(productModel.getEffectiveDateRangeSelectionNumber());
+        if (productModel.getPrimitive().getEffectiveDateRangeSelectionNumber() != null) {
+            product.setEffectiveDateRangeSelectionNumber(productModel.getPrimitive().getEffectiveDateRangeSelectionNumber());
         }
-        if (productModel.getFiles().getAvatarImage() != null && productModel.getFiles().getBannerImage()
-                != null && productModel.getFiles().getInsuredRule() != null) {
-            CompletableFuture<String> async1 = cloudinaryService.uploadAsync(productModel.getFiles().getAvatarImage());
-            CompletableFuture<String> async2 = cloudinaryService.uploadAsync(productModel.getFiles().getBannerImage());
-            CompletableFuture<String> async3 = cloudinaryService.uploadPDFAsync(productModel.getFiles().getInsuredRule());
+        if (productModel.getAvatarImage() != null && productModel.getBannerImage()
+                != null && productModel.getInsuredRule() != null) {
+            CompletableFuture<String> async1 = cloudinaryService.uploadAsync(productModel.getAvatarImage());
+            CompletableFuture<String> async2 = cloudinaryService.uploadAsync(productModel.getBannerImage());
+            CompletableFuture<String> async3 = cloudinaryService.uploadPDFAsync(productModel.getInsuredRule());
             CompletableFuture.allOf(async1, async2, async3).join();
 
             product.setAvatarImage(async1.get());
@@ -129,50 +129,50 @@ public class ProductService extends AbstractService<Product> implements IProduct
             product.setInsuredRule(async3.get());
         }
 
-        if (productModel.getFiles().getAvatarImage() != null && productModel.getFiles().getBannerImage() != null ) {
-            CompletableFuture<String> async1 = cloudinaryService.uploadAsync(productModel.getFiles().getAvatarImage());
-            CompletableFuture<String> async2 = cloudinaryService.uploadAsync(productModel.getFiles().getBannerImage());
+        if (productModel.getAvatarImage() != null && productModel.getBannerImage() != null ) {
+            CompletableFuture<String> async1 = cloudinaryService.uploadAsync(productModel.getAvatarImage());
+            CompletableFuture<String> async2 = cloudinaryService.uploadAsync(productModel.getBannerImage());
             CompletableFuture.allOf(async1, async2).join();
 
             product.setAvatarImage(async1.get());
             product.setBannerImage(async2.get());
         }
 
-        if ( productModel.getFiles().getBannerImage()
-                != null && productModel.getFiles().getInsuredRule() != null) {
-            CompletableFuture<String> async2 = cloudinaryService.uploadAsync(productModel.getFiles().getBannerImage());
-            CompletableFuture<String> async3 = cloudinaryService.uploadPDFAsync(productModel.getFiles().getInsuredRule());
+        if ( productModel.getBannerImage()
+                != null && productModel.getInsuredRule() != null) {
+            CompletableFuture<String> async2 = cloudinaryService.uploadAsync(productModel.getBannerImage());
+            CompletableFuture<String> async3 = cloudinaryService.uploadPDFAsync(productModel.getInsuredRule());
             CompletableFuture.allOf(async2, async3).join();
 
             product.setBannerImage(async2.get());
             product.setInsuredRule(async3.get());
         }
 
-        if (productModel.getFiles().getAvatarImage() != null && productModel.getFiles().getInsuredRule() != null) {
-            CompletableFuture<String> async1 = cloudinaryService.uploadAsync(productModel.getFiles().getAvatarImage());
-            CompletableFuture<String> async3 = cloudinaryService.uploadPDFAsync(productModel.getFiles().getInsuredRule());
+        if (productModel.getAvatarImage() != null && productModel.getInsuredRule() != null) {
+            CompletableFuture<String> async1 = cloudinaryService.uploadAsync(productModel.getAvatarImage());
+            CompletableFuture<String> async3 = cloudinaryService.uploadPDFAsync(productModel.getInsuredRule());
             CompletableFuture.allOf(async1, async3).join();
 
             product.setAvatarImage(async1.get());
             product.setInsuredRule(async3.get());
         }
 
-        if (productModel.getFiles().getAvatarImage() != null) {
-            CompletableFuture<String> async1 = cloudinaryService.uploadAsync(productModel.getFiles().getAvatarImage());
+        if (productModel.getAvatarImage() != null) {
+            CompletableFuture<String> async1 = cloudinaryService.uploadAsync(productModel.getAvatarImage());
             CompletableFuture.allOf(async1).join();
 
             product.setAvatarImage(async1.get());
         }
 
-        if ( productModel.getFiles().getBannerImage() != null ) {
-            CompletableFuture<String> async2 = cloudinaryService.uploadAsync(productModel.getFiles().getBannerImage());
+        if ( productModel.getBannerImage() != null ) {
+            CompletableFuture<String> async2 = cloudinaryService.uploadAsync(productModel.getBannerImage());
             CompletableFuture.allOf(async2).join();
 
             product.setBannerImage(async2.get());
         }
 
-        if (productModel.getFiles().getInsuredRule() != null) {
-            CompletableFuture<String> async3 = cloudinaryService.uploadPDFAsync(productModel.getFiles().getInsuredRule());
+        if (productModel.getInsuredRule() != null) {
+            CompletableFuture<String> async3 = cloudinaryService.uploadPDFAsync(productModel.getInsuredRule());
             CompletableFuture.allOf(async3).join();
 
             product.setInsuredRule(async3.get());
@@ -200,48 +200,48 @@ public class ProductService extends AbstractService<Product> implements IProduct
                 .orElseThrow(() -> new NotFoundEntityExceptionByCode(code, "Product"));
 
         Boolean existsByNameOrCodeAndIdNot = productRepository
-                .existsByNameOrCodeAndIdNot(productModel.getName(), productModel.getCode(), product.getId());
+                .existsByNameOrCodeAndIdNot(productModel.getPrimitive().getName(), productModel.getPrimitive().getCode(), product.getId());
 
         if (existsByNameOrCodeAndIdNot) {
             throw new MessageException("Name or code already exists.");
         }
 
-        if (!Strings.isBlank(productModel.getCode())) {
-            product.setCode(productModel.getCode());
+        if (!Strings.isBlank(productModel.getPrimitive().getCode())) {
+            product.setCode(productModel.getPrimitive().getCode());
         }
-        if (!Strings.isBlank(productModel.getDetailedDescription())) {
-            product.setDetailedDescription(productModel.getDetailedDescription());
+        if (!Strings.isBlank(productModel.getPrimitive().getDetailedDescription())) {
+            product.setDetailedDescription(productModel.getPrimitive().getDetailedDescription());
         }
-        if (!Strings.isBlank(productModel.getName())) {
-            product.setName(productModel.getName());
+        if (!Strings.isBlank(productModel.getPrimitive().getName())) {
+            product.setName(productModel.getPrimitive().getName());
         }
-        if (!Strings.isBlank(productModel.getShortDescription())) {
-            product.setShortDescription(productModel.getShortDescription());
+        if (!Strings.isBlank(productModel.getPrimitive().getShortDescription())) {
+            product.setShortDescription(productModel.getPrimitive().getShortDescription());
         }
-        if (productModel.getPriceObj() != null) {
-            product.setPriceObj(productModel.getPriceObj());
+        if (productModel.getPrimitive().getPriceObj() != null) {
+            product.setPriceObj(productModel.getPrimitive().getPriceObj());
         }
-        if (productModel.getGenderApply() != null) {
-            product.setGenderApply(productModel.getGenderApply());
+        if (productModel.getPrimitive().getGenderApply() != null) {
+            product.setGenderApply(productModel.getPrimitive().getGenderApply());
         }
-        if (productModel.getProductCategoryId() != null) {
-            ProductCategory productCategory = productCategoryService.findById(productModel.getProductCategoryId())
-                    .orElseThrow(() -> new NotFoundEntityException(productModel.getProductCategoryId(), "productCategory"));
+        if (productModel.getPrimitive().getProductCategoryId() != null) {
+            ProductCategory productCategory = productCategoryService.findById(productModel.getPrimitive().getProductCategoryId())
+                    .orElseThrow(() -> new NotFoundEntityException(productModel.getPrimitive().getProductCategoryId(), "productCategory"));
             product.setProductCategory(productCategory);
         }
-        if (productModel.getPartnerId() != null) {
-            Partner provider = productProviderService.findById(productModel.getPartnerId())
-                    .orElseThrow(() -> new NotFoundEntityException(productModel.getPartnerId(), "Partner"));
+        if (productModel.getPrimitive().getPartnerId() != null) {
+            Partner provider = productProviderService.findById(productModel.getPrimitive().getPartnerId())
+                    .orElseThrow(() -> new NotFoundEntityException(productModel.getPrimitive().getPartnerId(), "Partner"));
             product.setPartner(provider);
         }
-        if (productModel.getEffectiveDateRangeSelectionNumber() != null) {
-            product.setEffectiveDateRangeSelectionNumber(productModel.getEffectiveDateRangeSelectionNumber());
+        if (productModel.getPrimitive().getEffectiveDateRangeSelectionNumber() != null) {
+            product.setEffectiveDateRangeSelectionNumber(productModel.getPrimitive().getEffectiveDateRangeSelectionNumber());
         }
-        if (productModel.getFiles().getAvatarImage() != null && productModel.getFiles().getBannerImage()
-                != null && productModel.getFiles().getInsuredRule() != null) {
-            CompletableFuture<String> async1 = cloudinaryService.uploadAsync(productModel.getFiles().getAvatarImage());
-            CompletableFuture<String> async2 = cloudinaryService.uploadAsync(productModel.getFiles().getBannerImage());
-            CompletableFuture<String> async3 = cloudinaryService.uploadPDFAsync(productModel.getFiles().getInsuredRule());
+        if (productModel.getAvatarImage() != null && productModel.getBannerImage()
+                != null && productModel.getInsuredRule() != null) {
+            CompletableFuture<String> async1 = cloudinaryService.uploadAsync(productModel.getAvatarImage());
+            CompletableFuture<String> async2 = cloudinaryService.uploadAsync(productModel.getBannerImage());
+            CompletableFuture<String> async3 = cloudinaryService.uploadPDFAsync(productModel.getInsuredRule());
             CompletableFuture.allOf(async1, async2, async3).join();
 
             product.setAvatarImage(async1.get());
@@ -249,50 +249,50 @@ public class ProductService extends AbstractService<Product> implements IProduct
             product.setInsuredRule(async3.get());
         }
 
-        if (productModel.getFiles().getAvatarImage() != null && productModel.getFiles().getBannerImage() != null ) {
-            CompletableFuture<String> async1 = cloudinaryService.uploadAsync(productModel.getFiles().getAvatarImage());
-            CompletableFuture<String> async2 = cloudinaryService.uploadAsync(productModel.getFiles().getBannerImage());
+        if (productModel.getAvatarImage() != null && productModel.getBannerImage() != null ) {
+            CompletableFuture<String> async1 = cloudinaryService.uploadAsync(productModel.getAvatarImage());
+            CompletableFuture<String> async2 = cloudinaryService.uploadAsync(productModel.getBannerImage());
             CompletableFuture.allOf(async1, async2).join();
 
             product.setAvatarImage(async1.get());
             product.setBannerImage(async2.get());
         }
 
-        if ( productModel.getFiles().getBannerImage()
-                != null && productModel.getFiles().getInsuredRule() != null) {
-            CompletableFuture<String> async2 = cloudinaryService.uploadAsync(productModel.getFiles().getBannerImage());
-            CompletableFuture<String> async3 = cloudinaryService.uploadPDFAsync(productModel.getFiles().getInsuredRule());
+        if ( productModel.getBannerImage()
+                != null && productModel.getInsuredRule() != null) {
+            CompletableFuture<String> async2 = cloudinaryService.uploadAsync(productModel.getBannerImage());
+            CompletableFuture<String> async3 = cloudinaryService.uploadPDFAsync(productModel.getInsuredRule());
             CompletableFuture.allOf(async2, async3).join();
 
             product.setBannerImage(async2.get());
             product.setInsuredRule(async3.get());
         }
 
-        if (productModel.getFiles().getAvatarImage() != null && productModel.getFiles().getInsuredRule() != null) {
-            CompletableFuture<String> async1 = cloudinaryService.uploadAsync(productModel.getFiles().getAvatarImage());
-            CompletableFuture<String> async3 = cloudinaryService.uploadPDFAsync(productModel.getFiles().getInsuredRule());
+        if (productModel.getAvatarImage() != null && productModel.getInsuredRule() != null) {
+            CompletableFuture<String> async1 = cloudinaryService.uploadAsync(productModel.getAvatarImage());
+            CompletableFuture<String> async3 = cloudinaryService.uploadPDFAsync(productModel.getInsuredRule());
             CompletableFuture.allOf(async1, async3).join();
 
             product.setAvatarImage(async1.get());
             product.setInsuredRule(async3.get());
         }
 
-        if (productModel.getFiles().getAvatarImage() != null) {
-            CompletableFuture<String> async1 = cloudinaryService.uploadAsync(productModel.getFiles().getAvatarImage());
+        if (productModel.getAvatarImage() != null) {
+            CompletableFuture<String> async1 = cloudinaryService.uploadAsync(productModel.getAvatarImage());
             CompletableFuture.allOf(async1).join();
 
             product.setAvatarImage(async1.get());
         }
 
-        if ( productModel.getFiles().getBannerImage() != null ) {
-            CompletableFuture<String> async2 = cloudinaryService.uploadAsync(productModel.getFiles().getBannerImage());
+        if ( productModel.getBannerImage() != null ) {
+            CompletableFuture<String> async2 = cloudinaryService.uploadAsync(productModel.getBannerImage());
             CompletableFuture.allOf(async2).join();
 
             product.setBannerImage(async2.get());
         }
 
-        if (productModel.getFiles().getInsuredRule() != null) {
-            CompletableFuture<String> async3 = cloudinaryService.uploadPDFAsync(productModel.getFiles().getInsuredRule());
+        if (productModel.getInsuredRule() != null) {
+            CompletableFuture<String> async3 = cloudinaryService.uploadPDFAsync(productModel.getInsuredRule());
             CompletableFuture.allOf(async3).join();
 
             product.setInsuredRule(async3.get());

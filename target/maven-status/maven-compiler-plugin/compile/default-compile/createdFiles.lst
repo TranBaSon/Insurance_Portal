@@ -70,7 +70,6 @@ com/gen/com/Insurance_portal/configs/TwilioInitazer.class
 com/gen/com/Insurance_portal/common/mappers/CustomerMapperImpl.class
 com/gen/com/Insurance_portal/repositories/RoleRepository.class
 com/gen/com/Insurance_portal/services/impls/FAQService.class
-com/gen/com/Insurance_portal/models/RequestModels/FileModel.class
 com/gen/com/Insurance_portal/entites/ProductCategory.class
 com/gen/com/Insurance_portal/common/enums/PolicyGroup.class
 com/gen/com/Insurance_portal/services/IUserService.class
@@ -85,7 +84,6 @@ com/gen/com/Insurance_portal/entites/SysAdmin.class
 com/gen/com/Insurance_portal/common/mappers/UserMapper.class
 com/gen/com/Insurance_portal/models/RequestModels/CreatePartnerModel.class
 com/gen/com/Insurance_portal/services/IAbstractService.class
-com/gen/com/Insurance_portal/models/RequestModels/FileUpdateModel.class
 com/gen/com/Insurance_portal/auth/MyUserDetailService.class
 com/gen/com/Insurance_portal/models/RequestModels/CreateProductCategoryModel.class
 com/gen/com/Insurance_portal/services/IFAQService.class
@@ -139,8 +137,10 @@ com/gen/com/Insurance_portal/repositories/PartnerRepository.class
 com/gen/com/Insurance_portal/services/impls/AbstractService.class
 com/gen/com/Insurance_portal/entites/Benefit.class
 com/gen/com/Insurance_portal/models/responseModels/ResponseProductModel.class
+com/gen/com/Insurance_portal/models/RequestModels/PrimitiveUpdateModel.class
 com/gen/com/Insurance_portal/common/mappers/CustomerMapper.class
 com/gen/com/Insurance_portal/common/enums/FeeType.class
+com/gen/com/Insurance_portal/models/RequestModels/PrimitiveModel.class
 com/gen/com/Insurance_portal/exceptions/NotFoundEntityExceptionByCode.class
 com/gen/com/Insurance_portal/controllers/auth/ProductController.class
 com/gen/com/Insurance_portal/repositories/CustomerRepository.class

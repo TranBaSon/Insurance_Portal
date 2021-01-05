@@ -14,13 +14,11 @@
 /Users/transon/workspace/aptech/Insurance_Portal/src/main/java/com/gen/com/Insurance_portal/repositories/AuthoritiesGroupRepository.java
 /Users/transon/workspace/aptech/Insurance_Portal/src/main/java/com/gen/com/Insurance_portal/controllers/auth/AuthController.java
 /Users/transon/workspace/aptech/Insurance_Portal/src/main/java/com/gen/com/Insurance_portal/entites/Partner.java
-/Users/transon/workspace/aptech/Insurance_Portal/src/main/java/com/gen/com/Insurance_portal/models/RequestModels/FileModel.java
 /Users/transon/workspace/aptech/Insurance_Portal/src/main/java/com/gen/com/Insurance_portal/services/impls/ProductCategoryService.java
 /Users/transon/workspace/aptech/Insurance_Portal/src/main/java/com/gen/com/Insurance_portal/services/IAuthoritiesService.java
 /Users/transon/workspace/aptech/Insurance_Portal/src/main/java/com/gen/com/Insurance_portal/common/enums/AttributeFormat.java
 /Users/transon/workspace/aptech/Insurance_Portal/src/main/java/com/gen/com/Insurance_portal/common/enums/ProductCategory.java
 /Users/transon/workspace/aptech/Insurance_Portal/src/main/java/com/gen/com/Insurance_portal/common/enums/EffectiveDateType.java
-/Users/transon/workspace/aptech/Insurance_Portal/src/main/java/com/gen/com/Insurance_portal/models/RequestModels/FileUpdateModel.java
 /Users/transon/workspace/aptech/Insurance_Portal/src/main/java/com/gen/com/Insurance_portal/common/enums/TransactionStatus.java
 /Users/transon/workspace/aptech/Insurance_Portal/src/main/java/com/gen/com/Insurance_portal/jwt/UsernameAndPasswordAuthenticationRequest.java
 /Users/transon/workspace/aptech/Insurance_Portal/src/main/java/com/gen/com/Insurance_portal/common/constanst/ClaimsCode.java
@@ -122,7 +120,9 @@
 /Users/transon/workspace/aptech/Insurance_Portal/src/main/java/com/gen/com/Insurance_portal/entites/ProductPack.java
 /Users/transon/workspace/aptech/Insurance_Portal/src/main/java/com/gen/com/Insurance_portal/repositories/SysAdminRepository.java
 /Users/transon/workspace/aptech/Insurance_Portal/src/main/java/com/gen/com/Insurance_portal/common/enums/FeeType.java
+/Users/transon/workspace/aptech/Insurance_Portal/src/main/java/com/gen/com/Insurance_portal/models/RequestModels/PrimitiveUpdateModel.java
 /Users/transon/workspace/aptech/Insurance_Portal/src/main/java/com/gen/com/Insurance_portal/models/RequestModels/UsernameAndPasswordAuthentication.java
+/Users/transon/workspace/aptech/Insurance_Portal/src/main/java/com/gen/com/Insurance_portal/models/RequestModels/PrimitiveModel.java
 /Users/transon/workspace/aptech/Insurance_Portal/src/main/java/com/gen/com/Insurance_portal/models/RequestModels/UpdateProductModel.java
 /Users/transon/workspace/aptech/Insurance_Portal/src/main/java/com/gen/com/Insurance_portal/services/ISysAdminService.java
 /Users/transon/workspace/aptech/Insurance_Portal/src/main/java/com/gen/com/Insurance_portal/common/Helpper.java

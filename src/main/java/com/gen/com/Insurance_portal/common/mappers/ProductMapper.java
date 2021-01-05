@@ -2,6 +2,8 @@ package com.gen.com.Insurance_portal.common.mappers;
 
 import com.gen.com.Insurance_portal.entites.Product;
 import com.gen.com.Insurance_portal.models.RequestModels.CreateProductModel;
+import com.gen.com.Insurance_portal.models.RequestModels.PrimitiveModel;
+import com.gen.com.Insurance_portal.models.RequestModels.PrimitiveUpdateModel;
 import com.gen.com.Insurance_portal.models.RequestModels.UpdateProductModel;
 import com.gen.com.Insurance_portal.models.responseModels.ResponseProductModel;
 import org.mapstruct.Mapper;
@@ -17,13 +19,13 @@ public interface ProductMapper {
     @Mapping(target = "bannerImage", ignore = true)
     @Mapping(target = "avatarImage", ignore = true)
     @Mapping(target = "genderApply", source = "genderApply")
-    Product createProductModelToProduct(CreateProductModel productModel);
+    Product createProductModelToProduct(PrimitiveModel productModel);
 
     @Mapping(target = "insuredRule", ignore = true)
     @Mapping(target = "bannerImage", ignore = true)
     @Mapping(target = "avatarImage", ignore = true)
     @Mapping(target = "genderApply", source = "genderApply")
-    Product updateProductModelToProduct(UpdateProductModel productModel);
+    Product updateProductModelToProduct(PrimitiveUpdateModel productModel);
 
     ResponseProductModel ProductModelToProductResponse(Product productModel);
 }
