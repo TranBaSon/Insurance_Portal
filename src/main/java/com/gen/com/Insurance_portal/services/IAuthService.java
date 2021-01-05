@@ -15,7 +15,7 @@ public interface IAuthService {
 
     RegisterStatus registerCustomer(CreateUserModel customerModel);
 
-    RegisterStatus registerProvider(CreateProviderModel providerModel);
+    RegisterStatus registerPartner(CreateProviderModel providerModel);
 
     Boolean activeUser(UserModelActive modelActive);
 

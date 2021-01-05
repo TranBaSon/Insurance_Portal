@@ -5,7 +5,6 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.springframework.web.multipart.MultipartFile;
 
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
@@ -30,10 +29,6 @@ public class CreateProductModel {
     private String code;
 
 
-    @Schema(name = "insuredRule", required = true)
-    @NotNull(message = "insuredRule is required!")
-    private MultipartFile insuredRule;
-
     @Schema(name = "detailedDescription", type = "String", required = true)
     @NotBlank(message = "code is required!")
     private String detailedDescription;
@@ -45,10 +40,6 @@ public class CreateProductModel {
     @Schema(name = "genderApply", type = "String", required = true, description = "value in {'ALL', 'Male', 'FEMALE'}")
     @NotNull(message = "genderApply is required!")
     private GenderApply genderApply;
-
-    @Schema(name = "bannerImage", required = true)
-    @NotNull(message = "bannerImage is required!")
-    private MultipartFile bannerImage;
 
     @Schema(name = "priceObj", type = "Double", required = true)
     @NotNull(message = "priceObj is required!")
@@ -63,8 +54,6 @@ public class CreateProductModel {
     @NotBlank(message = "shortDescription is required!")
     private String shortDescription;
 
-    @Schema(name = "avatarImage", required = true)
-    @NotNull(message = "avatarImage is required!")
-    private MultipartFile avatarImage;
+    private FileModel files;
 
 }

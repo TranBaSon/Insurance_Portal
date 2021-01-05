@@ -1,6 +1,7 @@
 com/gen/com/Insurance_portal/entites/RefreshToken.class
 com/gen/com/Insurance_portal/common/enums/GenderApply.class
 com/gen/com/Insurance_portal/repositories/ProductCategoryRepository.class
+com/gen/com/Insurance_portal/services/impls/CustomerService.class
 com/gen/com/Insurance_portal/services/impls/CloudinaryService.class
 com/gen/com/Insurance_portal/exceptions/NotFoundEntityException.class
 com/gen/com/Insurance_portal/common/Helpper.class
@@ -8,6 +9,7 @@ com/gen/com/Insurance_portal/entites/Order.class
 com/gen/com/Insurance_portal/entites/AuthoritiesGroup.class
 com/gen/com/Insurance_portal/controllers/auth/AuthController.class
 com/gen/com/Insurance_portal/common/enums/SysAdminType.class
+com/gen/com/Insurance_portal/common/mappers/RoleMapper.class
 com/gen/com/Insurance_portal/common/enums/PaymentStatus.class
 com/gen/com/Insurance_portal/services/IPartnerService.class
 com/gen/com/Insurance_portal/entites/Article.class
@@ -30,7 +32,9 @@ com/gen/com/Insurance_portal/services/impls/SysAdminService.class
 com/gen/com/Insurance_portal/entites/ProviderHistory.class
 com/gen/com/Insurance_portal/common/constanst/Constants.class
 com/gen/com/Insurance_portal/models/responseModels/ResponseObjectModel.class
+com/gen/com/Insurance_portal/models/RequestModels/ProductStatusRequest.class
 com/gen/com/Insurance_portal/entites/Role.class
+com/gen/com/Insurance_portal/models/responseModels/CustomerResponseModel.class
 com/gen/com/Insurance_portal/common/enums/ProductCategory.class
 com/gen/com/Insurance_portal/services/ICloudinaryService.class
 com/gen/com/Insurance_portal/models/RequestModels/UsernameAndPasswordAuthentication.class
@@ -41,12 +45,15 @@ com/gen/com/Insurance_portal/entites/AbstractEntity.class
 com/gen/com/Insurance_portal/configs/TwilioConfiguration.class
 com/gen/com/Insurance_portal/common/enums/TransactionStatus.class
 com/gen/com/Insurance_portal/common/enums/CycleType.class
+com/gen/com/Insurance_portal/models/RequestModels/PartnerStatusRequest.class
 com/gen/com/Insurance_portal/common/TwilioHelper.class
 com/gen/com/Insurance_portal/common/mappers/ProductProviderMapper.class
 com/gen/com/Insurance_portal/entites/ProviderPolicy.class
+com/gen/com/Insurance_portal/services/ICustomerService.class
 com/gen/com/Insurance_portal/controllers/HomeController.class
 com/gen/com/Insurance_portal/services/IAuthoritiesService.class
 com/gen/com/Insurance_portal/repositories/RefreshTokenRepository.class
+com/gen/com/Insurance_portal/models/responseModels/RoleResponseModel.class
 com/gen/com/Insurance_portal/services/impls/ProductCategoryService.class
 com/gen/com/Insurance_portal/models/responseModels/TokenResponse.class
 com/gen/com/Insurance_portal/entites/Policy.class
@@ -54,15 +61,16 @@ com/gen/com/Insurance_portal/entites/BenefitSetting.class
 com/gen/com/Insurance_portal/repositories/AuthoritiesGroupRepository.class
 com/gen/com/Insurance_portal/models/RequestModels/UpdateUserModel.class
 com/gen/com/Insurance_portal/common/mappers/ProductMapper.class
+com/gen/com/Insurance_portal/controllers/auth/CustomerContronller.class
 com/gen/com/Insurance_portal/common/mappers/ProductProviderMapperImpl.class
 com/gen/com/Insurance_portal/entites/ProductPack.class
-com/gen/com/Insurance_portal/common/enums/ProductProviderStatus.class
 com/gen/com/Insurance_portal/common/enums/ProductStatus.class
 com/gen/com/Insurance_portal/common/mappers/UserMapperImpl.class
 com/gen/com/Insurance_portal/configs/TwilioInitazer.class
 com/gen/com/Insurance_portal/common/mappers/CustomerMapperImpl.class
 com/gen/com/Insurance_portal/repositories/RoleRepository.class
 com/gen/com/Insurance_portal/services/impls/FAQService.class
+com/gen/com/Insurance_portal/models/RequestModels/FileModel.class
 com/gen/com/Insurance_portal/entites/ProductCategory.class
 com/gen/com/Insurance_portal/common/enums/PolicyGroup.class
 com/gen/com/Insurance_portal/services/IUserService.class
@@ -77,6 +85,7 @@ com/gen/com/Insurance_portal/entites/SysAdmin.class
 com/gen/com/Insurance_portal/common/mappers/UserMapper.class
 com/gen/com/Insurance_portal/models/RequestModels/CreatePartnerModel.class
 com/gen/com/Insurance_portal/services/IAbstractService.class
+com/gen/com/Insurance_portal/models/RequestModels/FileUpdateModel.class
 com/gen/com/Insurance_portal/auth/MyUserDetailService.class
 com/gen/com/Insurance_portal/models/RequestModels/CreateProductCategoryModel.class
 com/gen/com/Insurance_portal/services/IFAQService.class
@@ -85,6 +94,7 @@ com/gen/com/Insurance_portal/entites/CustomerContactCode.class
 com/gen/com/Insurance_portal/models/RequestModels/CreateProviderModel.class
 com/gen/com/Insurance_portal/common/enums/OrderStatus.class
 com/gen/com/Insurance_portal/services/impls/ProductService.class
+com/gen/com/Insurance_portal/common/enums/PartnerStatus.class
 com/gen/com/Insurance_portal/exceptions/CustomGlobalExceptionHandler.class
 com/gen/com/Insurance_portal/common/enums/RegisterStatus.class
 com/gen/com/Insurance_portal/entites/PaymentMethod.class
@@ -96,6 +106,7 @@ com/gen/com/Insurance_portal/entites/Ward.class
 com/gen/com/Insurance_portal/models/responseModels/ResponseDataModel.class
 com/gen/com/Insurance_portal/exceptions/MessageException.class
 com/gen/com/Insurance_portal/entites/Partner.class
+com/gen/com/Insurance_portal/models/RequestModels/ParamsModel.class
 com/gen/com/Insurance_portal/services/impls/UserService.class
 com/gen/com/Insurance_portal/repositories/SysAdminRepository.class
 com/gen/com/Insurance_portal/configs/ApplicationSecurityConfig.class
@@ -146,6 +157,7 @@ com/gen/com/Insurance_portal/common/enums/TransactionProcessName.class
 com/gen/com/Insurance_portal/entites/Product.class
 com/gen/com/Insurance_portal/InsurancePortalApplication.class
 com/gen/com/Insurance_portal/repositories/UserRepository.class
+com/gen/com/Insurance_portal/common/mappers/RoleMapperImpl.class
 com/gen/com/Insurance_portal/services/impls/AuthService.class
 com/gen/com/Insurance_portal/entites/District.class
 com/gen/com/Insurance_portal/controllers/auth/PartnerController.class

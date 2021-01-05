@@ -1,5 +1,6 @@
 package com.gen.com.Insurance_portal.entites;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 
 import javax.persistence.*;
@@ -28,8 +29,10 @@ public class Role extends AbstractEntity {
 
     private Date deletedAt;
 
+
+    @JsonIgnore
     @ToString.Exclude
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(
             name = "role_authority",
             joinColumns = @JoinColumn(name = "role_id"),

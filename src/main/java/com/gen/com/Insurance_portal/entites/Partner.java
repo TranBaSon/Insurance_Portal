@@ -1,7 +1,7 @@
 package com.gen.com.Insurance_portal.entites;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.gen.com.Insurance_portal.common.enums.ProductProviderStatus;
+import com.gen.com.Insurance_portal.common.enums.PartnerStatus;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -38,7 +38,7 @@ public class Partner extends AbstractEntity {
     private String introductionContent;
 
     @Column(nullable = false)
-    private ProductProviderStatus status = ProductProviderStatus.PENDING;
+    private PartnerStatus status = PartnerStatus.PENDING;
 
     private String avatarImage;
 
@@ -52,6 +52,6 @@ public class Partner extends AbstractEntity {
     @OneToMany(mappedBy = "partner", cascade = CascadeType.ALL)
     private Set<CustomerContactCode> customerContactCodes;
 
-    private Boolean isActive;
+    private Boolean isActive = false;
 
 }

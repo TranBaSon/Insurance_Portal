@@ -5,6 +5,7 @@ import com.gen.com.Insurance_portal.common.enums.Gender;
 import com.gen.com.Insurance_portal.common.enums.SysAdminType;
 import com.gen.com.Insurance_portal.entites.*;
 import com.gen.com.Insurance_portal.services.*;
+import io.swagger.v3.oas.annotations.Hidden;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -14,6 +15,8 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.Arrays;
 import java.util.List;
 
+
+@Hidden
 @CrossOrigin(origins = "*")
 @RestController
 @RequestMapping("/seed")
@@ -111,6 +114,7 @@ public class SeedController {
     public String seedAuthorities() {
 
         Role admin = roleService.save(new Role("admin role", "ADMIN"));
+        admin.setActive(true);
         roleService.save(new Role("customer role", "CUSTOMER"));
 
 
@@ -141,8 +145,9 @@ public class SeedController {
         Authorities a4 = new Authorities(ClaimsCode.ProductApprovement, "Duyệt thông tin sản pphẩm", productGroup);
         Authorities a5 = new Authorities(ClaimsCode.ProductList, "Xem danh sách sản phẩm", productGroup);
         Authorities a6 = new Authorities(ClaimsCode.ProductDetail, "Xem chi tiết sản phẩm", productGroup);
+        Authorities a69 = new Authorities(ClaimsCode.ProductDelete, "Xoá sản phẩm", productGroup);
 
-        List<Authorities> productAuthorities = Arrays.asList(a1, a2, a3, a4, a5, a6);
+        List<Authorities> productAuthorities = Arrays.asList(a1, a2, a3, a4, a5, a6, a69);
         admin.getAuthorities().addAll(productAuthorities);
         authoritiesService.saveAll(productAuthorities);
 
@@ -172,8 +177,10 @@ public class SeedController {
 
         // Khách hàng
         Authorities a12 = new Authorities(ClaimsCode.CustomerList, "xem danh sách khách hàng", customerGroup);
-        admin.getAuthorities().add(a12);
-        authoritiesService.save(a12);
+        Authorities a67 = new Authorities(ClaimsCode.CustomerDetail, "xem chi tiết khách hàng", customerGroup);
+        List<Authorities> customerAuthorities = Arrays.asList(a12, a67);
+        admin.getAuthorities().addAll(customerAuthorities);
+        authoritiesService.saveAll(customerAuthorities);
 
 
         //---------------------------------------------------------------------------------------------->
@@ -191,8 +198,9 @@ public class SeedController {
         Authorities a15 = new Authorities(ClaimsCode.PartnerStatus, "Active / Deactive đối tác", partnerGroup);
         Authorities a16 = new Authorities(ClaimsCode.PartnerApprovement, "duyệt thông tin đối tác", partnerGroup);
         Authorities a17 = new Authorities(ClaimsCode.PartnerList, "xem danh sách đối tác", partnerGroup);
+        Authorities a68 = new Authorities(ClaimsCode.PartnerDetail, "xem chi tiết đối tác", partnerGroup);
 
-        List<Authorities> partnerAuthorities = Arrays.asList(a13, a14, a15, a16, a17);
+        List<Authorities> partnerAuthorities = Arrays.asList(a13, a14, a15, a16, a17, a68);
         admin.getAuthorities().addAll(partnerAuthorities);
         authoritiesService.saveAll(partnerAuthorities);
 

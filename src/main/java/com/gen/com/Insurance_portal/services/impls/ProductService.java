@@ -1,5 +1,6 @@
 package com.gen.com.Insurance_portal.services.impls;
 
+import com.gen.com.Insurance_portal.common.enums.ProductStatus;
 import com.gen.com.Insurance_portal.common.mappers.ProductMapper;
 import com.gen.com.Insurance_portal.entites.Partner;
 import com.gen.com.Insurance_portal.entites.Product;
@@ -8,6 +9,7 @@ import com.gen.com.Insurance_portal.exceptions.MessageException;
 import com.gen.com.Insurance_portal.exceptions.NotFoundEntityException;
 import com.gen.com.Insurance_portal.exceptions.NotFoundEntityExceptionByCode;
 import com.gen.com.Insurance_portal.models.RequestModels.CreateProductModel;
+import com.gen.com.Insurance_portal.models.RequestModels.ProductStatusRequest;
 import com.gen.com.Insurance_portal.models.RequestModels.UpdateProductModel;
 import com.gen.com.Insurance_portal.models.responseModels.ResponseProductModel;
 import com.gen.com.Insurance_portal.repositories.ProductRepository;
@@ -51,9 +53,9 @@ public class ProductService extends AbstractService<Product> implements IProduct
             throw new MessageException("Name or code already exists.");
         }
 
-        CompletableFuture<String> async1 = cloudinaryService.uploadAsync(productModel.getAvatarImage());
-        CompletableFuture<String> async2 = cloudinaryService.uploadAsync(productModel.getBannerImage());
-        CompletableFuture<String> async3 = cloudinaryService.uploadPDFAsync(productModel.getInsuredRule());
+        CompletableFuture<String> async1 = cloudinaryService.uploadAsync(productModel.getFiles().getAvatarImage());
+        CompletableFuture<String> async2 = cloudinaryService.uploadAsync(productModel.getFiles().getBannerImage());
+        CompletableFuture<String> async3 = cloudinaryService.uploadPDFAsync(productModel.getFiles().getInsuredRule());
 
         CompletableFuture.allOf(async1, async2, async3).join();
 
@@ -115,11 +117,11 @@ public class ProductService extends AbstractService<Product> implements IProduct
         if (productModel.getEffectiveDateRangeSelectionNumber() != null) {
             product.setEffectiveDateRangeSelectionNumber(productModel.getEffectiveDateRangeSelectionNumber());
         }
-        if (productModel.getAvatarImage() != null && productModel.getBannerImage()
-                != null && productModel.getInsuredRule() != null) {
-            CompletableFuture<String> async1 = cloudinaryService.uploadAsync(productModel.getAvatarImage());
-            CompletableFuture<String> async2 = cloudinaryService.uploadAsync(productModel.getBannerImage());
-            CompletableFuture<String> async3 = cloudinaryService.uploadPDFAsync(productModel.getInsuredRule());
+        if (productModel.getFiles().getAvatarImage() != null && productModel.getFiles().getBannerImage()
+                != null && productModel.getFiles().getInsuredRule() != null) {
+            CompletableFuture<String> async1 = cloudinaryService.uploadAsync(productModel.getFiles().getAvatarImage());
+            CompletableFuture<String> async2 = cloudinaryService.uploadAsync(productModel.getFiles().getBannerImage());
+            CompletableFuture<String> async3 = cloudinaryService.uploadPDFAsync(productModel.getFiles().getInsuredRule());
             CompletableFuture.allOf(async1, async2, async3).join();
 
             product.setAvatarImage(async1.get());
@@ -127,50 +129,50 @@ public class ProductService extends AbstractService<Product> implements IProduct
             product.setInsuredRule(async3.get());
         }
 
-        if (productModel.getAvatarImage() != null && productModel.getBannerImage() != null ) {
-            CompletableFuture<String> async1 = cloudinaryService.uploadAsync(productModel.getAvatarImage());
-            CompletableFuture<String> async2 = cloudinaryService.uploadAsync(productModel.getBannerImage());
+        if (productModel.getFiles().getAvatarImage() != null && productModel.getFiles().getBannerImage() != null ) {
+            CompletableFuture<String> async1 = cloudinaryService.uploadAsync(productModel.getFiles().getAvatarImage());
+            CompletableFuture<String> async2 = cloudinaryService.uploadAsync(productModel.getFiles().getBannerImage());
             CompletableFuture.allOf(async1, async2).join();
 
             product.setAvatarImage(async1.get());
             product.setBannerImage(async2.get());
         }
 
-        if ( productModel.getBannerImage()
-                != null && productModel.getInsuredRule() != null) {
-            CompletableFuture<String> async2 = cloudinaryService.uploadAsync(productModel.getBannerImage());
-            CompletableFuture<String> async3 = cloudinaryService.uploadPDFAsync(productModel.getInsuredRule());
+        if ( productModel.getFiles().getBannerImage()
+                != null && productModel.getFiles().getInsuredRule() != null) {
+            CompletableFuture<String> async2 = cloudinaryService.uploadAsync(productModel.getFiles().getBannerImage());
+            CompletableFuture<String> async3 = cloudinaryService.uploadPDFAsync(productModel.getFiles().getInsuredRule());
             CompletableFuture.allOf(async2, async3).join();
 
             product.setBannerImage(async2.get());
             product.setInsuredRule(async3.get());
         }
 
-        if (productModel.getAvatarImage() != null && productModel.getInsuredRule() != null) {
-            CompletableFuture<String> async1 = cloudinaryService.uploadAsync(productModel.getAvatarImage());
-            CompletableFuture<String> async3 = cloudinaryService.uploadPDFAsync(productModel.getInsuredRule());
+        if (productModel.getFiles().getAvatarImage() != null && productModel.getFiles().getInsuredRule() != null) {
+            CompletableFuture<String> async1 = cloudinaryService.uploadAsync(productModel.getFiles().getAvatarImage());
+            CompletableFuture<String> async3 = cloudinaryService.uploadPDFAsync(productModel.getFiles().getInsuredRule());
             CompletableFuture.allOf(async1, async3).join();
 
             product.setAvatarImage(async1.get());
             product.setInsuredRule(async3.get());
         }
 
-        if (productModel.getAvatarImage() != null) {
-            CompletableFuture<String> async1 = cloudinaryService.uploadAsync(productModel.getAvatarImage());
+        if (productModel.getFiles().getAvatarImage() != null) {
+            CompletableFuture<String> async1 = cloudinaryService.uploadAsync(productModel.getFiles().getAvatarImage());
             CompletableFuture.allOf(async1).join();
 
             product.setAvatarImage(async1.get());
         }
 
-        if ( productModel.getBannerImage() != null ) {
-            CompletableFuture<String> async2 = cloudinaryService.uploadAsync(productModel.getBannerImage());
+        if ( productModel.getFiles().getBannerImage() != null ) {
+            CompletableFuture<String> async2 = cloudinaryService.uploadAsync(productModel.getFiles().getBannerImage());
             CompletableFuture.allOf(async2).join();
 
             product.setBannerImage(async2.get());
         }
 
-        if (productModel.getInsuredRule() != null) {
-            CompletableFuture<String> async3 = cloudinaryService.uploadPDFAsync(productModel.getInsuredRule());
+        if (productModel.getFiles().getInsuredRule() != null) {
+            CompletableFuture<String> async3 = cloudinaryService.uploadPDFAsync(productModel.getFiles().getInsuredRule());
             CompletableFuture.allOf(async3).join();
 
             product.setInsuredRule(async3.get());
@@ -188,7 +190,7 @@ public class ProductService extends AbstractService<Product> implements IProduct
 
     @Override
     public List<ResponseProductModel> getList() {
-        return productRepository.findAll().stream()
+        return productRepository.findProductsByProductStatus(ProductStatus.APPROVED).stream()
                 .map(ProductMapper.INSTANCE::ProductModelToProductResponse).collect(Collectors.toList());
     }
 
@@ -235,11 +237,11 @@ public class ProductService extends AbstractService<Product> implements IProduct
         if (productModel.getEffectiveDateRangeSelectionNumber() != null) {
             product.setEffectiveDateRangeSelectionNumber(productModel.getEffectiveDateRangeSelectionNumber());
         }
-        if (productModel.getAvatarImage() != null && productModel.getBannerImage()
-                != null && productModel.getInsuredRule() != null) {
-            CompletableFuture<String> async1 = cloudinaryService.uploadAsync(productModel.getAvatarImage());
-            CompletableFuture<String> async2 = cloudinaryService.uploadAsync(productModel.getBannerImage());
-            CompletableFuture<String> async3 = cloudinaryService.uploadPDFAsync(productModel.getInsuredRule());
+        if (productModel.getFiles().getAvatarImage() != null && productModel.getFiles().getBannerImage()
+                != null && productModel.getFiles().getInsuredRule() != null) {
+            CompletableFuture<String> async1 = cloudinaryService.uploadAsync(productModel.getFiles().getAvatarImage());
+            CompletableFuture<String> async2 = cloudinaryService.uploadAsync(productModel.getFiles().getBannerImage());
+            CompletableFuture<String> async3 = cloudinaryService.uploadPDFAsync(productModel.getFiles().getInsuredRule());
             CompletableFuture.allOf(async1, async2, async3).join();
 
             product.setAvatarImage(async1.get());
@@ -247,50 +249,50 @@ public class ProductService extends AbstractService<Product> implements IProduct
             product.setInsuredRule(async3.get());
         }
 
-        if (productModel.getAvatarImage() != null && productModel.getBannerImage() != null ) {
-            CompletableFuture<String> async1 = cloudinaryService.uploadAsync(productModel.getAvatarImage());
-            CompletableFuture<String> async2 = cloudinaryService.uploadAsync(productModel.getBannerImage());
+        if (productModel.getFiles().getAvatarImage() != null && productModel.getFiles().getBannerImage() != null ) {
+            CompletableFuture<String> async1 = cloudinaryService.uploadAsync(productModel.getFiles().getAvatarImage());
+            CompletableFuture<String> async2 = cloudinaryService.uploadAsync(productModel.getFiles().getBannerImage());
             CompletableFuture.allOf(async1, async2).join();
 
             product.setAvatarImage(async1.get());
             product.setBannerImage(async2.get());
         }
 
-        if ( productModel.getBannerImage()
-                != null && productModel.getInsuredRule() != null) {
-            CompletableFuture<String> async2 = cloudinaryService.uploadAsync(productModel.getBannerImage());
-            CompletableFuture<String> async3 = cloudinaryService.uploadPDFAsync(productModel.getInsuredRule());
+        if ( productModel.getFiles().getBannerImage()
+                != null && productModel.getFiles().getInsuredRule() != null) {
+            CompletableFuture<String> async2 = cloudinaryService.uploadAsync(productModel.getFiles().getBannerImage());
+            CompletableFuture<String> async3 = cloudinaryService.uploadPDFAsync(productModel.getFiles().getInsuredRule());
             CompletableFuture.allOf(async2, async3).join();
 
             product.setBannerImage(async2.get());
             product.setInsuredRule(async3.get());
         }
 
-        if (productModel.getAvatarImage() != null && productModel.getInsuredRule() != null) {
-            CompletableFuture<String> async1 = cloudinaryService.uploadAsync(productModel.getAvatarImage());
-            CompletableFuture<String> async3 = cloudinaryService.uploadPDFAsync(productModel.getInsuredRule());
+        if (productModel.getFiles().getAvatarImage() != null && productModel.getFiles().getInsuredRule() != null) {
+            CompletableFuture<String> async1 = cloudinaryService.uploadAsync(productModel.getFiles().getAvatarImage());
+            CompletableFuture<String> async3 = cloudinaryService.uploadPDFAsync(productModel.getFiles().getInsuredRule());
             CompletableFuture.allOf(async1, async3).join();
 
             product.setAvatarImage(async1.get());
             product.setInsuredRule(async3.get());
         }
 
-        if (productModel.getAvatarImage() != null) {
-            CompletableFuture<String> async1 = cloudinaryService.uploadAsync(productModel.getAvatarImage());
+        if (productModel.getFiles().getAvatarImage() != null) {
+            CompletableFuture<String> async1 = cloudinaryService.uploadAsync(productModel.getFiles().getAvatarImage());
             CompletableFuture.allOf(async1).join();
 
             product.setAvatarImage(async1.get());
         }
 
-        if ( productModel.getBannerImage() != null ) {
-            CompletableFuture<String> async2 = cloudinaryService.uploadAsync(productModel.getBannerImage());
+        if ( productModel.getFiles().getBannerImage() != null ) {
+            CompletableFuture<String> async2 = cloudinaryService.uploadAsync(productModel.getFiles().getBannerImage());
             CompletableFuture.allOf(async2).join();
 
             product.setBannerImage(async2.get());
         }
 
-        if (productModel.getInsuredRule() != null) {
-            CompletableFuture<String> async3 = cloudinaryService.uploadPDFAsync(productModel.getInsuredRule());
+        if (productModel.getFiles().getInsuredRule() != null) {
+            CompletableFuture<String> async3 = cloudinaryService.uploadPDFAsync(productModel.getFiles().getInsuredRule());
             CompletableFuture.allOf(async3).join();
 
             product.setInsuredRule(async3.get());
@@ -304,5 +306,13 @@ public class ProductService extends AbstractService<Product> implements IProduct
         Product product = productRepository.findByCode(code)
                 .orElseThrow(() -> new NotFoundEntityExceptionByCode(code, "Product"));
         delete(product);
+    }
+
+    @Override
+    public void status(String code, ProductStatusRequest statusRequest) {
+        Product product = productRepository.findByCode(code)
+                .orElseThrow(() -> new NotFoundEntityExceptionByCode(code, "Product"));
+        product.setProductStatus(statusRequest.getStatus());
+        update(product);
     }
 }

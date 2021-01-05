@@ -1,5 +1,6 @@
 package com.gen.com.Insurance_portal.entites;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.gen.com.Insurance_portal.common.enums.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -74,16 +75,21 @@ public class Product extends AbstractEntity {
     @JoinColumn(name = "product_category_id")
     private ProductCategory productCategory;
 
+    @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "product_provider_id")
     private Partner partner;
 
+    @JsonIgnore
     private Boolean enableIndemnity;
 
+    @JsonIgnore
     private Boolean canBuyMultiple;
 
+    @JsonIgnore
     private Boolean isSelfInsurance;
 
+    @JsonIgnore
     private Boolean hideBuyerInfo;
 
     private String videoUrl;
@@ -95,6 +101,7 @@ public class Product extends AbstractEntity {
     @OneToMany(mappedBy = "product")
     private Set<Benefit> benefits;
 
+    @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "target_group_id")
     private TargetGroup targetGroup;

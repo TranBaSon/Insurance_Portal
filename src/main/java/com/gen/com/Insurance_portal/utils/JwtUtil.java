@@ -51,8 +51,6 @@ public class JwtUtil {
 
         if (role != null) {
             claims.put("role", role.getName());
-            List<Authorities> authorities = role.getAuthorities();
-            claims.put("authorities", authorities);
         }
 
         return claims;

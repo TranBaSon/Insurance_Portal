@@ -6,6 +6,7 @@ import com.gen.com.Insurance_portal.common.Helpper;
 import com.gen.com.Insurance_portal.common.TwilioHelper;
 import com.gen.com.Insurance_portal.common.enums.RegisterStatus;
 import com.gen.com.Insurance_portal.common.enums.SysAdminType;
+import com.gen.com.Insurance_portal.common.mappers.RoleMapper;
 import com.gen.com.Insurance_portal.common.mappers.UserMapper;
 import com.gen.com.Insurance_portal.entites.*;
 import com.gen.com.Insurance_portal.exceptions.MessageException;
@@ -72,7 +73,7 @@ public class AuthService implements IAuthService {
                     )
             );
         } catch (BadCredentialsException e) {
-            throw new Exception("Incorrect username or password");
+            throw new MessageException("Incorrect username or password");
         }
 
         final UserDetails userDetails = userDetailService
@@ -85,9 +86,9 @@ public class AuthService implements IAuthService {
         }
 
         if (!user.getIsActive()) {
-            throw new Exception("account can't active.");
+            throw new MessageException("account can't active.");
         }else if (user.isCancelled() || user.getIsDeleted()) {
-            throw new Exception("bad request!");
+            throw new MessageException("bad request!");
         }
 
         if (user.getRefreshToken() != null){
@@ -102,6 +103,7 @@ public class AuthService implements IAuthService {
         refreshTokenService.save(refreshToken);
 
         ResponseUserInfor userInfor = UserMapper.INSTANCE.UserToUserInfor(user);
+        userInfor.setRole(RoleMapper.INSTANCE.roleToRoleResponse(user.getRole()));
         return new TokenResponse(token, refreshToken.getToken(), userInfor);
     }
 
@@ -172,7 +174,7 @@ public class AuthService implements IAuthService {
     }
 
     @Override
-    public RegisterStatus registerProvider(CreateProviderModel providerModel) {
+    public RegisterStatus registerPartner(CreateProviderModel providerModel) {
         User user = UserMapper.INSTANCE.createProviderModelToUser(providerModel);
         RegisterStatus result = registerUser(user, true);
 

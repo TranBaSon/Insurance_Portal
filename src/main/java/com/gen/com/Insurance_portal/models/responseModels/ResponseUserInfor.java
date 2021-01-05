@@ -19,6 +19,6 @@ public class ResponseUserInfor {
 
     private String phoneNumber;
 
-    private Role role;
+    private RoleResponseModel role;
 
 }

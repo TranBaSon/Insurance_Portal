@@ -55,10 +55,10 @@ public class AuthController {
         );
     }
 
-    @PostMapping("/register")
-    public ResponseEntity<?> registerProvider(@Valid @RequestBody CreateProviderModel providerModel) {
+    @PostMapping("/partner/register")
+    public ResponseEntity<?> registerPartner(@Valid @RequestBody CreateProviderModel providerModel) {
 
-        RegisterStatus result = authService.registerProvider(providerModel);
+        RegisterStatus result = authService.registerPartner(providerModel);
 
         if (result == RegisterStatus.ExistUser) {
             return new ResponseEntity<>(

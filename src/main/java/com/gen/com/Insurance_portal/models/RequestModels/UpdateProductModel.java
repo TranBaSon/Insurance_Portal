@@ -19,15 +19,12 @@ public class UpdateProductModel {
 
     private String code;
 
-    private MultipartFile insuredRule;
 
     private String detailedDescription;
 
     private Long productCategoryId;
 
     private GenderApply genderApply;
-
-    private MultipartFile bannerImage;
 
     @Min(value = 1, message = "priceObj must be greater than 0")
     private Double priceObj;
@@ -36,5 +33,5 @@ public class UpdateProductModel {
 
     private String shortDescription;
 
-    private MultipartFile avatarImage;
+    private FileUpdateModel files;
 }

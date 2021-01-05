@@ -5,6 +5,7 @@ public class ClaimsCode {
     public static final String ProductCreate = "Product_Create";
     public static final String ProductEdit = "Product_Edit";
     public static final String ProductStatus = "Product_Status";
+    public static final String ProductDelete = "Product_Delete";
 
     public static final String ProductApprovement = "Product_Approvement";
     public static final String ProductList = "Product_List";
@@ -26,13 +27,15 @@ public class ClaimsCode {
 
     //Partner
     public static final String PartnerCreate = "Partner_Create";
-    public static final String PartnerEdit = "Partner_Cdit";
-    public static final String PartnerStatus = "Partner_Ctatus";
+    public static final String PartnerEdit = "Partner_Edit";
+    public static final String PartnerStatus = "Partner_Status";
+    public static final String PartnerDetail = "Partner_Detail";
     public static final String PartnerApprovement = "Partner_Approvement";
     public static final String PartnerList = "Partner_List";
 
     //Customer
     public static final String CustomerList = "Customer_List";
+    public static final String CustomerDetail = "Customer_Detail";
 
     //Contract
     public static final String ContractNumberCreate = "ContractNumber_Create"; //Tạo số hợp đồng

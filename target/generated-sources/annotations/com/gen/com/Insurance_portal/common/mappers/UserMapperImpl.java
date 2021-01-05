@@ -1,14 +1,17 @@
 package com.gen.com.Insurance_portal.common.mappers;
 
+import com.gen.com.Insurance_portal.entites.Role;
 import com.gen.com.Insurance_portal.entites.User;
 import com.gen.com.Insurance_portal.models.RequestModels.CreateProviderModel;
 import com.gen.com.Insurance_portal.models.RequestModels.CreateUserModel;
+import com.gen.com.Insurance_portal.models.responseModels.CustomerResponseModel;
 import com.gen.com.Insurance_portal.models.responseModels.ResponseUserInfor;
+import com.gen.com.Insurance_portal.models.responseModels.RoleResponseModel;
 import javax.annotation.Generated;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2021-01-03T18:50:03+0700",
+    date = "2021-01-05T18:13:06+0700",
     comments = "version: 1.3.0.Final, compiler: javac, environment: Java 1.8.0_265 (AdoptOpenJDK)"
 )
 public class UserMapperImpl implements UserMapper {
@@ -48,7 +51,7 @@ public class UserMapperImpl implements UserMapper {
         responseUserInfor.setSurname( user.getSurname() );
         responseUserInfor.setGivenName( user.getGivenName() );
         responseUserInfor.setPhoneNumber( user.getPhoneNumber() );
-        responseUserInfor.setRole( user.getRole() );
+        responseUserInfor.setRole( roleToRoleResponseModel( user.getRole() ) );
 
         return responseUserInfor;
     }
@@ -68,5 +71,40 @@ public class UserMapperImpl implements UserMapper {
         user.setAddress( providerModel.getAddress() );
 
         return user;
+    }
+
+    @Override
+    public CustomerResponseModel userToCustomerResponse(User providerModel) {
+        if ( providerModel == null ) {
+            return null;
+        }
+
+        CustomerResponseModel customerResponseModel = new CustomerResponseModel();
+
+        customerResponseModel.setId( providerModel.getId() );
+        customerResponseModel.setSurname( providerModel.getSurname() );
+        customerResponseModel.setGivenName( providerModel.getGivenName() );
+        customerResponseModel.setUsername( providerModel.getUsername() );
+        customerResponseModel.setPhoneNumber( providerModel.getPhoneNumber() );
+        customerResponseModel.setEmail( providerModel.getEmail() );
+        customerResponseModel.setDod( providerModel.getDod() );
+        customerResponseModel.setGender( providerModel.getGender() );
+        customerResponseModel.setAddress( providerModel.getAddress() );
+        customerResponseModel.setCompany( providerModel.getCompany() );
+        customerResponseModel.setIsActive( providerModel.getIsActive() );
+
+        return customerResponseModel;
+    }
+
+    protected RoleResponseModel roleToRoleResponseModel(Role role) {
+        if ( role == null ) {
+            return null;
+        }
+
+        RoleResponseModel roleResponseModel = new RoleResponseModel();
+
+        roleResponseModel.setName( role.getName() );
+
+        return roleResponseModel;
     }
 }

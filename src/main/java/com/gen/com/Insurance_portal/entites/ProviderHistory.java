@@ -1,6 +1,6 @@
 package com.gen.com.Insurance_portal.entites;
 
-import com.gen.com.Insurance_portal.common.enums.ProductProviderStatus;
+import com.gen.com.Insurance_portal.common.enums.PartnerStatus;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -29,5 +29,5 @@ public class ProviderHistory extends AbstractEntity {
     @JoinColumn(name = "product_provider_id")
     private Partner partner;
 
-    private ProductProviderStatus productProviderStatus;
+    private PartnerStatus partnerStatus;
 }

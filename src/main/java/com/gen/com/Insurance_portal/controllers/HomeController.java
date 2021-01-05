@@ -1,10 +1,13 @@
 package com.gen.com.Insurance_portal.controllers;
 
 import com.gen.com.Insurance_portal.services.IRoleService;
+import io.swagger.v3.oas.annotations.Hidden;
+import io.swagger.v3.oas.annotations.Operation;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 
+@Hidden
 @CrossOrigin(origins = "*")
 @Controller
 @RequestMapping("/home")

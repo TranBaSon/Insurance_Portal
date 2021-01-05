@@ -1,5 +1,6 @@
 package com.gen.com.Insurance_portal.entites;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -28,6 +29,7 @@ public class Customer extends AbstractEntity{
     @JoinColumn(name = "user_id")
     private User user;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "customer", cascade = CascadeType.ALL)
     private Set<CustomerContactCode> customerContactCodes;
 

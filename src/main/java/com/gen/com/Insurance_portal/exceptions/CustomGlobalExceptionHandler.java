@@ -65,4 +65,20 @@ public class CustomGlobalExceptionHandler extends ResponseEntityExceptionHandler
 
         return new ResponseEntity<>(body, HttpStatus.NOT_FOUND);
     }
+
+    @ExceptionHandler({TokenRefreshException.class})
+    public ResponseEntity<Object> handleTokenRefreshException(
+            TokenRefreshException ex, WebRequest request) {
+
+        Map<String, Object> body = new LinkedHashMap<>();
+
+        body.put("status", HttpStatus.BAD_REQUEST);
+        body.put("timestamp", new SimpleDateFormat("dd/MM/yyyy - hh:mm:ss").format(new Date()));
+        body.put("message", ex.getMessage());
+        List<String> errors = new ArrayList<>();
+        errors.add(ex.getMessage());
+        body.put("errors", errors);
+
+        return new ResponseEntity<>(body, HttpStatus.NOT_FOUND);
+    }
 }

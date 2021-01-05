@@ -5,6 +5,7 @@ import com.gen.com.Insurance_portal.entites.Partner;
 import com.gen.com.Insurance_portal.exceptions.MessageException;
 import com.gen.com.Insurance_portal.exceptions.NotFoundEntityException;
 import com.gen.com.Insurance_portal.models.RequestModels.CreatePartnerModel;
+import com.gen.com.Insurance_portal.models.RequestModels.PartnerStatusRequest;
 import com.gen.com.Insurance_portal.models.RequestModels.UpdateProductProviderModel;
 import com.gen.com.Insurance_portal.repositories.PartnerRepository;
 import com.gen.com.Insurance_portal.services.IPartnerService;
@@ -27,6 +28,7 @@ public class PartnerService extends AbstractService<Partner> implements IPartner
         Partner provider = ProductProviderMapper.INSTANCE
                                    .createProductProviderModelToProductProvider(productProviderModel);
 
+        provider.setIsActive(true);
 
         Boolean existsByNameOrCode = partnerRepository
                 .existsByNameOrCode(productProviderModel.getName(), productProviderModel.getCode());
@@ -75,6 +77,12 @@ public class PartnerService extends AbstractService<Partner> implements IPartner
         if (!Strings.isBlank(productProviderModel.getPhoneNumber())) {
             partner.setPhoneNumber(productProviderModel.getPhoneNumber());
         }
+        if (!Strings.isBlank(productProviderModel.getEmail())) {
+            partner.setEmail(productProviderModel.getEmail());
+        }
+        if (!Strings.isBlank(productProviderModel.getIntroductionContent())) {
+            partner.setIntroductionContent(productProviderModel.getIntroductionContent());
+        }
 
         this.update(partner);
     }
@@ -85,6 +93,22 @@ public class PartnerService extends AbstractService<Partner> implements IPartner
                 .orElseThrow(() -> new NotFoundEntityException(id, "Partner"));
         provider.setIsActive(!provider.getIsActive());
         update(provider);
+    }
+
+    @Override
+    public void active(Long id) {
+        Partner partner = this.findById(id)
+                .orElseThrow(() -> new NotFoundEntityException(id, "Partner"));
+        partner.setIsActive(!partner.getIsActive());
+        update(partner);
+    }
+
+    @Override
+    public void status(Long id, PartnerStatusRequest statusRequest) {
+        Partner partner = this.findById(id)
+                .orElseThrow(() -> new NotFoundEntityException(id, "Partner"));
+        partner.setStatus(statusRequest.getStatus());
+        update(partner);
     }
 
 }
