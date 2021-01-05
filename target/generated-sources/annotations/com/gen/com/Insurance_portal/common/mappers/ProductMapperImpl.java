@@ -1,20 +1,20 @@
 package com.gen.com.Insurance_portal.common.mappers;
 
 import com.gen.com.Insurance_portal.entites.Product;
-import com.gen.com.Insurance_portal.models.RequestModels.PrimitiveModel;
-import com.gen.com.Insurance_portal.models.RequestModels.PrimitiveUpdateModel;
+import com.gen.com.Insurance_portal.models.RequestModels.CreateProductModel;
+import com.gen.com.Insurance_portal.models.RequestModels.UpdateProductModel;
 import com.gen.com.Insurance_portal.models.responseModels.ResponseProductModel;
 import javax.annotation.Generated;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2021-01-05T23:12:59+0700",
+    date = "2021-01-06T01:01:15+0700",
     comments = "version: 1.3.0.Final, compiler: javac, environment: Java 1.8.0_265 (AdoptOpenJDK)"
 )
 public class ProductMapperImpl implements ProductMapper {
 
     @Override
-    public Product createProductModelToProduct(PrimitiveModel productModel) {
+    public Product createProductModelToProduct(CreateProductModel productModel) {
         if ( productModel == null ) {
             return null;
         }
@@ -33,7 +33,7 @@ public class ProductMapperImpl implements ProductMapper {
     }
 
     @Override
-    public Product updateProductModelToProduct(PrimitiveUpdateModel productModel) {
+    public Product updateProductModelToProduct(UpdateProductModel productModel) {
         if ( productModel == null ) {
             return null;
         }

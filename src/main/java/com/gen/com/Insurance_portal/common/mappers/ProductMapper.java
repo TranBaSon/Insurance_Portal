@@ -19,13 +19,13 @@ public interface ProductMapper {
     @Mapping(target = "bannerImage", ignore = true)
     @Mapping(target = "avatarImage", ignore = true)
     @Mapping(target = "genderApply", source = "genderApply")
-    Product createProductModelToProduct(PrimitiveModel productModel);
+    Product createProductModelToProduct(CreateProductModel productModel);
 
     @Mapping(target = "insuredRule", ignore = true)
     @Mapping(target = "bannerImage", ignore = true)
     @Mapping(target = "avatarImage", ignore = true)
     @Mapping(target = "genderApply", source = "genderApply")
-    Product updateProductModelToProduct(PrimitiveUpdateModel productModel);
+    Product updateProductModelToProduct(UpdateProductModel productModel);
 
     ResponseProductModel ProductModelToProductResponse(Product productModel);
 }

@@ -1,7 +1,6 @@
 package com.gen.com.Insurance_portal.controllers.auth;
 
 import com.gen.com.Insurance_portal.models.RequestModels.CreateProductModel;
-import com.gen.com.Insurance_portal.models.RequestModels.ProductStatusRequest;
 import com.gen.com.Insurance_portal.models.RequestModels.UpdateProductModel;
 import com.gen.com.Insurance_portal.models.responseModels.ResponseMessageModel;
 import com.gen.com.Insurance_portal.models.responseModels.ResponseObjectModel;
@@ -10,12 +9,10 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.concurrent.ExecutionException;
-
 
 @RestController
 @RequestMapping("/api/v1/product")
@@ -27,29 +24,19 @@ public class ProductController {
         this.productService = productService;
     }
 
-    @PreAuthorize(value = "hasRole('Product_Create')")
     @Operation(summary = "Required Header { Authorization : bearer key }",security = { @SecurityRequirement(name = "bearer key") })
     @PostMapping
-    public ResponseEntity<?> create(@ModelAttribute @Valid CreateProductModel productModel) throws ExecutionException, InterruptedException {
+    public ResponseEntity<?> create(@RequestBody @Valid CreateProductModel productModel) throws ExecutionException, InterruptedException {
         productService.create(productModel);
         return new ResponseEntity<>(new ResponseMessageModel(true), HttpStatus.OK);
     }
 
-    @PreAuthorize(value = "hasRole('Product_List')")
-    @Operation(summary = "Required Header { Authorization : bearer key }",security = { @SecurityRequirement(name = "bearer key") }, description = "Get approved products, return: { name: String, code: String }")
+    @Operation(summary = "Required Header { Authorization : bearer key }",security = { @SecurityRequirement(name = "bearer key") })
     @GetMapping
     public ResponseEntity<?> getAll() {
         return new ResponseEntity<>(new ResponseObjectModel(true, productService.getList()), HttpStatus.OK);
     }
 
-    @PreAuthorize(value = "hasRole('Product_List')")
-    @Operation(summary = "Required Header { Authorization : bearer key }",security = { @SecurityRequirement(name = "bearer key") }, description = "get all product")
-    @GetMapping("/list")
-    public ResponseEntity<?> getAllDetail() {
-        return new ResponseEntity<>(new ResponseObjectModel(true, productService.findAll()), HttpStatus.OK);
-    }
-
-    @PreAuthorize(value = "hasRole('Product_Detail')")
     @Operation(summary = "Required Header { Authorization : bearer key }",security = { @SecurityRequirement(name = "bearer key") })
     @GetMapping("/{code}")
     public ResponseEntity<?> getOne(@PathVariable String code) {
@@ -58,7 +45,6 @@ public class ProductController {
                 HttpStatus.OK);
     }
 
-    @PreAuthorize(value = "hasRole('Product_Detail')")
     @Operation(summary = "Required Header { Authorization : bearer key }",security = { @SecurityRequirement(name = "bearer key") })
     @GetMapping("/id/{id}")
     public ResponseEntity<?> getOne(@PathVariable Long id) {
@@ -67,10 +53,9 @@ public class ProductController {
                 HttpStatus.OK);
     }
 
-    @PreAuthorize(value = "hasRole('Product_Edit')")
     @Operation(summary = "Required Header { Authorization : bearer key }",security = { @SecurityRequirement(name = "bearer key") })
     @PutMapping("/id/{id}")
-    public ResponseEntity<?> update(@ModelAttribute @Valid UpdateProductModel updateProductModel,
+    public ResponseEntity<?> update(@RequestBody @Valid UpdateProductModel updateProductModel,
                                     @PathVariable Long id) throws ExecutionException, InterruptedException {
 
         productService.update(updateProductModel, id);
@@ -78,8 +63,6 @@ public class ProductController {
         return new ResponseEntity<>(new ResponseMessageModel(true), HttpStatus.OK);
     }
 
-
-    @PreAuthorize(value = "hasRole('Product_Delete')")
     @Operation(summary = "Required Header { Authorization : bearer key }",security = { @SecurityRequirement(name = "bearer key") })
     @DeleteMapping("/id/{id}")
     public ResponseEntity<?> delete(@PathVariable Long id) {
@@ -89,10 +72,9 @@ public class ProductController {
         return new ResponseEntity<>(new ResponseMessageModel(true), HttpStatus.OK);
     }
 
-    @PreAuthorize(value = "hasRole('Product_Edit')")
     @Operation(summary = "Required Header { Authorization : bearer key }",security = { @SecurityRequirement(name = "bearer key") })
     @PutMapping("{code}")
-    public ResponseEntity<?> update(@ModelAttribute @Valid UpdateProductModel updateProductModel,
+    public ResponseEntity<?> update(@RequestBody @Valid UpdateProductModel updateProductModel,
                                     @PathVariable String code) throws ExecutionException, InterruptedException {
 
         productService.updateByCode(updateProductModel, code);
@@ -100,20 +82,9 @@ public class ProductController {
         return new ResponseEntity<>(new ResponseMessageModel(true), HttpStatus.OK);
     }
 
-    @PreAuthorize(value = "hasRole('Product_Delete')")
     @Operation(summary = "Required Header { Authorization : bearer key }",security = { @SecurityRequirement(name = "bearer key") })
     @DeleteMapping("/{code}")
     public ResponseEntity<?> delete(@PathVariable String code) {
-
-        productService.deleteByCode(code);
-
-        return new ResponseEntity<>(new ResponseMessageModel(true), HttpStatus.OK);
-    }
-
-    @PreAuthorize(value = "hasRole('Product_Status')")
-    @Operation(summary = "Required Header { Authorization : bearer key }",security = { @SecurityRequirement(name = "bearer key") })
-    @PostMapping("/status")
-    public ResponseEntity<?> status(@PathVariable String code, ProductStatusRequest statusRequest) {
 
         productService.deleteByCode(code);
 

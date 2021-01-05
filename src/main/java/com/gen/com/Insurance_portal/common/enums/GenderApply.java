@@ -2,7 +2,7 @@ package com.gen.com.Insurance_portal.common.enums;
 
 public enum GenderApply {
     ALL("tất cả"),
-    Male("nam"),
+    MALE("nam"),
     FEMALE("nữ");
 
     private String value;

@@ -58,6 +58,7 @@ public class ApplicationSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers(HttpMethod.POST , "/api/v1/upload/**").permitAll()
                 .antMatchers(HttpMethod.GET , "/seed/**").permitAll()
                 .antMatchers(HttpMethod.GET, "/swagger").permitAll()
+                .antMatchers(HttpMethod.POST, "/api/v1/product").permitAll()
                 .antMatchers(HttpMethod.GET, "/swagger/**").permitAll()
                 .antMatchers(HttpMethod.GET, "/swagger-ui/**", "/v3/api-docs/**").permitAll()
                 .antMatchers(HttpMethod.GET, "/swagger-ui.html/**").permitAll()
