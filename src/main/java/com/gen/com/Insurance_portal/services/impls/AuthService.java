@@ -139,7 +139,7 @@ public class AuthService implements IAuthService {
         Boolean isExist  = userService.isExistUser(user.getUsername(), user.getPhoneNumber(), user.getEmail());
 
         if (isExist) {
-            return RegisterStatus.ExistUser;
+            throw new MessageException("Username or password or email already exists .");
         }
 
 

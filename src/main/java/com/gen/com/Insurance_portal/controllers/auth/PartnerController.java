@@ -77,7 +77,7 @@ public class PartnerController {
 
     @PreAuthorize(value = "hasRole('Partner_Status')")
     @Operation(summary = "Required Header { Authorization : bearer key }",security = { @SecurityRequirement(name = "bearer key") })
-    @PostMapping("/active")
+    @PostMapping("/active/{id}")
     public ResponseEntity<?> active(@PathVariable Long id) {
 
         partnerService.active(id);
@@ -87,7 +87,7 @@ public class PartnerController {
 
     @PreAuthorize(value = "hasRole('Partner_Status')")
     @Operation(summary = "Required Header { Authorization : bearer key }",security = { @SecurityRequirement(name = "bearer key") })
-    @PostMapping("/partnerStatus")
+    @PostMapping("/partnerStatus/{id}")
     public ResponseEntity<?> status(@PathVariable Long id, @RequestBody PartnerStatusRequest statusRequest) {
 
         partnerService.status(id, statusRequest);

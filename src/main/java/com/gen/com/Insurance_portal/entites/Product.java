@@ -48,7 +48,7 @@ public class Product extends AbstractEntity {
     private String indemnityInstructionContent = "guide";
 
     @Enumerated(EnumType.STRING)
-    private EffectiveDateType effectiveDateType = EffectiveDateType.NONE;
+    private EffectiveDateType effectiveDateType = EffectiveDateType.T;
 
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
@@ -68,7 +68,7 @@ public class Product extends AbstractEntity {
     private Boolean hideBeneficiary;
 
     // số lựa chọn ngày có hiệu lực
-    private Integer EffectiveDateRangeSelectionNumber;
+    private Integer EffectiveDateRangeSelectionNumber = 0;
 
 
     @ManyToOne
@@ -109,9 +109,7 @@ public class Product extends AbstractEntity {
     @OneToMany(mappedBy = "product")
     private Set<ProductAttributeSetting> productAttributeSettings;
 
-
 //    public string MappedRequestJsonStructure { get; set; }
-//
 //    public string FERequestJsonStructure { get; set; }
 //    public string FERequestQueryBuilder { get; set; }
 //    public bool HideInsured { get; set; }

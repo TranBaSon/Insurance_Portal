@@ -8,7 +8,6 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.util.Date;
-import java.util.Set;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -25,8 +24,6 @@ public class Order extends AbstractEntity{
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private String code;
 
-    private String proposalNum;
-
     @Column(nullable = false)
     private String CustomerCode;
 
@@ -40,29 +37,20 @@ public class Order extends AbstractEntity{
     @Column(nullable = false)
     private Date expiredDate;
 
-    private Double FeeAmount;
-
     @Column(nullable = false)
     private OrderStatus orderStatus;
 
-    private String beneficiaryFullName; // Tên đầy đủ của người thụ hưởng
-
-    private String beneficiaryPhoneNumber;
-
-    private Date beneficiaryDOB;
-
-    private String beneficiaryRelationship;
-
-    private String beneficiaryEmail;
-
-    private String beneficiaryGender;
-
-    @ManyToOne
-    @JoinColumn(name = "product_pack_detail_id")
-    private ProductPackDetail productPackDetail;
-
-    @OneToMany(mappedBy = "order")
-    private Set<OrderAttributeSetting> orderAttributeSettings;
+//    private String beneficiaryFullName; // Tên đầy đủ của người thụ hưởng
+//
+//    private String beneficiaryPhoneNumber;
+//
+//    private Date beneficiaryDOB;
+//
+//    private String beneficiaryRelationship;
+//
+//    private String beneficiaryEmail;
+//
+//    private String beneficiaryGender;
 
     private String insuredFullName;
 
@@ -75,28 +63,5 @@ public class Order extends AbstractEntity{
     private String insuredAddress;
 
     private String insuredGender;
-
-    @OneToOne
-    @JoinColumn(name = "promo_code_id")
-    private PromoCode promoCode;
-
-
-
-
-    /*
-
-        public string JsonAttribute { get; set; }
-        public string JsonAttributeDisplay { get; set; }
-
-
-        public Guid? CampaignId { get; set; }
-        public Guid? BeneficiaryId { get; set; }
-
-        [NotMapped]
-        public int PolicyCreateFailedCount { get; set; }
-        [NotMapped]
-        public string OrderSendToVTPay { get; set; }
-
-    * */
 
 }

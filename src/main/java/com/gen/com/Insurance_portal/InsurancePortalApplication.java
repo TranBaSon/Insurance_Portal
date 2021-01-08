@@ -2,6 +2,7 @@ package com.gen.com.Insurance_portal;
 
 
 import com.cloudinary.Cloudinary;
+import com.gen.com.Insurance_portal.common.enums.ContractStatus;
 import io.swagger.v3.oas.annotations.OpenAPIDefinition;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.SpringApplication;

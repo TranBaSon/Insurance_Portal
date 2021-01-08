@@ -114,6 +114,7 @@ public class ClaimsCode {
     public static final String OrderPendingList = "OrderPending_List";
     public static final String OrderPendingDetail = "OrderPending_Detail";
     public static final String OrderPendingCreatePolicy = "OrderPending_CreatePolicy";
+    public static final String PolicyList = "Policy_List";
 
     //Site Config
     public static final String SiteConfigIndex = "SiteConfig_index";
@@ -122,7 +123,6 @@ public class ClaimsCode {
     public static final String PromoCreate = "Promo_Create";
     public static final String PromoIndex = "Promo_Index";
     public static final String PromoEdit = "Promo_Edit";
-
     // CSKH
     public static final String CSKH = "cskh";
 }

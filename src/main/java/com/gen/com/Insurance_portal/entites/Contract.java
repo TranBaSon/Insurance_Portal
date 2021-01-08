@@ -1,8 +1,8 @@
 package com.gen.com.Insurance_portal.entites;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.gen.com.Insurance_portal.common.enums.PaymentStatus;
-import com.gen.com.Insurance_portal.common.enums.PolicyGroup;
-import com.gen.com.Insurance_portal.common.enums.PolicyStatus;
+import com.gen.com.Insurance_portal.common.enums.ContractStatus;
 import com.gen.com.Insurance_portal.common.enums.PurchaseMethod;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -17,7 +17,7 @@ import java.util.Date;
 @EqualsAndHashCode(callSuper = true)
 @Data
 @Entity
-public class Policy extends AbstractEntity {
+public class Contract extends AbstractEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -25,23 +25,22 @@ public class Policy extends AbstractEntity {
 
     private String code;
 
-    private String contactNo;
+    private String partner;
+
+    private String partnerCode;
 
     @Column(nullable = false)
     private String customerCode;
 
-    @ManyToOne
+    @JsonIgnore
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "customer_id")
     private Customer customer;
 
     private String idNumber;
 
-    @Column(nullable = false)
-    private PolicyStatus status;
-
-    @ManyToOne
-    @JoinColumn(name = "payment_method_id")
-    private PaymentMethod paymentMethod;
+    @Enumerated(value = EnumType.STRING)
+    private ContractStatus status = ContractStatus.Inactive;
 
     @Column(nullable = false)
     private Date effectiveDate;
@@ -49,42 +48,18 @@ public class Policy extends AbstractEntity {
     @Column(nullable = false)
     private Date expiredDate;
 
-    private Date lastAutoExtendAttemptDate;
-
-    private Integer dailyExtendAttempt;
-
-    private Date autoExtendExpiredDate;
-
     private Date cancelDate;
 
-    private Date createdPolicyDate;
+    private Date createdContractDate;
 
     private Date activeDate;
 
     @Column(nullable = false)
-    private Boolean enableExtend;
-
-    @Column(nullable = false)
-    private PaymentStatus paymentStatus;
-
-    @Column(nullable = false)
-    private Double feeAmount;
-
-    private Double autoExtendFeeAmount;
+    private PaymentStatus paymentStatus = PaymentStatus.Paid;
 
     private Double paidAmount;
 
-    private Double paidAmountPercentage;
-
-    @OneToOne
-    @JoinColumn(name = "order_id")
-    private Order order;
-
     private Date extendSuccessDate;
-
-    @ManyToOne
-    @JoinColumn(name = "product_pack_detail_id")
-    private ProductPackDetail productPackDetail;
 
     private String fullName;
 
@@ -94,28 +69,27 @@ public class Policy extends AbstractEntity {
 
     private String email;
 
+    private String phoneNumber;
+
     private String address;
 
     private String buyerIdNumber;
 
-    private PolicyGroup policyGroup;
-
     @Column(nullable = false)
     private PurchaseMethod purchaseMethod;
 
-    private Boolean syncPolicy;
+    private String numberPlate;
 
-    private Boolean syncCancelPolicy;
+    private String carBrand;
 
-    private String promoCode;
+    private String carMaker;
 
-    private Date nextDebtDate;
+    private String product;
 
-    private Integer bidailyPaymentAttempts;
+    private String productCode;
 
-    /*
+    @JsonIgnore
+    @OneToOne(mappedBy = "contract", fetch = FetchType.LAZY)
+    private TransactionHistory transactionHistory;
 
-    private Campaign Campaign;
-
-    */
 }

@@ -3,8 +3,7 @@ package com.gen.com.Insurance_portal.common.enums;
 public enum TransactionProcessName {
     BuyNew("Mua mới"),
     Extend("Gia Hạn"),
-    Cancel("Hủy"),
-    PaymentSuccess("Thanh toán thành công");
+    Cancel("Hủy");
 
     private String value;
 

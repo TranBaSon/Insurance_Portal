@@ -1,7 +1,6 @@
 package com.gen.com.Insurance_portal.common.enums;
 
-public enum PolicyStatus {
-
+public enum ContractStatus {
     Active("Hoạt động"),
     Expired("Hết hạn"),
     Cancelled("Đã huỷ"),
@@ -9,7 +8,7 @@ public enum PolicyStatus {
 
     private String value;
 
-    PolicyStatus(String value) {
+    ContractStatus(String value) {
         this.value = value;
     }
 

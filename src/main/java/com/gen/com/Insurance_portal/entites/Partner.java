@@ -48,9 +48,9 @@ public class Partner extends AbstractEntity {
     @Column(nullable = false)
     private String contact;
 
-    @JsonIgnore
-    @OneToMany(mappedBy = "partner", cascade = CascadeType.ALL)
-    private Set<CustomerContactCode> customerContactCodes;
+//    @JsonIgnore
+//    @OneToMany(mappedBy = "partner", cascade = CascadeType.ALL)
+//    private Set<CustomerContactCode> customerContactCodes;
 
     private Boolean isActive = false;
 

@@ -1,9 +1,9 @@
 package com.gen.com.Insurance_portal.controllers;
 
 import com.gen.com.Insurance_portal.common.constanst.ClaimsCode;
-import com.gen.com.Insurance_portal.common.enums.Gender;
-import com.gen.com.Insurance_portal.common.enums.SysAdminType;
+import com.gen.com.Insurance_portal.common.enums.*;
 import com.gen.com.Insurance_portal.entites.*;
+import com.gen.com.Insurance_portal.entites.ProductCategory;
 import com.gen.com.Insurance_portal.services.*;
 import io.swagger.v3.oas.annotations.Hidden;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -30,6 +30,8 @@ public class SeedController {
     private final PasswordEncoder passwordEncoder;
     private final IUserService userService;
     private final ISysAdminService sysAdminService;
+    private final IPartnerService partnerService;
+    private final IProductService productService;
 
     public SeedController(IRoleService roleService, IFAQService faqService,
                           IProductCategoryService productCategoryService,
@@ -37,7 +39,7 @@ public class SeedController {
                           IAuthoritiesService authoritiesService,
                           PasswordEncoder passwordEncoder,
                           IUserService userService,
-                          ISysAdminService sysAdminService) {
+                          ISysAdminService sysAdminService, IPartnerService partnerService, IProductService productService) {
 
         this.roleService = roleService;
         this.faqService = faqService;
@@ -47,6 +49,8 @@ public class SeedController {
         this.passwordEncoder = passwordEncoder;
         this.userService = userService;
         this.sysAdminService = sysAdminService;
+        this.partnerService = partnerService;
+        this.productService = productService;
     }
 
     @GetMapping
@@ -94,7 +98,7 @@ public class SeedController {
         ProductCategory pc4 = new ProductCategory("Bảo hiểm xe", "Bảo hiểm xe");
 
         List<ProductCategory> productCategories = Arrays.asList(pc1, pc2, pc3, pc4);
-        productCategoryService.saveAll(productCategories);
+        List<ProductCategory> productCategories1 = productCategoryService.saveAll(productCategories);
 
         FAQ faq1 = new FAQ("Những trường hợp nào khách hàng tham gia bảo hiểm sẽ không được bồi thường?", "Trong thực tế, tất cả các yêu cầu thanh toán quyền lợi bảo hiểm theo đúng quy định tại quy tắc điều khoản sản phẩm bảo hiểm đều được các công ty bảo hiểm chấp thuận chi trả đầy đủ và nhanh chóng. Tuy nhiên, trên cơ sở tuân thủ luật pháp và đảm bảo công bằng cho tất cả khách hàng tham gia bảo hiểm, đồng thời để bảo hiểm nhân thọ không trở thành một phương tiện đầu cơ trục lợi, cũng có những trường hợp các công ty bảo hiểm buộc phải từ chối thanh toán quyền lợi bảo hiểm.", true);
         FAQ faq2= new FAQ("Điều kiện để được tham gia bảo hiểm nhân thọ là gì?", "Khách hàng chỉ cần ở trong độ tuổi có thể được bảo hiểm (có quy định trong từng sản phẩm cụ thể), có tình trạng sức khỏe phù hợp với tiêu chuẩn thẩm định của công ty bảo hiểm, và có khả năng đóng phí bảo hiểm là có thể tham gia bảo hiểm nhân thọ.", true );
@@ -104,6 +108,37 @@ public class SeedController {
 
         List<FAQ> faqs = Arrays.asList(faq1, faq2, faq3, faq4, faq5);
         faqService.saveAll(faqs);
+
+        Partner partner = new Partner();
+        partner.setAppellation("MR.");
+        partner.setCode("PRUU");
+        partner.setEmail("prudential@gmail.com");
+        partner.setContact("2");
+        partner.setHotline("1");
+        partner.setIntroductionContent("Prudential");
+        partner.setIntroductionContent("Prudential");
+        partner.setName("Prudential");
+        partner.setPhoneNumber("0383860666");
+        partner.setStatus(PartnerStatus.APPROVED);
+
+        Partner partnerResult = partnerService.save(partner);
+
+        Product product = new Product();
+        product.setEffectiveDateRangeSelectionNumber(0);
+        product.setAvatarImage("https://res.cloudinary.com/dmhmclzpm/image/upload/v1609757301/image_tceti6.png");
+        product.setBannerImage("https://res.cloudinary.com/dmhmclzpm/image/upload/v1609757254/banner_vn7lnt.png");
+        product.setCode("BHOT");
+        product.setDetailedDescription("Chỉ với mức phí từ 1.300 đồng/ngày, quyền lợi lên đến 200 triệu đồng, bảo hiểm ô tô bắt buộc là một trong các giấy tờ xe luôn phải mang theo khi tham gia giao thông. Người điều khiển xe sẽ bị phạt từ 400.000 – 600.000 đồng khi không có bảo hiểm bắt buộc ô tô hoặc bảo hiểm đã hết hạn. Với ViettelPay, khách hàng có thêm lựa chọn để mở rộng quyền lợi bảo hiểm cho người ngồi trên xe lên đến 80 triêu đồng, với mức phí tăng thêm chỉ từ 40.000 đồng/năm. ");
+        product.setEffectiveDateType(EffectiveDateType.T);
+        product.setFeeType(FeeType.FIXED);
+        product.setGenderApply(GenderApply.ALL);
+        product.setShortDescription("https://res.cloudinary.com/dmhmclzpm/image/upload/v1609757613/insurance_lljsqd.png");
+        product.setName("Bảo hiểm xe ô tô");
+        product.setPriceObj(200000000.);
+        product.setProductStatus(ProductStatus.APPROVED);
+        product.setPartner(partnerResult);
+        product.setProductCategory(productCategories1.get(3));
+        productService.save(product);
 
         return "seed succeed!";
     }
@@ -400,6 +435,7 @@ public class SeedController {
         authoritiesService.save(a66);
 
         roleService.update(admin);
+
 
         return "seed succeed!";
     }

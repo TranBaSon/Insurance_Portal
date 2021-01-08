@@ -29,6 +29,12 @@ public class Customer extends AbstractEntity{
     @JoinColumn(name = "user_id")
     private User user;
 
+    @OneToMany(mappedBy = "customer")
+    private Set<Contract> contracts;
+
+    @OneToMany(mappedBy = "customer")
+    private Set<TransactionHistory> transactionHistories;
+
     @JsonIgnore
     @OneToMany(mappedBy = "customer", cascade = CascadeType.ALL)
     private Set<CustomerContactCode> customerContactCodes;

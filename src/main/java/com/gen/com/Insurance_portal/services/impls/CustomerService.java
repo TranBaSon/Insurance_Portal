@@ -3,6 +3,7 @@ package com.gen.com.Insurance_portal.services.impls;
 import com.gen.com.Insurance_portal.common.mappers.UserMapper;
 import com.gen.com.Insurance_portal.entites.Customer;
 import com.gen.com.Insurance_portal.entites.Partner;
+import com.gen.com.Insurance_portal.exceptions.MessageException;
 import com.gen.com.Insurance_portal.exceptions.NotFoundEntityException;
 import com.gen.com.Insurance_portal.models.RequestModels.ParamsModel;
 import com.gen.com.Insurance_portal.models.responseModels.CustomerResponseModel;
@@ -69,14 +70,14 @@ public class CustomerService extends AbstractService<Customer> implements ICusto
 
             Map<String, Object> response = new HashMap<>();
             response.put("data", models);
-            response.put("currentPage", pageTuts.getNumber());
+            response.put("currentPage", paramsModel.getPageNumber());
             response.put("totalItems", pageTuts.getTotalElements());
             response.put("totalPages", pageTuts.getTotalPages());
 
             return response;
 
         } catch (Exception e) {
-            return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+            throw  new MessageException("Error server.");
         }
     }
 
