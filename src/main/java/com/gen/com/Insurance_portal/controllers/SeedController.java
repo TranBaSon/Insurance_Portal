@@ -54,7 +54,6 @@ public class SeedController {
         this.productService = productService;
     }
 
-    @PreAuthorize("permitAll()")
     @GetMapping
     public String hello() {
         return "Welcome to here!";

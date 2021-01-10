@@ -21,7 +21,6 @@ public class HomeController {
     }
 
 
-    @PreAuthorize("permitAll()")
     @RequestMapping("/swagger")
     public String home() {
         return "redirect:/swagger-ui.html";

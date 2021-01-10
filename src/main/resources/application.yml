@@ -4,11 +4,15 @@
 
 
 
+springdoc:
+  swagger-ui:
+    path: /swagger-ui.html
 
 app:
   token:
     refresh:
       duration: 2592000000
+
 
 
 
