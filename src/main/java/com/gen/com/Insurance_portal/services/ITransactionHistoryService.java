@@ -9,4 +9,5 @@ public interface ITransactionHistoryService extends IAbstractService<Transaction
     void create(TransactionHistoryModel transactionHistoryModel);
     TransactionHistory findByTransactionCode(String code);
     Object getList(ParamsModel paramsModel, Boolean forUser);
+    Object UGetList(ParamsModel paramsModel, String token);
 }

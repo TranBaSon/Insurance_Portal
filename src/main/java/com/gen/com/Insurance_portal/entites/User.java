@@ -6,6 +6,8 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
+import org.apache.commons.lang3.builder.EqualsExclude;
+import org.apache.commons.lang3.builder.ToStringExclude;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
@@ -73,4 +75,10 @@ public class User extends AbstractEntity{
     @JsonIgnore
     @OneToOne( mappedBy = "user")
     private RefreshToken refreshToken;
+
+    @EqualsExclude
+    @ToStringExclude
+    @JsonIgnore
+    @OneToOne(mappedBy = "user")
+    private Customer customer;
 }

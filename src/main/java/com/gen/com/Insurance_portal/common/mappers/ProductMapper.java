@@ -5,6 +5,7 @@ import com.gen.com.Insurance_portal.models.RequestModels.CreateProductModel;
 import com.gen.com.Insurance_portal.models.RequestModels.PrimitiveModel;
 import com.gen.com.Insurance_portal.models.RequestModels.PrimitiveUpdateModel;
 import com.gen.com.Insurance_portal.models.RequestModels.UpdateProductModel;
+import com.gen.com.Insurance_portal.models.responseModels.ProductDetailModel;
 import com.gen.com.Insurance_portal.models.responseModels.ResponseProductModel;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
@@ -28,4 +29,6 @@ public interface ProductMapper {
     Product updateProductModelToProduct(UpdateProductModel productModel);
 
     ResponseProductModel ProductModelToProductResponse(Product productModel);
+
+    ProductDetailModel ProductToProductDetailModel(Product productModel);
 }

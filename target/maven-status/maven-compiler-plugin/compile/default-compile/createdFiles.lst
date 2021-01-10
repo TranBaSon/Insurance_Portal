@@ -72,6 +72,7 @@ com/gen/com/Insurance_portal/repositories/ContractRepository.class
 com/gen/com/Insurance_portal/common/mappers/ProductProviderMapperImpl.class
 com/gen/com/Insurance_portal/controllers/user/UContractController.class
 com/gen/com/Insurance_portal/entites/ProductPack.class
+com/gen/com/Insurance_portal/models/responseModels/ProductDetailModel.class
 com/gen/com/Insurance_portal/common/enums/ProductStatus.class
 com/gen/com/Insurance_portal/common/mappers/UserMapperImpl.class
 com/gen/com/Insurance_portal/configs/TwilioInitazer.class
@@ -147,6 +148,7 @@ com/gen/com/Insurance_portal/utils/Utils.class
 com/gen/com/Insurance_portal/controllers/SeedController.class
 com/gen/com/Insurance_portal/services/impls/AuthoritiesService.class
 com/gen/com/Insurance_portal/entites/User.class
+com/gen/com/Insurance_portal/models/responseModels/ResponseCustomerUserInfor.class
 com/gen/com/Insurance_portal/services/IAuthoritiesGroupService.class
 com/gen/com/Insurance_portal/utils/SortUtil.class
 com/gen/com/Insurance_portal/controllers/auth/ProductCategoryController.class

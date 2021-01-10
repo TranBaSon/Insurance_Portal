@@ -11,6 +11,8 @@ import java.util.Optional;
 @Repository
 public interface TransactionHistoryRepository extends JpaRepository<TransactionHistory, Long> {
     Optional<TransactionHistory> findByTransactionCode(String code);
+    Optional<TransactionHistory> findByTransactionCodeAndCustomerCode(String transactionCode, String customerCode);
     Page<TransactionHistory> findAllByContractCode(String code, Pageable pageable);
-
+    Page<TransactionHistory> findAllByCustomerCode(String customerCodeode, Pageable pageable);
+    Page<TransactionHistory> findAllByCustomerCodeAndContractCode(String customerCode, String contractCode, Pageable pageable);
 }

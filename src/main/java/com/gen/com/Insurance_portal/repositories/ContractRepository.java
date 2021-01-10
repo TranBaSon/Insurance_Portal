@@ -13,6 +13,12 @@ import java.util.Optional;
 public interface ContractRepository extends JpaRepository<Contract, Long> {
     Boolean existsByCode(String code);
     Page<Contract> findAllByCode(String code, Pageable pageable);
+    Page<Contract> findAllByCodeAndCustomerCode(String code, String customerCode, Pageable pageable);
+
+    Page<Contract> findAllByCustomerCode(String customerCode, Pageable pageable);
+
     Page<Contract> findAllByStatus(ContractStatus status, Pageable pageable);
+    Page<Contract> findAllByStatusAndCustomerCode(ContractStatus status, String customerCode, Pageable pageable);
+
     Optional<Contract> findByCode(String code);
 }

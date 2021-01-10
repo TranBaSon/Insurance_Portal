@@ -12,6 +12,7 @@ import com.gen.com.Insurance_portal.entites.*;
 import com.gen.com.Insurance_portal.exceptions.MessageException;
 import com.gen.com.Insurance_portal.exceptions.TokenRefreshException;
 import com.gen.com.Insurance_portal.models.RequestModels.*;
+import com.gen.com.Insurance_portal.models.responseModels.ResponseCustomerUserInfor;
 import com.gen.com.Insurance_portal.models.responseModels.ResponseUserInfor;
 import com.gen.com.Insurance_portal.models.responseModels.TokenResponse;
 import com.gen.com.Insurance_portal.repositories.CustomerRepository;
@@ -36,9 +37,9 @@ public class AuthService implements IAuthService {
     private final PasswordEncoder passwordEncoder;
     private final RefreshTokenService refreshTokenService;
     private final JwtUtil jwtTokenUtil;
+    private final IUserService userService;
     private final AuthenticationManager authenticationManager;
     private final MyUserDetailService userDetailService;
-    private final IUserService userService;
     private final IRoleService roleService;
     private final IPartnerService productProviderService;
     private final ISysAdminService sysAdminService;
@@ -102,9 +103,18 @@ public class AuthService implements IAuthService {
         refreshToken.setUser(user);
         refreshTokenService.save(refreshToken);
 
-        ResponseUserInfor userInfor = UserMapper.INSTANCE.UserToUserInfor(user);
-        userInfor.setRole(RoleMapper.INSTANCE.roleToRoleResponse(user.getRole()));
-        return new TokenResponse(token, refreshToken.getToken(), userInfor);
+        Object response = null;
+        if (user.getCustomer() != null) {
+            ResponseCustomerUserInfor userInfor = UserMapper.INSTANCE.UserToCustomerUserInfor(user);
+            userInfor.setRole(RoleMapper.INSTANCE.roleToRoleResponse(user.getRole()));
+            userInfor.setCustomerId(user.getCustomer().getId());
+            response = userInfor;
+        }else {
+            ResponseUserInfor userInfor = UserMapper.INSTANCE.UserToUserInfor(user);
+            userInfor.setRole(RoleMapper.INSTANCE.roleToRoleResponse(user.getRole()));
+            response = userInfor;
+        }
+        return new TokenResponse(token, refreshToken.getToken(), response);
     }
 
     @Override
@@ -142,6 +152,12 @@ public class AuthService implements IAuthService {
             throw new MessageException("Username or password or email already exists .");
         }
 
+        if (!isProvider){
+            Role customerRole = roleService.findByName("CUSTOMER");
+            if (customerRole != null) {
+                user.setRole(customerRole);
+            }
+        }
 
         user.setPassword(passwordEncoder.encode(user.getPassword()));
 

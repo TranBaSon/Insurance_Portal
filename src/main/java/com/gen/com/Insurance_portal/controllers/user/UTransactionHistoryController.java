@@ -7,6 +7,7 @@ import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 
@@ -30,9 +31,10 @@ public class UTransactionHistoryController {
             @Parameter(name = "size", description = "optional field, the size of a default page is 10")
             @RequestParam(defaultValue = "10") int size,
             @Parameter(name = "sort", description = "optional field, syntax=field...,{desc/asc}")
-            @RequestParam(defaultValue = "id,desc") String[] sort) {
+            @RequestParam(defaultValue = "id,desc") String[] sort,
+            @RequestHeader (name="Authorization") String token) {
 
-        Object response = transactionHistoryService.getList(new ParamsModel(filter, page, size, sort), true);
+        Object response = transactionHistoryService.UGetList(new ParamsModel(filter, page, size, sort), token);
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
 

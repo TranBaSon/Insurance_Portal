@@ -1,14 +1,18 @@
 package com.gen.com.Insurance_portal.common.mappers;
 
+import com.gen.com.Insurance_portal.entites.Benefit;
 import com.gen.com.Insurance_portal.entites.Product;
 import com.gen.com.Insurance_portal.models.RequestModels.CreateProductModel;
 import com.gen.com.Insurance_portal.models.RequestModels.UpdateProductModel;
+import com.gen.com.Insurance_portal.models.responseModels.ProductDetailModel;
 import com.gen.com.Insurance_portal.models.responseModels.ResponseProductModel;
+import java.util.HashSet;
+import java.util.Set;
 import javax.annotation.Generated;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2021-01-10T15:58:02+0700",
+    date = "2021-01-10T18:34:23+0700",
     comments = "version: 1.3.0.Final, compiler: javac, environment: Java 1.8.0_265 (AdoptOpenJDK)"
 )
 public class ProductMapperImpl implements ProductMapper {
@@ -63,5 +67,45 @@ public class ProductMapperImpl implements ProductMapper {
         responseProductModel.setCode( productModel.getCode() );
 
         return responseProductModel;
+    }
+
+    @Override
+    public ProductDetailModel ProductToProductDetailModel(Product productModel) {
+        if ( productModel == null ) {
+            return null;
+        }
+
+        ProductDetailModel productDetailModel = new ProductDetailModel();
+
+        productDetailModel.setId( productModel.getId() );
+        productDetailModel.setName( productModel.getName() );
+        productDetailModel.setCode( productModel.getCode() );
+        productDetailModel.setShortDescription( productModel.getShortDescription() );
+        productDetailModel.setDetailedDescription( productModel.getDetailedDescription() );
+        productDetailModel.setAvatarImage( productModel.getAvatarImage() );
+        productDetailModel.setBannerImage( productModel.getBannerImage() );
+        productDetailModel.setIndemnityTemplate( productModel.getIndemnityTemplate() );
+        productDetailModel.setIndemnityInstruction( productModel.getIndemnityInstruction() );
+        productDetailModel.setIndemnityInstructionContent( productModel.getIndemnityInstructionContent() );
+        productDetailModel.setEffectiveDateType( productModel.getEffectiveDateType() );
+        productDetailModel.setFeeType( productModel.getFeeType() );
+        productDetailModel.setProductStatus( productModel.getProductStatus() );
+        productDetailModel.setGenderApply( productModel.getGenderApply() );
+        productDetailModel.setIsActive( productModel.getIsActive() );
+        productDetailModel.setDuplicateBuyerInfo( productModel.getDuplicateBuyerInfo() );
+        productDetailModel.setHideBeneficiary( productModel.getHideBeneficiary() );
+        productDetailModel.setEffectiveDateRangeSelectionNumber( productModel.getEffectiveDateRangeSelectionNumber() );
+        productDetailModel.setEnableIndemnity( productModel.getEnableIndemnity() );
+        productDetailModel.setIsSelfInsurance( productModel.getIsSelfInsurance() );
+        productDetailModel.setHideBuyerInfo( productModel.getHideBuyerInfo() );
+        productDetailModel.setVideoUrl( productModel.getVideoUrl() );
+        productDetailModel.setPriceObj( productModel.getPriceObj() );
+        productDetailModel.setInsuredRule( productModel.getInsuredRule() );
+        Set<Benefit> set = productModel.getBenefits();
+        if ( set != null ) {
+            productDetailModel.setBenefits( new HashSet<Benefit>( set ) );
+        }
+
+        return productDetailModel;
     }
 }

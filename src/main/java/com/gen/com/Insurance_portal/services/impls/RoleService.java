@@ -19,7 +19,7 @@ public class RoleService extends AbstractService<Role> implements IRoleService {
 
     @Override
     public Role findByName(String name) {
-        return null;
+        return roleRepository.findByName(name);
     }
 
     @Override

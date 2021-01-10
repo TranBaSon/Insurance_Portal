@@ -11,6 +11,7 @@ import com.gen.com.Insurance_portal.exceptions.NotFoundEntityExceptionByCode;
 import com.gen.com.Insurance_portal.models.RequestModels.CreateProductModel;
 import com.gen.com.Insurance_portal.models.RequestModels.ProductStatusRequest;
 import com.gen.com.Insurance_portal.models.RequestModels.UpdateProductModel;
+import com.gen.com.Insurance_portal.models.responseModels.ProductDetailModel;
 import com.gen.com.Insurance_portal.models.responseModels.ResponseProductModel;
 import com.gen.com.Insurance_portal.repositories.ProductRepository;
 import com.gen.com.Insurance_portal.services.ICloudinaryService;
@@ -192,9 +193,17 @@ public class ProductService extends AbstractService<Product> implements IProduct
     }
 
     @Override
-    public Product findByCode(String code) {
-        return productRepository.findByCode(code)
+    public ProductDetailModel findByCode(String code) {
+        Product product = productRepository.findByCode(code)
                 .orElseThrow(() -> new NotFoundEntityExceptionByCode(code, "Product"));
+
+        ProductDetailModel productDetailModel = ProductMapper.INSTANCE.ProductToProductDetailModel(product);
+        productDetailModel.setPartnerId(product.getPartner().getId());
+        productDetailModel.setPartnerName(product.getPartner().getName());
+        productDetailModel.setCategoryId(product.getProductCategory().getId());
+        productDetailModel.setCategoryName(product.getProductCategory().getName());
+
+        return productDetailModel;
     }
 
     @Override
