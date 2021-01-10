@@ -14,16 +14,7 @@ app:
       duration: 2592000000
 
 
-cloudinary:
-  cloud_name: dmhmclzpm
-  api_key: 981112714425554
-  api_secret: qZFjzDWOGhM3Rp9EIib7Xo3ofZI
 
-
-twilio:
-  account_sid: AC9199eb804661ab92ac07cf27192b5108
-  auth_token: 4c06b1c29fc2aebb717187cf8acb48aa
-  phone_number: +12512208683
 
 # ===============================
 # DATABASE
@@ -37,7 +28,7 @@ server:
 spring:
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://localhost:3308/insurance_portal
+    url: jdbc:mysql://localhost:3306/insurance_portal
     username: root
     password: son1808
 
