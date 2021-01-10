@@ -18,6 +18,7 @@ com/gen/com/Insurance_portal/models/responseModels/ResponseMessageModel.class
 com/gen/com/Insurance_portal/entites/Province.class
 com/gen/com/Insurance_portal/common/mappers/ProductCategoryMapperImpl.class
 com/gen/com/Insurance_portal/entites/ProductAttribute.class
+com/gen/com/Insurance_portal/controllers/user/UProductController.class
 com/gen/com/Insurance_portal/entites/Contract.class
 com/gen/com/Insurance_portal/models/RequestModels/UserModel.class
 com/gen/com/Insurance_portal/entites/ProductAttributeSetting.class

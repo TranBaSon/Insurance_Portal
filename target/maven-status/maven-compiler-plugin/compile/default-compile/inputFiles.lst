@@ -73,6 +73,7 @@
 /Users/transon/workspace/aptech/Insurance_Portal/src/main/java/com/gen/com/Insurance_portal/entites/Authorities.java
 /Users/transon/workspace/aptech/Insurance_Portal/src/main/java/com/gen/com/Insurance_portal/entites/CustomerContactCode.java
 /Users/transon/workspace/aptech/Insurance_Portal/src/main/java/com/gen/com/Insurance_portal/exceptions/TokenRefreshException.java
+/Users/transon/workspace/aptech/Insurance_Portal/src/main/java/com/gen/com/Insurance_portal/controllers/user/UProductController.java
 /Users/transon/workspace/aptech/Insurance_Portal/src/main/java/com/gen/com/Insurance_portal/models/RequestModels/RefreshTokenModel.java
 /Users/transon/workspace/aptech/Insurance_Portal/src/main/java/com/gen/com/Insurance_portal/services/impls/FAQService.java
 /Users/transon/workspace/aptech/Insurance_Portal/src/main/java/com/gen/com/Insurance_portal/services/IAbstractService.java
