@@ -6,6 +6,7 @@ import com.gen.com.Insurance_portal.entites.*;
 import com.gen.com.Insurance_portal.entites.ProductCategory;
 import com.gen.com.Insurance_portal.services.*;
 import io.swagger.v3.oas.annotations.Hidden;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -53,11 +54,13 @@ public class SeedController {
         this.productService = productService;
     }
 
+    @PreAuthorize("permitAll()")
     @GetMapping
     public String hello() {
         return "Welcome to here!";
     }
 
+    @PreAuthorize("permitAll()")
     @GetMapping("/role")
     public String seedRole() {
 
@@ -89,6 +92,7 @@ public class SeedController {
         return "seed succeed!";
     }
 
+    @PreAuthorize("permitAll()")
     @GetMapping("/common")
     public String seedFAQ() {
 
@@ -145,6 +149,7 @@ public class SeedController {
 
 
 
+    @PreAuthorize("permitAll()")
     @RequestMapping("/authorities")
     public String seedAuthorities() {
 
