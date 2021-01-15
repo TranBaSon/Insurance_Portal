@@ -12,6 +12,8 @@ import com.gen.com.Insurance_portal.services.IPartnerService;
 import org.apache.logging.log4j.util.Strings;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
+
 @Service
 public class PartnerService extends AbstractService<Partner> implements IPartnerService {
 
@@ -109,6 +111,11 @@ public class PartnerService extends AbstractService<Partner> implements IPartner
                 .orElseThrow(() -> new NotFoundEntityException(id, "Partner"));
         partner.setStatus(statusRequest.getStatus());
         update(partner);
+    }
+
+    @Override
+    public Optional<Partner> findByCode(String code) {
+        return partnerRepository.findByCode(code);
     }
 
 }

@@ -11,9 +11,9 @@ import org.apache.commons.lang3.builder.ToStringExclude;
 import javax.persistence.*;
 import java.util.Set;
 
+@EqualsAndHashCode(onlyExplicitlyIncluded = true, callSuper = false)
 @AllArgsConstructor
 @NoArgsConstructor
-@EqualsAndHashCode(callSuper = true)
 @Data
 @Entity
 public class Customer extends AbstractEntity{
@@ -33,22 +33,16 @@ public class Customer extends AbstractEntity{
     @JoinColumn(name = "user_id")
     private User user;
 
-    @EqualsExclude
-    @ToStringExclude
     @JsonIgnore
-    @OneToMany(mappedBy = "customer")
+    @OneToMany(mappedBy = "customer", fetch = FetchType.LAZY)
     private Set<Contract> contracts;
 
-    @EqualsExclude
-    @ToStringExclude
     @JsonIgnore
-    @OneToMany(mappedBy = "customer")
+    @OneToMany(mappedBy = "customer", fetch = FetchType.LAZY)
     private Set<TransactionHistory> transactionHistories;
 
-    @EqualsExclude
-    @ToStringExclude
     @JsonIgnore
-    @OneToMany(mappedBy = "customer", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "customer", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private Set<ClaimsInfo> claimsInfos;
 
     @Override

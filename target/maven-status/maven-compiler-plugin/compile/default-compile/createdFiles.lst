@@ -119,6 +119,7 @@ com/gen/com/Insurance_portal/common/enums/TransactionStatus.class
 com/gen/com/Insurance_portal/controllers/auth/TransactionHistoryController.class
 com/gen/com/Insurance_portal/models/RequestModels/PartnerStatusRequest.class
 com/gen/com/Insurance_portal/common/TwilioHelper.class
+com/gen/com/Insurance_portal/models/responseModels/ResponsePartnerUserInfo.class
 com/gen/com/Insurance_portal/common/mappers/ProductProviderMapper.class
 com/gen/com/Insurance_portal/models/RequestModels/TransactionHistoryModel.class
 com/gen/com/Insurance_portal/services/IAuthoritiesService.class

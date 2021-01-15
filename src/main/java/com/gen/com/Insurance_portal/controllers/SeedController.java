@@ -68,6 +68,7 @@ public class SeedController {
 
         Role admin = roleService.save(new Role("admin role", "ADMIN", authorities));
         Role customer = roleService.save(new Role("customer role", "CUSTOMER"));
+        Role partner = roleService.save(new Role("partner role", "PARTNER"));
 
 
         User user = new User();
@@ -112,19 +113,19 @@ public class SeedController {
         List<FAQ> faqs = Arrays.asList(faq1, faq2, faq3, faq4, faq5);
         faqService.saveAll(faqs);
 
-        Partner partner = new Partner();
-        partner.setAppellation("MR.");
-        partner.setCode("PRUU");
-        partner.setEmail("prudential@gmail.com");
-        partner.setContact("2");
-        partner.setHotline("1");
-        partner.setIntroductionContent("Prudential");
-        partner.setIntroductionContent("Prudential");
-        partner.setName("Prudential");
-        partner.setPhoneNumber("0383860666");
-        partner.setStatus(PartnerStatus.APPROVED);
-
-        Partner partnerResult = partnerService.save(partner);
+//        Partner partner = new Partner();
+//        partner.setAppellation("MR.");
+//        partner.setCode("PRUU");
+//        partner.setEmail("prudential@gmail.com");
+//        partner.setContact("2");
+//        partner.setHotline("1");
+//        partner.setIntroductionContent("Prudential");
+//        partner.setIntroductionContent("Prudential");
+//        partner.setName("Prudential");
+//        partner.setPhoneNumber("0383860666");
+//        partner.setStatus(PartnerStatus.APPROVED);
+//
+//        Partner partnerResult = partnerService.save(partner);
 
         Product product = new Product();
         product.setEffectiveDateRangeSelectionNumber(0);
@@ -164,6 +165,7 @@ public class SeedController {
         Role admin = roleService.save(new Role("admin role", "ADMIN"));
         admin.setActive(true);
         roleService.save(new Role("customer role", "CUSTOMER"));
+        roleService.save(new Role("partner role", "PARTNER"));
 
 
         User user = new User();

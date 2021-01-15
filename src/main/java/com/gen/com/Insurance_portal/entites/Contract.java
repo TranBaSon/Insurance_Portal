@@ -8,13 +8,15 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
+import org.apache.commons.lang3.builder.EqualsExclude;
+import org.apache.commons.lang3.builder.ToStringExclude;
 
 import javax.persistence.*;
 import java.util.Date;
 
+@EqualsAndHashCode(onlyExplicitlyIncluded = true, callSuper = false)
 @AllArgsConstructor
 @NoArgsConstructor
-@EqualsAndHashCode(callSuper = true)
 @Data
 @Entity
 public class Contract extends AbstractEntity {
@@ -33,7 +35,7 @@ public class Contract extends AbstractEntity {
     private String customerCode;
 
     @JsonIgnore
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "customer_id")
     private Customer customer;
 
@@ -93,8 +95,44 @@ public class Contract extends AbstractEntity {
 
     private String productCode;
 
+    @ToStringExclude
+    @EqualsExclude
     @JsonIgnore
     @OneToOne(mappedBy = "contract", fetch = FetchType.LAZY)
     private TransactionHistory transactionHistory;
 
+    @Override
+    public String toString() {
+        return "Contract{" +
+                "id=" + id +
+                ", code='" + code + '\'' +
+                ", partner='" + partner + '\'' +
+                ", partnerCode='" + partnerCode + '\'' +
+                ", customerCode='" + customerCode + '\'' +
+                ", idNumber='" + idNumber + '\'' +
+                ", status=" + status +
+                ", effectiveDate=" + effectiveDate +
+                ", expiredDate=" + expiredDate +
+                ", cancelDate=" + cancelDate +
+                ", createdContractDate=" + createdContractDate +
+                ", activeDate=" + activeDate +
+                ", paymentStatus=" + paymentStatus +
+                ", paidAmount=" + paidAmount +
+                ", extendSuccessDate=" + extendSuccessDate +
+                ", fullName='" + fullName + '\'' +
+                ", dob=" + dob +
+                ", gender='" + gender + '\'' +
+                ", email='" + email + '\'' +
+                ", phoneNumber='" + phoneNumber + '\'' +
+                ", address='" + address + '\'' +
+                ", buyerIdNumber='" + buyerIdNumber + '\'' +
+                ", purchaseMethod=" + purchaseMethod +
+                ", numberPlate='" + numberPlate + '\'' +
+                ", carBrand='" + carBrand + '\'' +
+                ", carMaker='" + carMaker + '\'' +
+                ", productName='" + productName + '\'' +
+                ", product=" + product +
+                ", productCode='" + productCode + '\'' +
+                '}';
+    }
 }

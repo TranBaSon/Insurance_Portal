@@ -64,7 +64,7 @@ public class Claims extends AbstractEntity {
 
     private Boolean componentFee;
 
-    private Integer numberComponent;
+    private Integer numberComponent = 0;
 
     private Double componentFeeAmount;
 
@@ -72,7 +72,7 @@ public class Claims extends AbstractEntity {
 
     private Boolean scratchedFee;
 
-    private Integer numberScratched;
+    private Integer numberScratched = 0;
 
     private Double scratchedFeeAmount;
 

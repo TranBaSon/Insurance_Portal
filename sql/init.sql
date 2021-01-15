@@ -1,21 +1,3 @@
--- -------------------------------------------------------------
--- TablePlus 3.12.0(354)
---
--- https://tableplus.com/
---
--- Database: insurance_portal
--- Generation Time: 2021-01-09 01:01:27.4280
--- -------------------------------------------------------------
-
-
-/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
-/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
-/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8mb4 */;
-/*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
-/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
-/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
-/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 
 DROP TABLE IF EXISTS `article`;
@@ -84,7 +66,7 @@ CREATE TABLE `authorities_group` (
   PRIMARY KEY (`id`),
   KEY `FKlb5uak37b0r226r1frh39w1et` (`parent_authorities_group_id`),
   CONSTRAINT `FKlb5uak37b0r226r1frh39w1et` FOREIGN KEY (`parent_authorities_group_id`) REFERENCES `authorities_group` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=utf8;
 
 DROP TABLE IF EXISTS `benefit`;
 CREATE TABLE `benefit` (
@@ -126,6 +108,97 @@ CREATE TABLE `benefit_setting` (
   CONSTRAINT `FK7ap94452yc5go7mev7xl06ive` FOREIGN KEY (`benefit_id`) REFERENCES `benefit` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+DROP TABLE IF EXISTS `claims`;
+CREATE TABLE `claims` (
+  `id` bigint NOT NULL AUTO_INCREMENT,
+  `created_at` datetime(6) DEFAULT NULL,
+  `created_by` varchar(255) DEFAULT NULL,
+  `deleted_at` datetime(6) DEFAULT NULL,
+  `is_active` bit(1) DEFAULT NULL,
+  `is_deleted` bit(1) DEFAULT NULL,
+  `updated_at` datetime(6) DEFAULT NULL,
+  `updated_by` varchar(255) DEFAULT NULL,
+  `amount` double DEFAULT NULL,
+  `bringing_fee` bit(1) DEFAULT NULL,
+  `bringing_fee_amount` double DEFAULT NULL,
+  `component_fee` bit(1) DEFAULT NULL,
+  `component_fee_amount` double DEFAULT NULL,
+  `contract_code` varchar(255) DEFAULT NULL,
+  `customer_code` varchar(255) DEFAULT NULL,
+  `employee_name` varchar(255) DEFAULT NULL,
+  `employee_phone_number` varchar(255) DEFAULT NULL,
+  `insurance_bringing_fee_amount` double DEFAULT NULL,
+  `insurance_component_fee_amount` double DEFAULT NULL,
+  `insurance_rear_view_mirror_amount` double DEFAULT NULL,
+  `insurance_repaint_fee_amount` double DEFAULT NULL,
+  `insurance_scratched_fee_amount` double DEFAULT NULL,
+  `name` varchar(255) DEFAULT NULL,
+  `note` varchar(255) DEFAULT NULL,
+  `number_bringing` int DEFAULT NULL,
+  `number_component` int DEFAULT NULL,
+  `number_plate` varchar(255) DEFAULT NULL,
+  `number_rear_view_mirror` int DEFAULT NULL,
+  `number_repaint` int DEFAULT NULL,
+  `number_scratched` int DEFAULT NULL,
+  `partner_code` varchar(255) DEFAULT NULL,
+  `partner_name` varchar(255) DEFAULT NULL,
+  `rear_view_mirror` bit(1) DEFAULT NULL,
+  `rear_view_mirror_amount` double DEFAULT NULL,
+  `repaint_fee` bit(1) DEFAULT NULL,
+  `repaint_fee_amount` double DEFAULT NULL,
+  `scratched_fee` bit(1) DEFAULT NULL,
+  `scratched_fee_amount` double DEFAULT NULL,
+  `status` int DEFAULT NULL,
+  `contract_id` bigint DEFAULT NULL,
+  `customer_id` bigint DEFAULT NULL,
+  `partner_id` bigint DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `FKcc5d15hc607ial72lhw29lur4` (`contract_id`),
+  KEY `FKrol4pvwwwx1lrjp286ggbihd1` (`customer_id`),
+  KEY `FKoe6dl2eyaqddpuqyhoqs635d` (`partner_id`),
+  CONSTRAINT `FKcc5d15hc607ial72lhw29lur4` FOREIGN KEY (`contract_id`) REFERENCES `contract` (`id`),
+  CONSTRAINT `FKoe6dl2eyaqddpuqyhoqs635d` FOREIGN KEY (`partner_id`) REFERENCES `partner` (`id`),
+  CONSTRAINT `FKrol4pvwwwx1lrjp286ggbihd1` FOREIGN KEY (`customer_id`) REFERENCES `customer` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+DROP TABLE IF EXISTS `claims_info`;
+CREATE TABLE `claims_info` (
+  `id` bigint NOT NULL AUTO_INCREMENT,
+  `created_at` datetime(6) DEFAULT NULL,
+  `created_by` varchar(255) DEFAULT NULL,
+  `deleted_at` datetime(6) DEFAULT NULL,
+  `is_active` bit(1) DEFAULT NULL,
+  `is_deleted` bit(1) DEFAULT NULL,
+  `updated_at` datetime(6) DEFAULT NULL,
+  `updated_by` varchar(255) DEFAULT NULL,
+  `bringing_fee` int DEFAULT NULL,
+  `component_fee` int DEFAULT NULL,
+  `contract_code` varchar(255) DEFAULT NULL,
+  `r_contract_id` bigint DEFAULT NULL,
+  `customer_code` varchar(255) DEFAULT NULL,
+  `r_customer_id` bigint DEFAULT NULL,
+  `number_bringing` int DEFAULT NULL,
+  `number_component` int DEFAULT NULL,
+  `number_rear_view_mirror` int DEFAULT NULL,
+  `number_repaint` int DEFAULT NULL,
+  `number_scratched` int DEFAULT NULL,
+  `product_code` varchar(255) DEFAULT NULL,
+  `r_product_id` bigint DEFAULT NULL,
+  `rear_view_mirror` int DEFAULT NULL,
+  `repaint_fee` int DEFAULT NULL,
+  `scratched_fee` int DEFAULT NULL,
+  `contract_id` bigint DEFAULT NULL,
+  `customer_id` bigint DEFAULT NULL,
+  `product_id` bigint DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `FKmgumnpphg7d0utieuetugg7tk` (`contract_id`),
+  KEY `FK6bgx7i44h7ls4svy4c8gqkbd2` (`customer_id`),
+  KEY `FK58pmh4ow25q2sd7tqg6052fc3` (`product_id`),
+  CONSTRAINT `FK58pmh4ow25q2sd7tqg6052fc3` FOREIGN KEY (`product_id`) REFERENCES `product` (`id`),
+  CONSTRAINT `FK6bgx7i44h7ls4svy4c8gqkbd2` FOREIGN KEY (`customer_id`) REFERENCES `customer` (`id`),
+  CONSTRAINT `FKmgumnpphg7d0utieuetugg7tk` FOREIGN KEY (`contract_id`) REFERENCES `contract` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
 DROP TABLE IF EXISTS `contract`;
 CREATE TABLE `contract` (
   `id` bigint NOT NULL AUTO_INCREMENT,
@@ -159,15 +232,18 @@ CREATE TABLE `contract` (
   `partner_code` varchar(255) DEFAULT NULL,
   `payment_status` int NOT NULL,
   `phone_number` varchar(255) DEFAULT NULL,
-  `product` varchar(255) DEFAULT NULL,
   `product_code` varchar(255) DEFAULT NULL,
+  `product_name` varchar(255) DEFAULT NULL,
   `purchase_method` int NOT NULL,
   `status` varchar(255) DEFAULT NULL,
   `customer_id` bigint DEFAULT NULL,
+  `product_id` bigint DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `FKq28qogy68douoc4gkgcy3ow9p` (`customer_id`),
+  KEY `FK6gt1bchn8d85oaq1srbhk31n4` (`product_id`),
+  CONSTRAINT `FK6gt1bchn8d85oaq1srbhk31n4` FOREIGN KEY (`product_id`) REFERENCES `product` (`id`),
   CONSTRAINT `FKq28qogy68douoc4gkgcy3ow9p` FOREIGN KEY (`customer_id`) REFERENCES `customer` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 DROP TABLE IF EXISTS `customer`;
 CREATE TABLE `customer` (
@@ -184,26 +260,6 @@ CREATE TABLE `customer` (
   PRIMARY KEY (`id`),
   KEY `FKj8dlm21j202cadsbfkoem0s58` (`user_id`),
   CONSTRAINT `FKj8dlm21j202cadsbfkoem0s58` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
-
-DROP TABLE IF EXISTS `customer_contact_code`;
-CREATE TABLE `customer_contact_code` (
-  `id` bigint NOT NULL AUTO_INCREMENT,
-  `created_at` datetime(6) DEFAULT NULL,
-  `created_by` varchar(255) DEFAULT NULL,
-  `deleted_at` datetime(6) DEFAULT NULL,
-  `is_active` bit(1) DEFAULT NULL,
-  `is_deleted` bit(1) DEFAULT NULL,
-  `updated_at` datetime(6) DEFAULT NULL,
-  `updated_by` varchar(255) DEFAULT NULL,
-  `contact_code` varchar(255) DEFAULT NULL,
-  `customer_id` bigint DEFAULT NULL,
-  `product_provider_id` bigint DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  KEY `FK2cltgx4vhyyhahjg1heax1gft` (`customer_id`),
-  KEY `FK5v8uymarai9ade0jfamfy17su` (`product_provider_id`),
-  CONSTRAINT `FK2cltgx4vhyyhahjg1heax1gft` FOREIGN KEY (`customer_id`) REFERENCES `customer` (`id`),
-  CONSTRAINT `FK5v8uymarai9ade0jfamfy17su` FOREIGN KEY (`product_provider_id`) REFERENCES `partner` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 DROP TABLE IF EXISTS `district`;
@@ -265,25 +321,6 @@ CREATE TABLE `order` (
   CONSTRAINT `FK1oduxyuuo3n2g98l3j7754vym` FOREIGN KEY (`customer_id`) REFERENCES `customer` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-DROP TABLE IF EXISTS `order_attribute_setting`;
-CREATE TABLE `order_attribute_setting` (
-  `id` bigint NOT NULL AUTO_INCREMENT,
-  `created_at` datetime(6) DEFAULT NULL,
-  `created_by` varchar(255) DEFAULT NULL,
-  `deleted_at` datetime(6) DEFAULT NULL,
-  `is_active` bit(1) DEFAULT NULL,
-  `is_deleted` bit(1) DEFAULT NULL,
-  `updated_at` datetime(6) DEFAULT NULL,
-  `updated_by` varchar(255) DEFAULT NULL,
-  `order_id` bigint DEFAULT NULL,
-  `product_attribute_id` bigint DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  KEY `FKip5ardq4g5r2c8aj6qxjnev30` (`order_id`),
-  KEY `FKh5nadrxvgn4qaxisla7rr8lu1` (`product_attribute_id`),
-  CONSTRAINT `FKh5nadrxvgn4qaxisla7rr8lu1` FOREIGN KEY (`product_attribute_id`) REFERENCES `product_attribute` (`id`),
-  CONSTRAINT `FKip5ardq4g5r2c8aj6qxjnev30` FOREIGN KEY (`order_id`) REFERENCES `order` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
 DROP TABLE IF EXISTS `partner`;
 CREATE TABLE `partner` (
   `id` bigint NOT NULL AUTO_INCREMENT,
@@ -307,21 +344,6 @@ CREATE TABLE `partner` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 
-DROP TABLE IF EXISTS `payment_method`;
-CREATE TABLE `payment_method` (
-  `id` bigint NOT NULL AUTO_INCREMENT,
-  `created_at` datetime(6) DEFAULT NULL,
-  `created_by` varchar(255) DEFAULT NULL,
-  `deleted_at` datetime(6) DEFAULT NULL,
-  `is_active` bit(1) DEFAULT NULL,
-  `is_deleted` bit(1) DEFAULT NULL,
-  `updated_at` datetime(6) DEFAULT NULL,
-  `updated_by` varchar(255) DEFAULT NULL,
-  `code` int DEFAULT NULL,
-  `name` varchar(255) DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
 DROP TABLE IF EXISTS `product`;
 CREATE TABLE `product` (
   `id` bigint NOT NULL AUTO_INCREMENT,
@@ -335,8 +357,10 @@ CREATE TABLE `product` (
   `effective_date_range_selection_number` int DEFAULT NULL,
   `avatar_image` varchar(255) DEFAULT NULL,
   `banner_image` varchar(255) DEFAULT NULL,
+  `bringing_fee` int NOT NULL,
   `can_buy_multiple` bit(1) DEFAULT NULL,
   `code` varchar(255) NOT NULL,
+  `component_fee` int NOT NULL,
   `detailed_description` longtext NOT NULL,
   `duplicate_buyer_info` bit(1) DEFAULT NULL,
   `effective_date_type` varchar(255) DEFAULT NULL,
@@ -351,92 +375,26 @@ CREATE TABLE `product` (
   `insured_rule` varchar(255) DEFAULT NULL,
   `is_self_insurance` bit(1) DEFAULT NULL,
   `name` varchar(255) NOT NULL,
+  `number_bringing` int NOT NULL,
+  `number_component` int NOT NULL,
+  `number_rear_view_mirror` int NOT NULL,
+  `number_repaint` int NOT NULL,
+  `number_scratched` int NOT NULL,
   `price_obj` double DEFAULT NULL,
   `product_status` int NOT NULL,
+  `rear_view_mirror` int NOT NULL,
+  `repaint_fee` int NOT NULL,
+  `scratched_fee` int NOT NULL,
   `short_description` longtext NOT NULL,
   `video_url` varchar(255) DEFAULT NULL,
-  `product_provider_id` bigint DEFAULT NULL,
   `product_category_id` bigint DEFAULT NULL,
   `target_group_id` bigint DEFAULT NULL,
   PRIMARY KEY (`id`),
-  KEY `FK4y3wi8nm4vsx7rmyjqwhtv1xs` (`product_provider_id`),
   KEY `FKcwclrqu392y86y0pmyrsi649r` (`product_category_id`),
   KEY `FKal990foc7b0tlcxducc0u126l` (`target_group_id`),
-  CONSTRAINT `FK4y3wi8nm4vsx7rmyjqwhtv1xs` FOREIGN KEY (`product_provider_id`) REFERENCES `partner` (`id`),
   CONSTRAINT `FKal990foc7b0tlcxducc0u126l` FOREIGN KEY (`target_group_id`) REFERENCES `target_group` (`id`),
   CONSTRAINT `FKcwclrqu392y86y0pmyrsi649r` FOREIGN KEY (`product_category_id`) REFERENCES `product_category` (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
-
-DROP TABLE IF EXISTS `product_attribute`;
-CREATE TABLE `product_attribute` (
-  `id` bigint NOT NULL AUTO_INCREMENT,
-  `created_at` datetime(6) DEFAULT NULL,
-  `created_by` varchar(255) DEFAULT NULL,
-  `deleted_at` datetime(6) DEFAULT NULL,
-  `is_active` bit(1) DEFAULT NULL,
-  `is_deleted` bit(1) DEFAULT NULL,
-  `updated_at` datetime(6) DEFAULT NULL,
-  `updated_by` varchar(255) DEFAULT NULL,
-  `padding_by_parent` bit(1) DEFAULT NULL,
-  `active` bit(1) NOT NULL,
-  `applied_to_all_product_provider` bit(1) NOT NULL,
-  `attribute_format` int NOT NULL,
-  `attribute_group` varchar(255) DEFAULT NULL,
-  `code` varchar(255) DEFAULT NULL,
-  `contains` varchar(255) DEFAULT NULL,
-  `display_onfe` bit(1) NOT NULL,
-  `format_object` varchar(255) DEFAULT NULL,
-  `is_parent` bit(1) DEFAULT NULL,
-  `max_value_date` datetime(6) DEFAULT NULL,
-  `max_value_text` int DEFAULT NULL,
-  `min_value_date` datetime(6) DEFAULT NULL,
-  `min_value_text` int DEFAULT NULL,
-  `name` varchar(255) DEFAULT NULL,
-  `show_hide_by_parent` bit(1) DEFAULT NULL,
-  `parent_id` bigint DEFAULT NULL,
-  `product_provider_id` bigint DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  KEY `FKig7jke7667adwnbu5n1gj9mhu` (`parent_id`),
-  KEY `FKf2hwu207va64is5qu5m2kf6jd` (`product_provider_id`),
-  CONSTRAINT `FKf2hwu207va64is5qu5m2kf6jd` FOREIGN KEY (`product_provider_id`) REFERENCES `partner` (`id`),
-  CONSTRAINT `FKig7jke7667adwnbu5n1gj9mhu` FOREIGN KEY (`parent_id`) REFERENCES `product_attribute` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
-DROP TABLE IF EXISTS `product_attribute_option`;
-CREATE TABLE `product_attribute_option` (
-  `id` bigint NOT NULL AUTO_INCREMENT,
-  `created_at` datetime(6) DEFAULT NULL,
-  `created_by` varchar(255) DEFAULT NULL,
-  `deleted_at` datetime(6) DEFAULT NULL,
-  `is_active` bit(1) DEFAULT NULL,
-  `is_deleted` bit(1) DEFAULT NULL,
-  `updated_at` datetime(6) DEFAULT NULL,
-  `updated_by` varchar(255) DEFAULT NULL,
-  `value` varchar(255) DEFAULT NULL,
-  `product_attribute_id` bigint DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  KEY `FKrlb3yw5ivmkt31ae5a617mryv` (`product_attribute_id`),
-  CONSTRAINT `FKrlb3yw5ivmkt31ae5a617mryv` FOREIGN KEY (`product_attribute_id`) REFERENCES `product_attribute` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
-DROP TABLE IF EXISTS `product_attribute_setting`;
-CREATE TABLE `product_attribute_setting` (
-  `id` bigint NOT NULL AUTO_INCREMENT,
-  `created_at` datetime(6) DEFAULT NULL,
-  `created_by` varchar(255) DEFAULT NULL,
-  `deleted_at` datetime(6) DEFAULT NULL,
-  `is_active` bit(1) DEFAULT NULL,
-  `is_deleted` bit(1) DEFAULT NULL,
-  `updated_at` datetime(6) DEFAULT NULL,
-  `updated_by` varchar(255) DEFAULT NULL,
-  `product_id` bigint DEFAULT NULL,
-  `product_attribute_id` bigint DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  KEY `FK1w9jekwhxd9v5ayfw9sx3oq5f` (`product_id`),
-  KEY `FKjw957b38xmvg4c5o7665d5uop` (`product_attribute_id`),
-  CONSTRAINT `FK1w9jekwhxd9v5ayfw9sx3oq5f` FOREIGN KEY (`product_id`) REFERENCES `product` (`id`),
-  CONSTRAINT `FKjw957b38xmvg4c5o7665d5uop` FOREIGN KEY (`product_attribute_id`) REFERENCES `product_attribute` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 DROP TABLE IF EXISTS `product_category`;
 CREATE TABLE `product_category` (
@@ -506,12 +464,9 @@ CREATE TABLE `product_pack_detail_payment` (
   `is_deleted` bit(1) DEFAULT NULL,
   `updated_at` datetime(6) DEFAULT NULL,
   `updated_by` varchar(255) DEFAULT NULL,
-  `payment_method_id` bigint DEFAULT NULL,
   `product_detail_id` bigint DEFAULT NULL,
   PRIMARY KEY (`id`),
-  KEY `FK9jkbs2c76o4kyl88j7qa6x3li` (`payment_method_id`),
   KEY `FKs79gdwm0h6rpp47e06fmcl76g` (`product_detail_id`),
-  CONSTRAINT `FK9jkbs2c76o4kyl88j7qa6x3li` FOREIGN KEY (`payment_method_id`) REFERENCES `payment_method` (`id`),
   CONSTRAINT `FKs79gdwm0h6rpp47e06fmcl76g` FOREIGN KEY (`product_detail_id`) REFERENCES `product_pack_detail` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -538,46 +493,6 @@ CREATE TABLE `promo_code` (
   CONSTRAINT `FKsj3apooho7l8ug9hyydu5xis7` FOREIGN KEY (`product_id`) REFERENCES `product` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-DROP TABLE IF EXISTS `provider_history`;
-CREATE TABLE `provider_history` (
-  `id` bigint NOT NULL AUTO_INCREMENT,
-  `created_at` datetime(6) DEFAULT NULL,
-  `created_by` varchar(255) DEFAULT NULL,
-  `deleted_at` datetime(6) DEFAULT NULL,
-  `is_active` bit(1) DEFAULT NULL,
-  `is_deleted` bit(1) DEFAULT NULL,
-  `updated_at` datetime(6) DEFAULT NULL,
-  `updated_by` varchar(255) DEFAULT NULL,
-  `approved_by` varchar(255) DEFAULT NULL,
-  `partner_status` int DEFAULT NULL,
-  `product_provider_id` bigint DEFAULT NULL,
-  `provider_policy_id` bigint DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  KEY `FKl7tikt9b6o7kipv039rmi91wc` (`product_provider_id`),
-  KEY `FKicele9lgbfbcv5hl3tx84n10m` (`provider_policy_id`),
-  CONSTRAINT `FKicele9lgbfbcv5hl3tx84n10m` FOREIGN KEY (`provider_policy_id`) REFERENCES `provider_policy` (`id`),
-  CONSTRAINT `FKl7tikt9b6o7kipv039rmi91wc` FOREIGN KEY (`product_provider_id`) REFERENCES `partner` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
-DROP TABLE IF EXISTS `provider_policy`;
-CREATE TABLE `provider_policy` (
-  `id` bigint NOT NULL AUTO_INCREMENT,
-  `created_at` datetime(6) DEFAULT NULL,
-  `created_by` varchar(255) DEFAULT NULL,
-  `deleted_at` datetime(6) DEFAULT NULL,
-  `is_active` bit(1) DEFAULT NULL,
-  `is_deleted` bit(1) DEFAULT NULL,
-  `updated_at` datetime(6) DEFAULT NULL,
-  `updated_by` varchar(255) DEFAULT NULL,
-  `effective_from` datetime(6) DEFAULT NULL,
-  `effective_to` datetime(6) DEFAULT NULL,
-  `number_policy` varchar(255) DEFAULT NULL,
-  `product_provider_id` bigint DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  KEY `FK9duxirsxc6dyp0rmfhwe07s6b` (`product_provider_id`),
-  CONSTRAINT `FK9duxirsxc6dyp0rmfhwe07s6b` FOREIGN KEY (`product_provider_id`) REFERENCES `partner` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
 DROP TABLE IF EXISTS `province`;
 CREATE TABLE `province` (
   `code` bigint NOT NULL AUTO_INCREMENT,
@@ -590,26 +505,6 @@ CREATE TABLE `province` (
   `updated_by` varchar(255) DEFAULT NULL,
   `name` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`code`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
-DROP TABLE IF EXISTS `rate_charge`;
-CREATE TABLE `rate_charge` (
-  `id` bigint NOT NULL AUTO_INCREMENT,
-  `created_at` datetime(6) DEFAULT NULL,
-  `created_by` varchar(255) DEFAULT NULL,
-  `deleted_at` datetime(6) DEFAULT NULL,
-  `is_active` bit(1) DEFAULT NULL,
-  `is_deleted` bit(1) DEFAULT NULL,
-  `updated_at` datetime(6) DEFAULT NULL,
-  `updated_by` varchar(255) DEFAULT NULL,
-  `end_date` datetime(6) DEFAULT NULL,
-  `policy_group` int DEFAULT NULL,
-  `rate_charge_share` double NOT NULL,
-  `start_date` datetime(6) DEFAULT NULL,
-  `product_id` bigint DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  KEY `FK8tx06x9v2sn6l8afgu3dx33co` (`product_id`),
-  CONSTRAINT `FK8tx06x9v2sn6l8afgu3dx33co` FOREIGN KEY (`product_id`) REFERENCES `product` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 DROP TABLE IF EXISTS `refresh_token`;
@@ -630,7 +525,7 @@ CREATE TABLE `refresh_token` (
   UNIQUE KEY `UK_ga3cqp73wyumau3ghjfx7vq94` (`token`),
   UNIQUE KEY `UK_f95ixxe7pa48ryn1awmh2evt7` (`user_id`),
   CONSTRAINT `FKfgk1klcib7i15utalmcqo7krt` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 
 DROP TABLE IF EXISTS `role`;
 CREATE TABLE `role` (
@@ -648,12 +543,129 @@ CREATE TABLE `role` (
   UNIQUE KEY `UK_8sewwnpamngi6b1dwaa88askk` (`name`)
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 
+DROP TABLE IF EXISTS `role_authority`;
+CREATE TABLE `role_authority` (
+  `role_id` bigint NOT NULL,
+  `authority_id` bigint NOT NULL,
+  KEY `FKpduid6tx7e38l03s86446514r` (`authority_id`),
+  KEY `FK2052966dco7y9f97s1a824bj1` (`role_id`),
+  CONSTRAINT `FK2052966dco7y9f97s1a824bj1` FOREIGN KEY (`role_id`) REFERENCES `role` (`id`),
+  CONSTRAINT `FKpduid6tx7e38l03s86446514r` FOREIGN KEY (`authority_id`) REFERENCES `authorities` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+DROP TABLE IF EXISTS `sys_admin`;
+CREATE TABLE `sys_admin` (
+  `id` bigint NOT NULL AUTO_INCREMENT,
+  `created_at` datetime(6) DEFAULT NULL,
+  `created_by` varchar(255) DEFAULT NULL,
+  `deleted_at` datetime(6) DEFAULT NULL,
+  `is_active` bit(1) DEFAULT NULL,
+  `is_deleted` bit(1) DEFAULT NULL,
+  `updated_at` datetime(6) DEFAULT NULL,
+  `updated_by` varchar(255) DEFAULT NULL,
+  `type` varchar(255) DEFAULT NULL,
+  `product_provider_id` bigint DEFAULT NULL,
+  `user_id` bigint DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `FKeqlehv0xpcblcurwvpegpi5v8` (`product_provider_id`),
+  KEY `FKgr4i9qnvgmihp43t8k98m68h5` (`user_id`),
+  CONSTRAINT `FKeqlehv0xpcblcurwvpegpi5v8` FOREIGN KEY (`product_provider_id`) REFERENCES `partner` (`id`),
+  CONSTRAINT `FKgr4i9qnvgmihp43t8k98m68h5` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 
-/*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
-/*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
-/*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
-/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
-/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
-/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
-/*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
+DROP TABLE IF EXISTS `target_group`;
+CREATE TABLE `target_group` (
+  `id` bigint NOT NULL AUTO_INCREMENT,
+  `created_at` datetime(6) DEFAULT NULL,
+  `created_by` varchar(255) DEFAULT NULL,
+  `deleted_at` datetime(6) DEFAULT NULL,
+  `is_active` bit(1) DEFAULT NULL,
+  `is_deleted` bit(1) DEFAULT NULL,
+  `updated_at` datetime(6) DEFAULT NULL,
+  `updated_by` varchar(255) DEFAULT NULL,
+  `code` varchar(255) NOT NULL,
+  `description` longtext NOT NULL,
+  `index` int DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+DROP TABLE IF EXISTS `transaction_history`;
+CREATE TABLE `transaction_history` (
+  `id` bigint NOT NULL AUTO_INCREMENT,
+  `amount` double DEFAULT NULL,
+  `contract_code` varchar(255) DEFAULT NULL,
+  `customer_code` varchar(255) DEFAULT NULL,
+  `customer_name` varchar(255) DEFAULT NULL,
+  `customer_phone_number` varchar(255) DEFAULT NULL,
+  `effective_date` datetime(6) DEFAULT NULL,
+  `expired_date` datetime(6) DEFAULT NULL,
+  `partner_code` varchar(255) DEFAULT NULL,
+  `partner_name` varchar(255) DEFAULT NULL,
+  `payment_method` int DEFAULT NULL,
+  `process_code` varchar(255) DEFAULT NULL,
+  `process_name` int DEFAULT NULL,
+  `product_code` varchar(255) DEFAULT NULL,
+  `product_name` varchar(255) DEFAULT NULL,
+  `transaction_code` varchar(255) DEFAULT NULL,
+  `transaction_date` datetime(6) DEFAULT NULL,
+  `transaction_status` int DEFAULT NULL,
+  `contract_id` bigint DEFAULT NULL,
+  `customer_id` bigint DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `FKsyl5euhcbbajjyxx985jly760` (`contract_id`),
+  KEY `FK88ro5ut6437qycxlhvxcs61uu` (`customer_id`),
+  CONSTRAINT `FK88ro5ut6437qycxlhvxcs61uu` FOREIGN KEY (`customer_id`) REFERENCES `customer` (`id`),
+  CONSTRAINT `FKsyl5euhcbbajjyxx985jly760` FOREIGN KEY (`contract_id`) REFERENCES `contract` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+DROP TABLE IF EXISTS `user`;
+CREATE TABLE `user` (
+  `id` bigint NOT NULL AUTO_INCREMENT,
+  `created_at` datetime(6) DEFAULT NULL,
+  `created_by` varchar(255) DEFAULT NULL,
+  `deleted_at` datetime(6) DEFAULT NULL,
+  `is_active` bit(1) DEFAULT NULL,
+  `is_deleted` bit(1) DEFAULT NULL,
+  `updated_at` datetime(6) DEFAULT NULL,
+  `updated_by` varchar(255) DEFAULT NULL,
+  `address` varchar(255) DEFAULT NULL,
+  `cancel_date` datetime(6) DEFAULT NULL,
+  `cancellation_reason` varchar(255) DEFAULT NULL,
+  `company` varchar(255) DEFAULT NULL,
+  `dod` date DEFAULT NULL,
+  `email` varchar(255) DEFAULT NULL,
+  `from_legacy_system` bit(1) NOT NULL,
+  `gender` varchar(255) DEFAULT NULL,
+  `given_name` varchar(255) DEFAULT NULL,
+  `id_number` varchar(50) DEFAULT NULL,
+  `is_cancelled` bit(1) NOT NULL,
+  `is_partner` bit(1) DEFAULT NULL,
+  `partner_code` varchar(255) DEFAULT NULL,
+  `password` varchar(255) NOT NULL,
+  `phone_code` varchar(255) DEFAULT NULL,
+  `phone_number` varchar(255) DEFAULT NULL,
+  `surname` varchar(255) DEFAULT NULL,
+  `username` varchar(255) DEFAULT NULL,
+  `role_id` bigint DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `FKn82ha3ccdebhokx3a8fgdqeyy` (`role_id`),
+  CONSTRAINT `FKn82ha3ccdebhokx3a8fgdqeyy` FOREIGN KEY (`role_id`) REFERENCES `role` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+
+DROP TABLE IF EXISTS `ward`;
+CREATE TABLE `ward` (
+  `code` bigint NOT NULL AUTO_INCREMENT,
+  `created_at` datetime(6) DEFAULT NULL,
+  `created_by` varchar(255) DEFAULT NULL,
+  `deleted_at` datetime(6) DEFAULT NULL,
+  `is_active` bit(1) DEFAULT NULL,
+  `is_deleted` bit(1) DEFAULT NULL,
+  `updated_at` datetime(6) DEFAULT NULL,
+  `updated_by` varchar(255) DEFAULT NULL,
+  `name` varchar(255) DEFAULT NULL,
+  `district_code` bigint DEFAULT NULL,
+  PRIMARY KEY (`code`),
+  KEY `FK3x802nplawd033ox9fsntk06u` (`district_code`),
+  CONSTRAINT `FK3x802nplawd033ox9fsntk06u` FOREIGN KEY (`district_code`) REFERENCES `district` (`code`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+

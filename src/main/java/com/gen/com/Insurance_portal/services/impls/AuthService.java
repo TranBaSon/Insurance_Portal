@@ -10,9 +10,11 @@ import com.gen.com.Insurance_portal.common.mappers.RoleMapper;
 import com.gen.com.Insurance_portal.common.mappers.UserMapper;
 import com.gen.com.Insurance_portal.entites.*;
 import com.gen.com.Insurance_portal.exceptions.MessageException;
+import com.gen.com.Insurance_portal.exceptions.NotFoundEntityExceptionByCode;
 import com.gen.com.Insurance_portal.exceptions.TokenRefreshException;
 import com.gen.com.Insurance_portal.models.RequestModels.*;
 import com.gen.com.Insurance_portal.models.responseModels.ResponseCustomerUserInfor;
+import com.gen.com.Insurance_portal.models.responseModels.ResponsePartnerUserInfo;
 import com.gen.com.Insurance_portal.models.responseModels.ResponseUserInfor;
 import com.gen.com.Insurance_portal.models.responseModels.TokenResponse;
 import com.gen.com.Insurance_portal.repositories.CustomerRepository;
@@ -41,7 +43,7 @@ public class AuthService implements IAuthService {
     private final AuthenticationManager authenticationManager;
     private final MyUserDetailService userDetailService;
     private final IRoleService roleService;
-    private final IPartnerService productProviderService;
+    private final IPartnerService partnerService;
     private final ISysAdminService sysAdminService;
     private final IAuthoritiesService authoritiesService;
 
@@ -49,7 +51,7 @@ public class AuthService implements IAuthService {
                        RefreshTokenService refreshTokenService, JwtUtil jwtTokenUtil,
                        AuthenticationManager authenticationManager,
                        MyUserDetailService userDetailService, IUserService userService,
-                       IRoleService roleService, IPartnerService productProviderService,
+                       IRoleService roleService, IPartnerService partnerService,
                        ISysAdminService sysAdminService, IAuthoritiesService authoritiesService) {
 
         this.customerRepository = customerRepository;
@@ -60,7 +62,7 @@ public class AuthService implements IAuthService {
         this.userDetailService = userDetailService;
         this.userService = userService;
         this.roleService = roleService;
-        this.productProviderService = productProviderService;
+        this.partnerService = partnerService;
         this.sysAdminService = sysAdminService;
         this.authoritiesService = authoritiesService;
     }
@@ -111,7 +113,15 @@ public class AuthService implements IAuthService {
             userInfor.setRole(RoleMapper.INSTANCE.roleToRoleResponse(user.getRole()));
             userInfor.setCustomerId(user.getCustomer().getId());
             response = userInfor;
-        }else {
+        }else if (user.getIsPartner()) {
+            ResponsePartnerUserInfo userInfor = UserMapper.INSTANCE.UserToPartnerUserInfor(user);
+            userInfor.setRole(RoleMapper.INSTANCE.roleToRoleResponse(user.getRole()));
+            Partner partner = partnerService.findByCode(user.getPartnerCode())
+                    .orElseThrow(() -> new NotFoundEntityExceptionByCode(user.getPartnerCode(), "Partner"));
+            userInfor.setPartnerId(partner.getId());
+            response = userInfor;
+        }
+        else {
             ResponseUserInfor userInfor = UserMapper.INSTANCE.UserToUserInfor(user);
             userInfor.setRole(RoleMapper.INSTANCE.roleToRoleResponse(user.getRole()));
             response = userInfor;
@@ -140,7 +150,7 @@ public class AuthService implements IAuthService {
     }
 
     @Override
-    public RegisterStatus registerUser(User user, Boolean isProvider) {
+    public RegisterStatus registerUser(User user, Boolean isProvider, String partnerCode) {
         if (user == null || Strings.isBlank(user.getPassword())){
             assert user != null;
             throw new MessageException("Can't register user with name " + user.getUsername());
@@ -155,22 +165,30 @@ public class AuthService implements IAuthService {
         }
 
         if (!isProvider){
+            user.setIsActive(false);
             Role customerRole = roleService.findByName("CUSTOMER");
             if (customerRole != null) {
                 user.setRole(customerRole);
             }
         }else {
             user.setIsActive(true);
+            Role partnerRole = roleService.findByName("PARTNER");
+            if (partnerRole != null) {
+                user.setRole(partnerRole);
+            }
             Authorities required_claims = authoritiesService.findByCode("Required_Claims");
             if (required_claims != null) {
                 user.getRole().getAuthorities().add(required_claims);
+            }
+            user.setIsPartner(true);
+            if (partnerCode != null) {
+                user.setPartnerCode(partnerCode);
             }
         }
 
         user.setPassword(passwordEncoder.encode(user.getPassword()));
 
         String code  = String.valueOf(Helpper.genCode());
-        user.setIsActive(false);
         user.setPhoneCode(code);
         userService.save(user);
 
@@ -181,7 +199,7 @@ public class AuthService implements IAuthService {
     @Override
     public RegisterStatus registerCustomer(CreateUserModel customerModel) {
         User user = UserMapper.INSTANCE.createUserModelToUser(customerModel);
-        RegisterStatus result = registerUser(user, false);
+        RegisterStatus result = registerUser(user, false, null);
 
         if (result == RegisterStatus.Succeeded) {
             Customer customer = new Customer();
@@ -200,7 +218,7 @@ public class AuthService implements IAuthService {
     @Override
     public RegisterStatus registerPartner(CreateProviderModel providerModel) {
         User user = UserMapper.INSTANCE.createProviderModelToUser(providerModel);
-        RegisterStatus result = registerUser(user, true);
+        RegisterStatus result = registerUser(user, true, providerModel.getCode());
 
         if (result == RegisterStatus.Succeeded) {
 
@@ -215,11 +233,11 @@ public class AuthService implements IAuthService {
             provider.setEmail(providerModel.getEmail());
             provider.setIsActive(true);
             provider.setAvatarImage(providerModel.getAvatarImage());
-            productProviderService.save(provider);
+            partnerService.save(provider);
 
             SysAdmin sysAdmin = new SysAdmin();
             sysAdmin.setType(SysAdminType.ProductProvider);
-            sysAdmin.setIsActive(false);
+            sysAdmin.setIsActive(true);
             sysAdmin.setUser(user);
             sysAdmin.setPartner(provider);
             sysAdminService.save(sysAdmin);

@@ -15,7 +15,7 @@ import java.util.Date;
 
 @AllArgsConstructor
 @NoArgsConstructor
-@EqualsAndHashCode(callSuper = true)
+@EqualsAndHashCode(onlyExplicitlyIncluded = true, callSuper = false)
 @Data
 @Entity
 public class User extends AbstractEntity{
@@ -81,4 +81,35 @@ public class User extends AbstractEntity{
     @JsonIgnore
     @OneToOne(mappedBy = "user")
     private Customer customer;
+
+    private Boolean isPartner = false;
+
+    private String partnerCode;
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "id=" + id +
+                ", surname='" + surname + '\'' +
+                ", givenName='" + givenName + '\'' +
+                ", username='" + username + '\'' +
+                ", password='" + password + '\'' +
+                ", phoneNumber='" + phoneNumber + '\'' +
+                ", phoneCode='" + phoneCode + '\'' +
+                ", email='" + email + '\'' +
+                ", dod=" + dod +
+                ", gender=" + gender +
+                ", idNumber='" + idNumber + '\'' +
+                ", address='" + address + '\'' +
+                ", company='" + company + '\'' +
+                ", fromLegacySystem=" + fromLegacySystem +
+                ", isCancelled=" + isCancelled +
+                ", cancellationReason='" + cancellationReason + '\'' +
+                ", cancelDate=" + cancelDate +
+                ", isDeleted=" + isDeleted +
+                ", deletedAt=" + deletedAt +
+                ", isActive=" + isActive +
+                ", refreshToken=" + refreshToken +
+                '}';
+    }
 }

@@ -6,13 +6,14 @@ import com.gen.com.Insurance_portal.models.RequestModels.CreateProviderModel;
 import com.gen.com.Insurance_portal.models.RequestModels.CreateUserModel;
 import com.gen.com.Insurance_portal.models.responseModels.CustomerResponseModel;
 import com.gen.com.Insurance_portal.models.responseModels.ResponseCustomerUserInfor;
+import com.gen.com.Insurance_portal.models.responseModels.ResponsePartnerUserInfo;
 import com.gen.com.Insurance_portal.models.responseModels.ResponseUserInfor;
 import com.gen.com.Insurance_portal.models.responseModels.RoleResponseModel;
 import javax.annotation.Generated;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2021-01-15T17:26:52+0700",
+    date = "2021-01-15T18:49:52+0700",
     comments = "version: 1.3.0.Final, compiler: javac, environment: Java 1.8.0_265 (AdoptOpenJDK)"
 )
 public class UserMapperImpl implements UserMapper {
@@ -74,6 +75,25 @@ public class UserMapperImpl implements UserMapper {
         responseCustomerUserInfor.setRole( roleToRoleResponseModel( user.getRole() ) );
 
         return responseCustomerUserInfor;
+    }
+
+    @Override
+    public ResponsePartnerUserInfo UserToPartnerUserInfor(User user) {
+        if ( user == null ) {
+            return null;
+        }
+
+        ResponsePartnerUserInfo responsePartnerUserInfo = new ResponsePartnerUserInfo();
+
+        responsePartnerUserInfo.setId( user.getId() );
+        responsePartnerUserInfo.setUsername( user.getUsername() );
+        responsePartnerUserInfo.setEmail( user.getEmail() );
+        responsePartnerUserInfo.setSurname( user.getSurname() );
+        responsePartnerUserInfo.setGivenName( user.getGivenName() );
+        responsePartnerUserInfo.setPhoneNumber( user.getPhoneNumber() );
+        responsePartnerUserInfo.setRole( roleToRoleResponseModel( user.getRole() ) );
+
+        return responsePartnerUserInfo;
     }
 
     @Override
