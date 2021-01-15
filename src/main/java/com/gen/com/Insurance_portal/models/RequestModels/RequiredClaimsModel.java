@@ -12,8 +12,8 @@ import javax.validation.constraints.NotNull;
 @NoArgsConstructor
 public class RequiredClaimsModel {
 
-    @NotNull(message = "contractId is required!")
-    private Long contractId;
+    @NotNull(message = "contractCode is required!")
+    private String contractCode;
 
     @NotBlank(message = "numberPlate is required!")
     private String numberPlate;

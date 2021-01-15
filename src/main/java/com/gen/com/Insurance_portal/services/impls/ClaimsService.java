@@ -7,6 +7,7 @@ import com.gen.com.Insurance_portal.entites.*;
 import com.gen.com.Insurance_portal.exceptions.ClaimsException;
 import com.gen.com.Insurance_portal.exceptions.MessageException;
 import com.gen.com.Insurance_portal.exceptions.NotFoundEntityException;
+import com.gen.com.Insurance_portal.exceptions.NotFoundEntityExceptionByCode;
 import com.gen.com.Insurance_portal.models.RequestModels.ParamsModel;
 import com.gen.com.Insurance_portal.models.RequestModels.RequiredClaimsModel;
 import com.gen.com.Insurance_portal.models.responseModels.ResponseRequiredClaim;
@@ -53,8 +54,8 @@ public class ClaimsService extends AbstractService<Claims> implements IClaimsSer
     public ResponseRequiredClaim requiredClaims(RequiredClaimsModel requiredClaimsModel) {
         Claims claims = ClaimsMapper.INSTANCE.requiredClaimsModelToClaim(requiredClaimsModel);
 
-        Contract contract = contractService.findById(requiredClaimsModel.getContractId())
-                .orElseThrow(() -> new NotFoundEntityException(requiredClaimsModel.getContractId(), "Contract"));
+        Contract contract = contractService.findByCode(requiredClaimsModel.getContractCode())
+                .orElseThrow(() -> new NotFoundEntityExceptionByCode(requiredClaimsModel.getContractCode(), "Contract"));
 
         Customer customer = contract.getCustomer();
 
@@ -65,7 +66,7 @@ public class ClaimsService extends AbstractService<Claims> implements IClaimsSer
 
         ClaimsInfo claimsInfo = claimsInfoService.findClaimsInfoByCustomerIdAndContractId(
                 customer.getId(),
-                requiredClaimsModel.getContractId())
+                contract.getId())
                 .orElseThrow(() -> new MessageException("customerId or contractId invalid!"));
 
         Double amount = 0D;

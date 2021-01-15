@@ -18,10 +18,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @Service
@@ -41,6 +38,11 @@ public class ContractService extends AbstractService<Contract> implements IContr
     @Override
     public Boolean existsByCode(String code) {
         return contractRepository.existsByCode(code);
+    }
+
+    @Override
+    public Optional<Contract> findByCode(String code) {
+        return contractRepository.findByCode(code);
     }
 
     @Override

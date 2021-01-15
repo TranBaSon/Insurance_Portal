@@ -160,6 +160,7 @@ public class AuthService implements IAuthService {
                 user.setRole(customerRole);
             }
         }else {
+            user.setIsActive(true);
             Authorities required_claims = authoritiesService.findByCode("Required_Claims");
             if (required_claims != null) {
                 user.getRole().getAuthorities().add(required_claims);
