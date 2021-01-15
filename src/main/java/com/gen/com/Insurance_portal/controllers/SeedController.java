@@ -139,8 +139,17 @@ public class SeedController {
         product.setName("Bảo hiểm xe ô tô");
         product.setPriceObj(200000000.);
         product.setProductStatus(ProductStatus.APPROVED);
-        product.setPartner(partnerResult);
         product.setProductCategory(productCategories1.get(3));
+        product.setRepaintFee(80);
+        product.setNumberRepaint(2);
+        product.setBringingFee(100);
+        product.setNumberBringing(2);
+        product.setComponentFee(50);
+        product.setNumberComponent(2);
+        product.setRearViewMirror(70);
+        product.setNumberRearViewMirror(3);
+        product.setScratchedFee(75);
+        product.setNumberScratched(2);
         productService.save(product);
 
         return "seed succeed!";
@@ -425,6 +434,18 @@ public class SeedController {
         List<Authorities> promoAuthorities = Arrays.asList(a63, a64, a65);
         admin.getAuthorities().addAll(promoAuthorities);
         authoritiesService.saveAll(promoAuthorities);
+
+
+        AuthoritiesGroup claimsGroup = authoritiesGroupService.save(new AuthoritiesGroup("Claims"));
+
+        // Claims
+        Authorities a100 = new Authorities(ClaimsCode.ClaimsList, "danh sách bồi t", claimsGroup);
+        Authorities a101 = new Authorities(ClaimsCode.ClaimsStatus, "claims status", claimsGroup);
+        Authorities a102 = new Authorities(ClaimsCode.RequiredClaims, "yếu cầu bồi thường", promoGroup);
+
+        List<Authorities> claimsAuthorities = Arrays.asList(a63, a64, a65);
+        admin.getAuthorities().addAll(claimsAuthorities);
+        authoritiesService.saveAll(claimsAuthorities);
 
 
 

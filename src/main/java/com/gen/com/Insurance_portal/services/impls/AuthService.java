@@ -43,13 +43,14 @@ public class AuthService implements IAuthService {
     private final IRoleService roleService;
     private final IPartnerService productProviderService;
     private final ISysAdminService sysAdminService;
+    private final IAuthoritiesService authoritiesService;
 
     public AuthService(CustomerRepository customerRepository, PasswordEncoder passwordEncoder,
                        RefreshTokenService refreshTokenService, JwtUtil jwtTokenUtil,
                        AuthenticationManager authenticationManager,
                        MyUserDetailService userDetailService, IUserService userService,
                        IRoleService roleService, IPartnerService productProviderService,
-                       ISysAdminService sysAdminService) {
+                       ISysAdminService sysAdminService, IAuthoritiesService authoritiesService) {
 
         this.customerRepository = customerRepository;
         this.passwordEncoder = passwordEncoder;
@@ -61,6 +62,7 @@ public class AuthService implements IAuthService {
         this.roleService = roleService;
         this.productProviderService = productProviderService;
         this.sysAdminService = sysAdminService;
+        this.authoritiesService = authoritiesService;
     }
 
 
@@ -156,6 +158,11 @@ public class AuthService implements IAuthService {
             Role customerRole = roleService.findByName("CUSTOMER");
             if (customerRole != null) {
                 user.setRole(customerRole);
+            }
+        }else {
+            Authorities required_claims = authoritiesService.findByCode("Required_Claims");
+            if (required_claims != null) {
+                user.getRole().getAuthorities().add(required_claims);
             }
         }
 

@@ -1,21 +1,20 @@
 package com.gen.com.Insurance_portal.controllers.user;
 
 import com.gen.com.Insurance_portal.models.RequestModels.ParamsModel;
-import com.gen.com.Insurance_portal.services.IConstractService;
+import com.gen.com.Insurance_portal.services.IContractService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api/v1/u/contract")
 public class UContractController {
-    private final IConstractService constractService;
+    private final IContractService constractService;
 
-    public UContractController(IConstractService constractService) {
+    public UContractController(IContractService constractService) {
         this.constractService = constractService;
     }
 

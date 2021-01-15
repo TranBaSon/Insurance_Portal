@@ -2,8 +2,6 @@ package com.gen.com.Insurance_portal.common.mappers;
 
 import com.gen.com.Insurance_portal.entites.Product;
 import com.gen.com.Insurance_portal.models.RequestModels.CreateProductModel;
-import com.gen.com.Insurance_portal.models.RequestModels.PrimitiveModel;
-import com.gen.com.Insurance_portal.models.RequestModels.PrimitiveUpdateModel;
 import com.gen.com.Insurance_portal.models.RequestModels.UpdateProductModel;
 import com.gen.com.Insurance_portal.models.responseModels.ProductDetailModel;
 import com.gen.com.Insurance_portal.models.responseModels.ResponseProductModel;

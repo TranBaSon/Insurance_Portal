@@ -31,6 +31,8 @@ public class TransactionHistory {
 
     private String customerPhoneNumber;
 
+    private String customerName;
+
     private String contractCode;
 
     @JsonIgnore

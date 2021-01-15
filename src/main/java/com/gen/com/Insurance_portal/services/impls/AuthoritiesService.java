@@ -13,4 +13,9 @@ public class AuthoritiesService extends AbstractService<Authorities> implements 
         super(authoritiesRepositoty);
         this.authoritiesRepositoty = authoritiesRepositoty;
     }
+
+    @Override
+    public Authorities findByCode(String code) {
+        return authoritiesRepositoty.findByCode(code);
+    }
 }

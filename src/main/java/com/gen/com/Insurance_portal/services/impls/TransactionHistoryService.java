@@ -31,14 +31,16 @@ public class TransactionHistoryService extends AbstractService<TransactionHistor
     private final ICustomerService customerService;
     private final IPartnerService partnerService;
     private final IProductService productService;
-    private final IConstractService contractService;
+    private final IContractService contractService;
     private final JwtUtil jwtTokenUtil;
     private final IUserService userService;
+    private final IClaimsInfoService claimsInfoService;
 
     public TransactionHistoryService(TransactionHistoryRepository transactionHistoryRepository,
                                      CustomerService customerService, IPartnerService partnerService,
-                                     IProductService productService, IConstractService contractService,
-                                     JwtUtil jwtTokenUtil, IUserService userService) {
+                                     IProductService productService, IContractService contractService,
+                                     JwtUtil jwtTokenUtil, IUserService userService,
+                                     IClaimsInfoService claimsInfoService) {
         super(transactionHistoryRepository);
         this.transactionHistoryRepository = transactionHistoryRepository;
         this.customerService = customerService;
@@ -47,6 +49,7 @@ public class TransactionHistoryService extends AbstractService<TransactionHistor
         this.contractService = contractService;
         this.jwtTokenUtil = jwtTokenUtil;
         this.userService = userService;
+        this.claimsInfoService = claimsInfoService;
     }
 
     @Override
@@ -85,7 +88,8 @@ public class TransactionHistoryService extends AbstractService<TransactionHistor
         contract.setCarMaker(transactionHistoryModel.getCarMaker());
         contract.setPartner(partner.getName());
         contract.setPartnerCode(partner.getCode());
-        contract.setProduct(product.getName());
+        contract.setProductName(product.getName());
+        contract.setProduct(product);
         contract.setProductCode(product.getCode());
 
         Date activeDate = new Date();
@@ -135,9 +139,32 @@ public class TransactionHistoryService extends AbstractService<TransactionHistor
         transactionHistory.setContract(contractResult);
         transactionHistory.setProcessName(TransactionProcessName.BuyNew);
         transactionHistory.setEffectiveDate(contract.getEffectiveDate());
+        transactionHistory.setCustomerName(customer.getUser().getSurname() + " " + customer.getUser().getGivenName());
         transactionHistory.setExpiredDate(contract.getExpiredDate());
 
         transactionHistoryRepository.save(transactionHistory);
+
+        ClaimsInfo claimsInfo = new ClaimsInfo();
+        claimsInfo.setCustomer(customer);
+        claimsInfo.setCustomerId(customer.getId());
+        claimsInfo.setCustomerCode(customer.getCustomerCode());
+        claimsInfo.setProduct(product);
+        claimsInfo.setProductId(product.getId());
+        claimsInfo.setProductCode(product.getCode());
+        claimsInfo.setComponentFee(product.getComponentFee());
+        claimsInfo.setNumberComponent(product.getNumberComponent());
+        claimsInfo.setScratchedFee(product.getScratchedFee());
+        claimsInfo.setNumberScratched(product.getNumberScratched());
+        claimsInfo.setRepaintFee(product.getRepaintFee());
+        claimsInfo.setNumberRepaint(product.getNumberRepaint());
+        claimsInfo.setBringingFee(product.getBringingFee());
+        claimsInfo.setNumberBringing(product.getNumberBringing());
+        claimsInfo.setRearViewMirror(product.getRearViewMirror());
+        claimsInfo.setNumberRearViewMirror(product.getNumberRearViewMirror());
+        claimsInfo.setContract(contract);
+        claimsInfo.setContractId(contract.getId());
+        claimsInfo.setContractCode(contract.getCode());
+        claimsInfoService.save(claimsInfo);
 
     }
 

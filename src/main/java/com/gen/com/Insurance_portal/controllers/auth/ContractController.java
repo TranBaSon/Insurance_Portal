@@ -4,7 +4,7 @@ import com.gen.com.Insurance_portal.common.enums.ContractStatus;
 import com.gen.com.Insurance_portal.models.RequestModels.ParamsModel;
 import com.gen.com.Insurance_portal.models.RequestModels.RequestStatus;
 import com.gen.com.Insurance_portal.models.responseModels.ResponseMessageModel;
-import com.gen.com.Insurance_portal.services.IConstractService;
+import com.gen.com.Insurance_portal.services.IContractService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
@@ -16,9 +16,9 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequestMapping("/api/v1/contract")
 public class ContractController {
-    private final IConstractService contractService;
+    private final IContractService contractService;
 
-    public ContractController(IConstractService contractService) {
+    public ContractController(IContractService contractService) {
         this.contractService = contractService;
     }
 

@@ -1,6 +1,5 @@
 package com.gen.com.Insurance_portal.entites;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.gen.com.Insurance_portal.common.enums.PartnerStatus;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -8,7 +7,6 @@ import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import java.util.Set;
 
 @AllArgsConstructor
 @NoArgsConstructor

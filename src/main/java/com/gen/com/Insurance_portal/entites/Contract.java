@@ -84,7 +84,12 @@ public class Contract extends AbstractEntity {
 
     private String carMaker;
 
-    private String product;
+    private String productName;
+
+    @JsonIgnore
+    @OneToOne
+    @JoinColumn(name = "product_id")
+    private Product product;
 
     private String productCode;
 

@@ -20,21 +20,16 @@ public class CreateProductModel {
     @NotBlank(message = "name is required!")
     private String name;
 
-    @Schema(name = "partnerId", type = "Long", required = true)
-    @NotNull(message = "partnerId is required!")
-    private Long partnerId;
-
     @Schema(name = "code", type = "String", required = true)
     @NotBlank(message = "code is required!")
     private String code;
-
 
     @Schema(name = "detailedDescription", type = "String", required = true)
     @NotBlank(message = "code is required!")
     private String detailedDescription;
 
     @Schema(name = "productCategoryId", type = "Long", required = true)
-    @NotNull(message = "targetGroupId is required!")
+    @NotNull(message = "productCategoryId is required!")
     private Long productCategoryId;
 
     @Schema(name = "genderApply", type = "String", required = true, description = "value in {'ALL', 'Male', 'FEMALE'}")
@@ -67,5 +62,35 @@ public class CreateProductModel {
     @Schema(name = "insuredRule", required = true)
     @NotBlank(message = "insuredRule is required!")
     private String insuredRule;
+
+    @NotNull(message = "componentFee is required!")
+    private Integer componentFee;  // bộ phận
+
+    @NotNull(message = "numberComponent is required!")
+    private Integer numberComponent;
+
+    @NotNull(message = "scratchedFee is required!")
+    private Integer scratchedFee;  // trầy xước
+
+    @NotNull(message = "numberScratched is required!")
+    private Integer numberScratched;
+
+    @NotNull(message = "repaintFee is required!")
+    private Integer repaintFee;  // sơn lại
+
+    @NotNull(message = "numberRepaint is required!")
+    private Integer numberRepaint;
+
+    @NotNull(message = "bringingFee is required!")
+    private Integer bringingFee;  // cứu hộ
+
+    @NotNull(message = "numberBringing is required!")
+    private Integer numberBringing;
+
+    @NotNull(message = "rearViewMirror is required!")
+    private Integer rearViewMirror;  // gương chiếu hậu
+
+    @NotNull(message = "numberRearViewMirror is required!")
+    private Integer numberRearViewMirror;
 
 }

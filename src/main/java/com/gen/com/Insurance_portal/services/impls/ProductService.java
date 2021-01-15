@@ -53,25 +53,21 @@ public class ProductService extends AbstractService<Product> implements IProduct
         if (existsByNameOrCode) {
             throw new MessageException("Name or code already exists.");
         }
-
-//        CompletableFuture<String> async1 = cloudinaryService.uploadAsync(productModel.getAvatarImage());
-//        CompletableFuture<String> async2 = cloudinaryService.uploadAsync(productModel.getBannerImage());
-//        CompletableFuture<String> async3 = cloudinaryService.uploadPDFAsync(productModel.getInsuredRule());
-//
-//        CompletableFuture.allOf(async1, async2, async3).join();
-//
-//        product.setAvatarImage(async1.get());
-//        product.setBannerImage(async2.get());
-//        product.setInsuredRule(async3.get());
+        if (productModel.getAvatarImage() != null) {
+            product.setAvatarImage(productModel.getAvatarImage());
+        }
+        if (productModel.getBannerImage() != null) {
+            product.setBannerImage(productModel.getBannerImage());
+        }
+        if (productModel.getInsuredRule() != null) {
+            product.setInsuredRule(productModel.getInsuredRule());
+        }
 
         ProductCategory productCategory = productCategoryService.findById(productModel.getProductCategoryId())
                 .orElseThrow(() -> new NotFoundEntityException(productModel.getProductCategoryId(), "productCategory"));
 
-        Partner provider = productProviderService.findById(productModel.getPartnerId())
-                .orElseThrow(() -> new NotFoundEntityException(productModel.getPartnerId(), "Partner"));
 
         product.setProductCategory(productCategory);
-        product.setPartner(provider);
 
         this.save(product);
     }
@@ -109,11 +105,6 @@ public class ProductService extends AbstractService<Product> implements IProduct
             ProductCategory productCategory = productCategoryService.findById(productModel.getProductCategoryId())
                     .orElseThrow(() -> new NotFoundEntityException(productModel.getProductCategoryId(), "productCategory"));
             product.setProductCategory(productCategory);
-        }
-        if (productModel.getPartnerId() != null) {
-            Partner provider = productProviderService.findById(productModel.getPartnerId())
-                    .orElseThrow(() -> new NotFoundEntityException(productModel.getPartnerId(), "Partner"));
-            product.setPartner(provider);
         }
         if (productModel.getEffectiveDateRangeSelectionNumber() != null) {
             product.setEffectiveDateRangeSelectionNumber(productModel.getEffectiveDateRangeSelectionNumber());
@@ -198,8 +189,6 @@ public class ProductService extends AbstractService<Product> implements IProduct
                 .orElseThrow(() -> new NotFoundEntityExceptionByCode(code, "Product"));
 
         ProductDetailModel productDetailModel = ProductMapper.INSTANCE.ProductToProductDetailModel(product);
-        productDetailModel.setPartnerId(product.getPartner().getId());
-        productDetailModel.setPartnerName(product.getPartner().getName());
         productDetailModel.setCategoryId(product.getProductCategory().getId());
         productDetailModel.setCategoryName(product.getProductCategory().getName());
 
@@ -246,11 +235,6 @@ public class ProductService extends AbstractService<Product> implements IProduct
             ProductCategory productCategory = productCategoryService.findById(productModel.getProductCategoryId())
                     .orElseThrow(() -> new NotFoundEntityException(productModel.getProductCategoryId(), "productCategory"));
             product.setProductCategory(productCategory);
-        }
-        if (productModel.getPartnerId() != null) {
-            Partner provider = productProviderService.findById(productModel.getPartnerId())
-                    .orElseThrow(() -> new NotFoundEntityException(productModel.getPartnerId(), "Partner"));
-            product.setPartner(provider);
         }
         if (productModel.getEffectiveDateRangeSelectionNumber() != null) {
             product.setEffectiveDateRangeSelectionNumber(productModel.getEffectiveDateRangeSelectionNumber());

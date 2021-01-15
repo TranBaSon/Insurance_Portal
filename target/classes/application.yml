@@ -21,9 +21,9 @@ cloudinary:
 
 
 twilio:
-  account_sid: AC9199eb804661ab92ac07cf27192b5108
-  auth_token: 4c06b1c29fc2aebb717187cf8acb48aa
-  phone_number: +12512208683
+  account_sid: ACbe22cf4befa5adc5885b29bcc0b20ff1
+  auth_token: 6879e23d0c0ab37561bb1c2969a7c6ad
+  phone_number: +12058396039
 
 # ===============================
 # DATABASE

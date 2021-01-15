@@ -81,4 +81,18 @@ public class CustomGlobalExceptionHandler extends ResponseEntityExceptionHandler
 
         return new ResponseEntity<>(body, HttpStatus.NOT_FOUND);
     }
+
+    @ExceptionHandler({ClaimsException.class})
+    public ResponseEntity<Object> handleMessageException(
+            ClaimsException ex, WebRequest request) {
+
+        Map<String, Object> body = new LinkedHashMap<>();
+
+        body.put("status", HttpStatus.BAD_REQUEST);
+        body.put("timestamp", new SimpleDateFormat("dd/MM/yyyy - hh:mm:ss").format(new Date()));
+        body.put("message", ex.getMessage());
+        body.put("errors", ex.getMessages());
+
+        return new ResponseEntity<>(body, HttpStatus.NOT_FOUND);
+    }
 }

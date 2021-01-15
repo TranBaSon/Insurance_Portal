@@ -12,7 +12,7 @@ import javax.annotation.Generated;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2021-01-10T18:34:23+0700",
+    date = "2021-01-15T12:45:50+0700",
     comments = "version: 1.3.0.Final, compiler: javac, environment: Java 1.8.0_265 (AdoptOpenJDK)"
 )
 public class ProductMapperImpl implements ProductMapper {
@@ -32,6 +32,16 @@ public class ProductMapperImpl implements ProductMapper {
         product.setDetailedDescription( productModel.getDetailedDescription() );
         product.setEffectiveDateRangeSelectionNumber( productModel.getEffectiveDateRangeSelectionNumber() );
         product.setPriceObj( productModel.getPriceObj() );
+        product.setComponentFee( productModel.getComponentFee() );
+        product.setNumberComponent( productModel.getNumberComponent() );
+        product.setScratchedFee( productModel.getScratchedFee() );
+        product.setNumberScratched( productModel.getNumberScratched() );
+        product.setRepaintFee( productModel.getRepaintFee() );
+        product.setNumberRepaint( productModel.getNumberRepaint() );
+        product.setBringingFee( productModel.getBringingFee() );
+        product.setNumberBringing( productModel.getNumberBringing() );
+        product.setRearViewMirror( productModel.getRearViewMirror() );
+        product.setNumberRearViewMirror( productModel.getNumberRearViewMirror() );
 
         return product;
     }

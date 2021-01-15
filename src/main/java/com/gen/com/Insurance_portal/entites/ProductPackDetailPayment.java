@@ -22,8 +22,4 @@ public class ProductPackDetailPayment extends AbstractEntity {
     @JoinColumn(name = "product_detail_id")
     private ProductPackDetail productPackDetail;
 
-    @OneToOne
-    @JoinColumn(name = "payment_method_id")
-    private PaymentMethod paymentMethod;
-
 }

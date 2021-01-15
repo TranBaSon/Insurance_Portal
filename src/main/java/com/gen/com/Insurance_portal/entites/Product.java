@@ -8,6 +8,7 @@ import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.util.Set;
 
 @AllArgsConstructor
@@ -76,11 +77,6 @@ public class Product extends AbstractEntity {
     private ProductCategory productCategory;
 
     @JsonIgnore
-    @ManyToOne
-    @JoinColumn(name = "product_provider_id")
-    private Partner partner;
-
-    @JsonIgnore
     private Boolean enableIndemnity;
 
     @JsonIgnore
@@ -106,23 +102,33 @@ public class Product extends AbstractEntity {
     @JoinColumn(name = "target_group_id")
     private TargetGroup targetGroup;
 
-    @OneToMany(mappedBy = "product")
-    private Set<ProductAttributeSetting> productAttributeSettings;
+    @Column(nullable = false)
+    private Integer componentFee;  // bộ phận
 
-//    public string MappedRequestJsonStructure { get; set; }
-//    public string FERequestJsonStructure { get; set; }
-//    public string FERequestQueryBuilder { get; set; }
-//    public bool HideInsured { get; set; }
-//
-//
-//        [Required]
-//    public int RequestJsonStructureId { get; set; }
-//
-//        [ForeignKey("RequestJsonStructureId")]
-//    public RequestJsonStructure RequestJsonStructure { get; set; }
+    @Column(nullable = false)
+    private Integer numberComponent;
 
-//
-//    public ICollection<ProductPaymentSetting> ProductPaymentSettings { get; set; }
-//    public ICollection<CampaignProduct> CampaignProducts { get; set; }
+    @Column(nullable = false)
+    private Integer scratchedFee;  // trầy xước
 
+    @Column(nullable = false)
+    private Integer numberScratched;
+
+    @Column(nullable = false)
+    private Integer repaintFee;  // sơn lại
+
+    @Column(nullable = false)
+    private Integer numberRepaint;
+
+    @Column(nullable = false)
+    private Integer bringingFee;  // cứu hộ
+
+    @Column(nullable = false)
+    private Integer numberBringing;
+
+    @Column(nullable = false)
+    private Integer rearViewMirror;  // gương chiếu hậu
+
+    @Column(nullable = false)
+    private Integer numberRearViewMirror;
 }

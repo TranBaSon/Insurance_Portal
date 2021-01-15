@@ -16,9 +16,6 @@ public class UpdateProductModel {
     @Schema(name = "name", type = "String", required = true)
     private String name;
 
-    @Schema(name = "partnerId", type = "Long", required = true)
-    private Long partnerId;
-
     @Schema(name = "code", type = "String", required = true)
     private String code;
 

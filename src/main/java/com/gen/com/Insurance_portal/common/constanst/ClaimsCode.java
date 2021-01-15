@@ -7,6 +7,10 @@ public class ClaimsCode {
     public static final String ProductStatus = "Product_Status";
     public static final String ProductDelete = "Product_Delete";
 
+    public static final String ClaimsList = "Claims_List";
+    public static final String ClaimsStatus= "Claims_Status";
+    public static final String RequiredClaims = "Required_Claims";
+
     public static final String ProductApprovement = "Product_Approvement";
     public static final String ProductList = "Product_List";
     public static final String ProductDetail = "Product_Detail";

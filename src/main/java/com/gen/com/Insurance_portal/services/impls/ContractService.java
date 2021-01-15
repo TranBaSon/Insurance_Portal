@@ -8,7 +8,7 @@ import com.gen.com.Insurance_portal.exceptions.MessageException;
 import com.gen.com.Insurance_portal.exceptions.NotFoundEntityExceptionByCode;
 import com.gen.com.Insurance_portal.models.RequestModels.ParamsModel;
 import com.gen.com.Insurance_portal.repositories.ContractRepository;
-import com.gen.com.Insurance_portal.services.IConstractService;
+import com.gen.com.Insurance_portal.services.IContractService;
 import com.gen.com.Insurance_portal.services.IUserService;
 import com.gen.com.Insurance_portal.utils.JwtUtil;
 import com.gen.com.Insurance_portal.utils.Utils;
@@ -25,13 +25,13 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 @Service
-public class ConstractService extends AbstractService<Contract> implements IConstractService {
+public class ContractService extends AbstractService<Contract> implements IContractService {
     private final ContractRepository contractRepository;
     private final JwtUtil jwtTokenUtil;
     private final IUserService userService;
 
-    public ConstractService(ContractRepository contractRepository,
-                            JwtUtil jwtTokenUtil, IUserService userService) {
+    public ContractService(ContractRepository contractRepository,
+                           JwtUtil jwtTokenUtil, IUserService userService) {
         super(contractRepository);
         this.contractRepository = contractRepository;
         this.jwtTokenUtil = jwtTokenUtil;

@@ -37,4 +37,8 @@ public class Helpper {
         }
         return user.getCustomer().getCustomerCode();
     }
+
+    public static Double percentage(Double percent, Double of) {
+        return of * (percent / 100.0);
+    }
 }
