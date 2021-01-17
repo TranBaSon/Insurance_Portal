@@ -9,6 +9,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import javax.persistence.Column;
 import java.util.Set;
 
 @Data
@@ -71,4 +72,24 @@ public class ProductDetailModel {
     private String insuredRule;
 
     private Set<Benefit> benefits;
+
+    private Integer componentFee;  // bộ phận
+
+    private Integer numberComponent;
+
+    private Integer scratchedFee;  // trầy xước
+
+    private Integer numberScratched;
+
+    private Integer repaintFee;  // sơn lại
+
+    private Integer numberRepaint;
+
+    private Integer bringingFee;  // cứu hộ
+
+    private Integer numberBringing;
+
+    private Integer rearViewMirror;  // gương chiếu hậu
+
+    private Integer numberRearViewMirror;
 }
