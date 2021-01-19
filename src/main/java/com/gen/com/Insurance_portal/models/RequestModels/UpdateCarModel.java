@@ -9,11 +9,11 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class UpdateCarModel {
 
-    private String name;
+    private String title;
 
     private String code;
 
-    private Integer percent;
+    private Double price;
 
-    private Long carBrandId;
+    private String carBrandCode;
 }

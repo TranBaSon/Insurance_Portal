@@ -102,10 +102,11 @@ public class TransactionHistoryService extends AbstractService<TransactionHistor
         contract.setProduct(product);
         contract.setProductCode(product.getCode());
         if (Strings.isNotEmpty(transactionHistoryModel.getCarModelCode())){
-            contract.setCarBrandName(carBrand.getName());
-            contract.setCarBrandCode(carBrand.getCode());
+            assert carBrand != null;
+            contract.setCarBrandName(carBrand.getCarBrand());
+            contract.setCarBrandCode(carBrand.getCarBrandCode());
             contract.setCarModelCode(carModel.getCode());
-            contract.setCarModelName(carModel.getName());
+            contract.setCarModelTitle(carModel.getTitle());
         }
 
         Date activeDate = new Date();

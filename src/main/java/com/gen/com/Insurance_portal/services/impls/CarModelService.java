@@ -2,7 +2,8 @@ package com.gen.com.Insurance_portal.services.impls;
 
 import com.gen.com.Insurance_portal.entites.CarBrand;
 import com.gen.com.Insurance_portal.entites.CarModel;
-import com.gen.com.Insurance_portal.exceptions.NotFoundEntityException;
+import com.gen.com.Insurance_portal.exceptions.MessageException;
+import com.gen.com.Insurance_portal.exceptions.NotFoundEntityExceptionByCode;
 import com.gen.com.Insurance_portal.models.RequestModels.UpdateCarModel;
 import com.gen.com.Insurance_portal.repositories.CarModelRepository;
 import com.gen.com.Insurance_portal.services.ICarBrandService;
@@ -30,39 +31,44 @@ public class CarModelService extends AbstractService<CarModel> implements ICarMo
     }
 
     @Override
-    public void create(com.gen.com.Insurance_portal.models.RequestModels.CarModel carModel) {
-        CarBrand carBrand = carBrandService
-                .findById(carModel.getCarBrandId()).orElseThrow(() -> new NotFoundEntityException(carModel.getCarBrandId(), "CarBrand"));
+    public void create(com.gen.com.Insurance_portal.models.RequestModels.CarModelRequest carModel) {
+        CarBrand carBrand = carBrandService.findByCarBrandCode(carModel.getCarBrandCode())
+                .orElseThrow(() -> new NotFoundEntityExceptionByCode(carModel.getCarBrandCode(), "CarBrand"));
+
+        if (carModelRepository.existsByCode(carModel.getCode())) {
+            throw new MessageException("code already exist!");
+        }
 
         CarModel carModel1 = new CarModel();
         carModel1.setCarBrand(carBrand);
         carModel1.setCode(carModel.getCode());
-        carModel1.setName(carModel.getName());
-        carModel1.setPercent(carModel.getPercent());
+        carModel1.setTitle(carModel.getTitle());
+        carModel1.setPrice(carModel.getPrice());
         save(carModel1);
     }
 
     @Override
-    public void update(UpdateCarModel carModel) {
-        CarModel carModel1 = new CarModel();
+    public void update(UpdateCarModel carModel, String code) {
+       CarModel carModel1 = carModelRepository.findByCode(code)
+               .orElseThrow(() -> new NotFoundEntityExceptionByCode(code, "CarModel"));
 
         CarBrand carBrand = null;
 
-        if (carModel.getCarBrandId() != null) {
-            carBrand = carBrandService
-                    .findById(carModel.getCarBrandId()).orElseThrow(() -> new NotFoundEntityException(carModel.getCarBrandId(), "CarBrand"));
+        if (Strings.isNotBlank(carModel.getCarBrandCode())) {
+            carBrand = carBrandService.findByCarBrandCode(carModel.getCarBrandCode())
+                    .orElseThrow(() -> new NotFoundEntityExceptionByCode(carModel.getCarBrandCode(), "CarBrand"));
             carModel1.setCarBrand(carBrand);
         }
 
         if (Strings.isNotEmpty(carModel.getCode())) {
             carModel1.setCode(carModel.getCode());
         }
-        if (Strings.isNotEmpty(carModel.getName())) {
-            carModel1.setName(carModel.getName());
+        if (Strings.isNotEmpty(carModel.getTitle())) {
+            carModel1.setTitle(carModel.getTitle());
         }
-        if (carModel.getPercent() != null) {
-            carModel1.setPercent(carModel.getPercent());
+        if (carModel.getPrice() != null) {
+            carModel1.setPrice(carModel.getPrice());
         }
-        update(carModel);
+        update(carModel1);
     }
 }

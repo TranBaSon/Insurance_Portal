@@ -441,7 +441,7 @@ public class SeedController {
         AuthoritiesGroup claimsGroup = authoritiesGroupService.save(new AuthoritiesGroup("Claims"));
 
         // Claims
-        Authorities a100 = new Authorities(ClaimsCode.ClaimsList, "danh sách bồi t", claimsGroup);
+        Authorities a100 = new Authorities(ClaimsCode.ClaimsList, "danh sách bồi thường", claimsGroup);
         Authorities a101 = new Authorities(ClaimsCode.ClaimsStatus, "claims status", claimsGroup);
         Authorities a102 = new Authorities(ClaimsCode.RequiredClaims, "yếu cầu bồi thường", promoGroup);
 
@@ -450,7 +450,7 @@ public class SeedController {
         authoritiesService.saveAll(claimsAuthorities);
 
         AuthoritiesGroup allGroup = authoritiesGroupService.save(new AuthoritiesGroup("All"));
-        Authorities a103 = new Authorities("All_Authorities", "danh sách bồi t", allGroup);
+        Authorities a103 = new Authorities("All_Authorities", "All Authorities", allGroup);
         admin.getAuthorities().add(a103);
         authoritiesService.save(a103);
 

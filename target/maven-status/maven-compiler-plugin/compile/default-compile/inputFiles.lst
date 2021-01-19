@@ -21,6 +21,7 @@
 /Users/transon/workspace/aptech/Insurance_Portal/src/main/java/com/gen/com/Insurance_portal/services/IAuthoritiesService.java
 /Users/transon/workspace/aptech/Insurance_Portal/src/main/java/com/gen/com/Insurance_portal/common/enums/AttributeFormat.java
 /Users/transon/workspace/aptech/Insurance_Portal/src/main/java/com/gen/com/Insurance_portal/common/enums/ProductCategory.java
+/Users/transon/workspace/aptech/Insurance_Portal/src/main/java/com/gen/com/Insurance_portal/models/RequestModels/CarBrandModel.java
 /Users/transon/workspace/aptech/Insurance_Portal/src/main/java/com/gen/com/Insurance_portal/common/enums/EffectiveDateType.java
 /Users/transon/workspace/aptech/Insurance_Portal/src/main/java/com/gen/com/Insurance_portal/models/responseModels/ResponseCustomerUserInfor.java
 /Users/transon/workspace/aptech/Insurance_Portal/src/main/java/com/gen/com/Insurance_portal/common/enums/TransactionStatus.java
@@ -41,7 +42,6 @@
 /Users/transon/workspace/aptech/Insurance_Portal/src/main/java/com/gen/com/Insurance_portal/common/enums/TransactionProcessName.java
 /Users/transon/workspace/aptech/Insurance_Portal/src/main/java/com/gen/com/Insurance_portal/common/mappers/ContractMapper.java
 /Users/transon/workspace/aptech/Insurance_Portal/src/main/java/com/gen/com/Insurance_portal/models/RequestModels/UserModelActive.java
-/Users/transon/workspace/aptech/Insurance_Portal/src/main/java/com/gen/com/Insurance_portal/models/RequestModels/CarModel.java
 /Users/transon/workspace/aptech/Insurance_Portal/src/main/java/com/gen/com/Insurance_portal/models/RequestModels/UpdateCarModel.java
 /Users/transon/workspace/aptech/Insurance_Portal/src/main/java/com/gen/com/Insurance_portal/models/responseModels/ClaimsInfoModel.java
 /Users/transon/workspace/aptech/Insurance_Portal/src/main/java/com/gen/com/Insurance_portal/services/IUserService.java
@@ -125,6 +125,7 @@
 /Users/transon/workspace/aptech/Insurance_Portal/src/main/java/com/gen/com/Insurance_portal/models/responseModels/ResponseRequiredClaim.java
 /Users/transon/workspace/aptech/Insurance_Portal/src/main/java/com/gen/com/Insurance_portal/common/enums/PromoCodeStatus.java
 /Users/transon/workspace/aptech/Insurance_Portal/src/main/java/com/gen/com/Insurance_portal/repositories/ProductCategoryRepository.java
+/Users/transon/workspace/aptech/Insurance_Portal/src/main/java/com/gen/com/Insurance_portal/models/RequestModels/CarModelRequest.java
 /Users/transon/workspace/aptech/Insurance_Portal/src/main/java/com/gen/com/Insurance_portal/common/mappers/UserMapper.java
 /Users/transon/workspace/aptech/Insurance_Portal/src/main/java/com/gen/com/Insurance_portal/controllers/HomeController.java
 /Users/transon/workspace/aptech/Insurance_Portal/src/main/java/com/gen/com/Insurance_portal/services/IAuthService.java
@@ -182,4 +183,5 @@
 /Users/transon/workspace/aptech/Insurance_Portal/src/main/java/com/gen/com/Insurance_portal/entites/CarModel.java
 /Users/transon/workspace/aptech/Insurance_Portal/src/main/java/com/gen/com/Insurance_portal/controllers/auth/CarBrandController.java
 /Users/transon/workspace/aptech/Insurance_Portal/src/main/java/com/gen/com/Insurance_portal/services/ICloudinaryService.java
+/Users/transon/workspace/aptech/Insurance_Portal/src/main/java/com/gen/com/Insurance_portal/models/RequestModels/UpdateCarBrandModel.java
 /Users/transon/workspace/aptech/Insurance_Portal/src/main/java/com/gen/com/Insurance_portal/controllers/auth/ProductCategoryController.java

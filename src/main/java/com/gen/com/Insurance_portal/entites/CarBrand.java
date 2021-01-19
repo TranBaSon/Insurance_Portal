@@ -20,10 +20,10 @@ public class CarBrand {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String name;
+    private String carBrand;
 
-    private String code;
+    private String carBrandCode;
 
-    @OneToMany(mappedBy = "carBrand")
-    private Set<CarModel> carModels = new HashSet<>();
+    @OneToMany(mappedBy = "carBrand", cascade = CascadeType.ALL, orphanRemoval = true)
+    private Set<CarModel> models = new HashSet<>();
 }

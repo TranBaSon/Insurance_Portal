@@ -90,7 +90,7 @@ public class Contract extends AbstractEntity {
 
     private String carModelCode;
 
-    private String carModelName;
+    private String carModelTitle;
 
     @JsonIgnore
     @OneToOne
@@ -117,6 +117,7 @@ public class Contract extends AbstractEntity {
                 "id=" + id +
                 ", code='" + code + '\'' +
                 ", customerCode='" + customerCode + '\'' +
+                ", customer=" + customer +
                 ", idNumber='" + idNumber + '\'' +
                 ", status=" + status +
                 ", effectiveDate=" + effectiveDate +
@@ -124,7 +125,6 @@ public class Contract extends AbstractEntity {
                 ", cancelDate=" + cancelDate +
                 ", createdContractDate=" + createdContractDate +
                 ", activeDate=" + activeDate +
-                ", paymentStatus=" + paymentStatus +
                 ", paidAmount=" + paidAmount +
                 ", extendSuccessDate=" + extendSuccessDate +
                 ", fullName='" + fullName + '\'' +
@@ -134,11 +134,14 @@ public class Contract extends AbstractEntity {
                 ", phoneNumber='" + phoneNumber + '\'' +
                 ", address='" + address + '\'' +
                 ", buyerIdNumber='" + buyerIdNumber + '\'' +
-                ", purchaseMethod=" + purchaseMethod +
                 ", numberPlate='" + numberPlate + '\'' +
                 ", carBrand='" + carBrand + '\'' +
                 ", carMaker='" + carMaker + '\'' +
                 ", productName='" + productName + '\'' +
+                ", carBrandCode='" + carBrandCode + '\'' +
+                ", carBrandName='" + carBrandName + '\'' +
+                ", carModelCode='" + carModelCode + '\'' +
+                ", carModelTitle='" + carModelTitle + '\'' +
                 ", product=" + product +
                 ", productCode='" + productCode + '\'' +
                 '}';

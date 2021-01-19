@@ -49,7 +49,7 @@ CREATE TABLE `authorities` (
   UNIQUE KEY `UK_nb3atvjf9ov5d0egnuk47o5e` (`name`),
   KEY `FKcqalxpmmyfpmdk0ims8ruj169` (`authorities_group_id`),
   CONSTRAINT `FKcqalxpmmyfpmdk0ims8ruj169` FOREIGN KEY (`authorities_group_id`) REFERENCES `authorities_group` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=68 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 DROP TABLE IF EXISTS `authorities_group`;
 CREATE TABLE `authorities_group` (
@@ -66,13 +66,13 @@ CREATE TABLE `authorities_group` (
   PRIMARY KEY (`id`),
   KEY `FKlb5uak37b0r226r1frh39w1et` (`parent_authorities_group_id`),
   CONSTRAINT `FKlb5uak37b0r226r1frh39w1et` FOREIGN KEY (`parent_authorities_group_id`) REFERENCES `authorities_group` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 DROP TABLE IF EXISTS `car_brand`;
 CREATE TABLE `car_brand` (
   `id` bigint NOT NULL AUTO_INCREMENT,
-  `code` varchar(255) DEFAULT NULL,
-  `name` varchar(255) DEFAULT NULL,
+  `car_brand` varchar(255) DEFAULT NULL,
+  `car_brand_code` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -80,10 +80,11 @@ DROP TABLE IF EXISTS `car_model`;
 CREATE TABLE `car_model` (
   `id` bigint NOT NULL AUTO_INCREMENT,
   `code` varchar(255) DEFAULT NULL,
-  `name` varchar(255) DEFAULT NULL,
-  `percent` int DEFAULT NULL,
+  `price` double DEFAULT NULL,
+  `title` varchar(255) DEFAULT NULL,
   `car_brand_id` bigint DEFAULT NULL,
   PRIMARY KEY (`id`),
+  UNIQUE KEY `UK_950pb7olcd0jplckua7vf7t1e` (`code`),
   KEY `FK9r90hp4dmt4wtv6mebm9bv5n3` (`car_brand_id`),
   CONSTRAINT `FK9r90hp4dmt4wtv6mebm9bv5n3` FOREIGN KEY (`car_brand_id`) REFERENCES `car_brand` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -139,7 +140,7 @@ CREATE TABLE `claims` (
   CONSTRAINT `FKcc5d15hc607ial72lhw29lur4` FOREIGN KEY (`contract_id`) REFERENCES `contract` (`id`),
   CONSTRAINT `FKoe6dl2eyaqddpuqyhoqs635d` FOREIGN KEY (`partner_id`) REFERENCES `partner` (`id`),
   CONSTRAINT `FKrol4pvwwwx1lrjp286ggbihd1` FOREIGN KEY (`customer_id`) REFERENCES `customer` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 DROP TABLE IF EXISTS `claims_info`;
 CREATE TABLE `claims_info` (
@@ -177,7 +178,7 @@ CREATE TABLE `claims_info` (
   CONSTRAINT `FK58pmh4ow25q2sd7tqg6052fc3` FOREIGN KEY (`product_id`) REFERENCES `product` (`id`),
   CONSTRAINT `FK6bgx7i44h7ls4svy4c8gqkbd2` FOREIGN KEY (`customer_id`) REFERENCES `customer` (`id`),
   CONSTRAINT `FKmgumnpphg7d0utieuetugg7tk` FOREIGN KEY (`contract_id`) REFERENCES `contract` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 DROP TABLE IF EXISTS `contract`;
 CREATE TABLE `contract` (
@@ -198,7 +199,7 @@ CREATE TABLE `contract` (
   `car_brand_name` varchar(255) DEFAULT NULL,
   `car_maker` varchar(255) DEFAULT NULL,
   `car_model_code` varchar(255) DEFAULT NULL,
-  `car_model_name` varchar(255) DEFAULT NULL,
+  `car_model_title` varchar(255) DEFAULT NULL,
   `code` varchar(255) DEFAULT NULL,
   `created_contract_date` datetime(6) DEFAULT NULL,
   `customer_code` varchar(255) NOT NULL,
@@ -212,8 +213,6 @@ CREATE TABLE `contract` (
   `id_number` varchar(255) DEFAULT NULL,
   `number_plate` varchar(255) DEFAULT NULL,
   `paid_amount` double DEFAULT NULL,
-  `partner` varchar(255) DEFAULT NULL,
-  `partner_code` varchar(255) DEFAULT NULL,
   `payment_status` int NOT NULL,
   `phone_number` varchar(255) DEFAULT NULL,
   `product_code` varchar(255) DEFAULT NULL,
@@ -227,7 +226,7 @@ CREATE TABLE `contract` (
   KEY `FK6gt1bchn8d85oaq1srbhk31n4` (`product_id`),
   CONSTRAINT `FK6gt1bchn8d85oaq1srbhk31n4` FOREIGN KEY (`product_id`) REFERENCES `product` (`id`),
   CONSTRAINT `FKq28qogy68douoc4gkgcy3ow9p` FOREIGN KEY (`customer_id`) REFERENCES `customer` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 DROP TABLE IF EXISTS `customer`;
 CREATE TABLE `customer` (
@@ -244,7 +243,7 @@ CREATE TABLE `customer` (
   PRIMARY KEY (`id`),
   KEY `FKj8dlm21j202cadsbfkoem0s58` (`user_id`),
   CONSTRAINT `FKj8dlm21j202cadsbfkoem0s58` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 DROP TABLE IF EXISTS `faq`;
 CREATE TABLE `faq` (
@@ -259,7 +258,7 @@ CREATE TABLE `faq` (
   `content` longtext,
   `title` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 DROP TABLE IF EXISTS `partner`;
 CREATE TABLE `partner` (
@@ -282,7 +281,7 @@ CREATE TABLE `partner` (
   `phone_number` varchar(20) DEFAULT NULL,
   `status` int NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 DROP TABLE IF EXISTS `product`;
 CREATE TABLE `product` (
@@ -332,7 +331,7 @@ CREATE TABLE `product` (
   PRIMARY KEY (`id`),
   KEY `FKcwclrqu392y86y0pmyrsi649r` (`product_category_id`),
   CONSTRAINT `FKcwclrqu392y86y0pmyrsi649r` FOREIGN KEY (`product_category_id`) REFERENCES `product_category` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 DROP TABLE IF EXISTS `product_category`;
 CREATE TABLE `product_category` (
@@ -349,7 +348,7 @@ CREATE TABLE `product_category` (
   `name_display_on_client` varchar(255) DEFAULT NULL,
   `order` int DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 DROP TABLE IF EXISTS `refresh_token`;
 CREATE TABLE `refresh_token` (
@@ -366,10 +365,9 @@ CREATE TABLE `refresh_token` (
   `user_id` bigint DEFAULT NULL,
   PRIMARY KEY (`token_id`),
   UNIQUE KEY `UK_r4k4edos30bx9neoq81mdvwph` (`token`),
-  UNIQUE KEY `UK_ga3cqp73wyumau3ghjfx7vq94` (`token`),
   UNIQUE KEY `UK_f95ixxe7pa48ryn1awmh2evt7` (`user_id`),
   CONSTRAINT `FKfgk1klcib7i15utalmcqo7krt` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 DROP TABLE IF EXISTS `role`;
 CREATE TABLE `role` (
@@ -385,7 +383,7 @@ CREATE TABLE `role` (
   `name` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `UK_8sewwnpamngi6b1dwaa88askk` (`name`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 DROP TABLE IF EXISTS `role_authority`;
 CREATE TABLE `role_authority` (
@@ -415,7 +413,7 @@ CREATE TABLE `sys_admin` (
   KEY `FKgr4i9qnvgmihp43t8k98m68h5` (`user_id`),
   CONSTRAINT `FKeqlehv0xpcblcurwvpegpi5v8` FOREIGN KEY (`product_provider_id`) REFERENCES `partner` (`id`),
   CONSTRAINT `FKgr4i9qnvgmihp43t8k98m68h5` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 DROP TABLE IF EXISTS `transaction_history`;
 CREATE TABLE `transaction_history` (
@@ -427,8 +425,6 @@ CREATE TABLE `transaction_history` (
   `customer_phone_number` varchar(255) DEFAULT NULL,
   `effective_date` datetime(6) DEFAULT NULL,
   `expired_date` datetime(6) DEFAULT NULL,
-  `partner_code` varchar(255) DEFAULT NULL,
-  `partner_name` varchar(255) DEFAULT NULL,
   `payment_method` int DEFAULT NULL,
   `process_code` varchar(255) DEFAULT NULL,
   `process_name` int DEFAULT NULL,
@@ -444,7 +440,7 @@ CREATE TABLE `transaction_history` (
   KEY `FK88ro5ut6437qycxlhvxcs61uu` (`customer_id`),
   CONSTRAINT `FK88ro5ut6437qycxlhvxcs61uu` FOREIGN KEY (`customer_id`) REFERENCES `customer` (`id`),
   CONSTRAINT `FKsyl5euhcbbajjyxx985jly760` FOREIGN KEY (`contract_id`) REFERENCES `contract` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 DROP TABLE IF EXISTS `user`;
 CREATE TABLE `user` (
@@ -478,4 +474,5 @@ CREATE TABLE `user` (
   PRIMARY KEY (`id`),
   KEY `FKn82ha3ccdebhokx3a8fgdqeyy` (`role_id`),
   CONSTRAINT `FKn82ha3ccdebhokx3a8fgdqeyy` FOREIGN KEY (`role_id`) REFERENCES `role` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+

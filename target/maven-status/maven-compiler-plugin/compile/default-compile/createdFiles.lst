@@ -4,6 +4,7 @@ com/gen/com/Insurance_portal/repositories/ProductCategoryRepository.class
 com/gen/com/Insurance_portal/services/impls/CustomerService.class
 com/gen/com/Insurance_portal/exceptions/NotFoundEntityException.class
 com/gen/com/Insurance_portal/controllers/auth/AuthController.class
+com/gen/com/Insurance_portal/models/RequestModels/CarBrandModel.class
 com/gen/com/Insurance_portal/common/enums/SysAdminType.class
 com/gen/com/Insurance_portal/common/enums/PaymentStatus.class
 com/gen/com/Insurance_portal/entites/Article.class
@@ -62,7 +63,6 @@ com/gen/com/Insurance_portal/repositories/SysAdminRepository.class
 com/gen/com/Insurance_portal/repositories/AuthoritiesRepositoty.class
 com/gen/com/Insurance_portal/repositories/ProductRepository.class
 com/gen/com/Insurance_portal/repositories/CarBrandRepository.class
-com/gen/com/Insurance_portal/models/RequestModels/CarModel.class
 com/gen/com/Insurance_portal/models/RequestModels/CreateProductModel.class
 com/gen/com/Insurance_portal/common/enums/PaymentMethod.class
 com/gen/com/Insurance_portal/exceptions/TokenRefreshException.class
@@ -89,6 +89,7 @@ com/gen/com/Insurance_portal/controllers/auth/ContractController.class
 com/gen/com/Insurance_portal/common/enums/EffectiveDateType.class
 com/gen/com/Insurance_portal/jwt/JwtAuthenticationFilter.class
 com/gen/com/Insurance_portal/services/IProductService.class
+com/gen/com/Insurance_portal/models/RequestModels/CarModelRequest.class
 com/gen/com/Insurance_portal/models/RequestModels/UpdateProductModel.class
 com/gen/com/Insurance_portal/exceptions/ClaimsException.class
 com/gen/com/Insurance_portal/common/enums/TransactionProcessName.class
@@ -100,6 +101,7 @@ com/gen/com/Insurance_portal/entites/CarBrand.class
 com/gen/com/Insurance_portal/common/mappers/ContractMapper.class
 com/gen/com/Insurance_portal/services/impls/CarBrandService.class
 com/gen/com/Insurance_portal/common/enums/GenderApply.class
+com/gen/com/Insurance_portal/models/RequestModels/UpdateCarBrandModel.class
 com/gen/com/Insurance_portal/models/RequestModels/UpdateCarModel.class
 com/gen/com/Insurance_portal/services/impls/CloudinaryService.class
 com/gen/com/Insurance_portal/common/Helpper.class

@@ -1,7 +1,8 @@
 package com.gen.com.Insurance_portal.controllers.auth;
 
 import com.gen.com.Insurance_portal.entites.CarModel;
-import com.gen.com.Insurance_portal.exceptions.NotFoundEntityException;
+import com.gen.com.Insurance_portal.exceptions.NotFoundEntityExceptionByCode;
+import com.gen.com.Insurance_portal.models.RequestModels.CarModelRequest;
 import com.gen.com.Insurance_portal.models.RequestModels.UpdateCarModel;
 import com.gen.com.Insurance_portal.models.responseModels.ResponseMessageModel;
 import com.gen.com.Insurance_portal.services.ICarModelService;
@@ -31,35 +32,35 @@ public class CarModelController {
 
     @PreAuthorize(value = "hasRole('All_Authorities')")
     @PostMapping
-    public ResponseEntity<?> create( @RequestBody @Valid com.gen.com.Insurance_portal.models.RequestModels.CarModel carModel){
+    public ResponseEntity<?> create( @RequestBody @Valid CarModelRequest carModel){
         carModelService.create(carModel);
         return new ResponseEntity<>(new ResponseMessageModel(true), HttpStatus.OK);
     }
 
     @PreAuthorize(value = "hasRole('All_Authorities')")
-    @GetMapping("/{id}")
-    public ResponseEntity<?> get(@PathVariable Long id){
+    @GetMapping("/{code}")
+    public ResponseEntity<?> get(@PathVariable String code){
         CarModel carModel = carModelService
-                .findById(id).orElseThrow(() -> new NotFoundEntityException(id, "CarModel"));
+                .findByCode(code).orElseThrow(() -> new NotFoundEntityExceptionByCode(code, "CarModel"));
         return  new ResponseEntity<>(carModel, HttpStatus.OK);
     }
 
     @PreAuthorize(value = "hasRole('All_Authorities')")
-    @PutMapping("/{id}")
-    public ResponseEntity<?> update(@PathVariable Long id, @Valid @RequestBody UpdateCarModel carModel){
+    @PutMapping("/{code}")
+    public ResponseEntity<?> update(@PathVariable String code, @Valid @RequestBody UpdateCarModel carModel){
 
-        carModelService.findById(id)
-                .orElseThrow(() -> new NotFoundEntityException(id, "Menu"));
-        carModelService.update(carModel);
+        carModelService.findByCode(code)
+                .orElseThrow(() -> new NotFoundEntityExceptionByCode(code, "Menu"));
+        carModelService.update(carModel, code);
 
         return  new ResponseEntity<>(new ResponseMessageModel(true), HttpStatus.OK);
     }
 
     @PreAuthorize(value = "hasRole('All_Authorities')")
-    @DeleteMapping("/{id}")
-    public ResponseEntity<?>  delete(@PathVariable Long id){
+    @DeleteMapping("/{code}")
+    public ResponseEntity<?>  delete(@PathVariable String code){
         CarModel carModel = carModelService
-                .findById(id).orElseThrow(() -> new NotFoundEntityException(id, "CarBrand"));
+                .findByCode(code).orElseThrow(() -> new NotFoundEntityExceptionByCode(code, "CarBrand"));
         carModelService.delete(carModel);
         return  new ResponseEntity<>(new ResponseMessageModel(true), HttpStatus.OK);
     }
