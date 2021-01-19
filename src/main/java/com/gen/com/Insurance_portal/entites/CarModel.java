@@ -31,7 +31,7 @@ public class CarModel {
     @JsonIgnore
     @EqualsExclude
     @ToStringExclude
-    @ManyToOne(cascade = CascadeType.MERGE)
+    @ManyToOne(cascade = CascadeType.MERGE, fetch = FetchType.LAZY)
     @JoinColumn(name = "car_brand_id")
     private CarBrand carBrand;
 
@@ -53,7 +53,6 @@ public class CarModel {
     @Override
     public String toString() {
         return "CarModel{" +
-                "id=" + id +
                 ", title='" + title + '\'' +
                 ", code='" + code + '\'' +
                 ", price=" + price +

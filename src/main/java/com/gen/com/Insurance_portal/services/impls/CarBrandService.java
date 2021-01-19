@@ -45,7 +45,7 @@ public class CarBrandService extends AbstractService<CarBrand> implements ICarBr
         CarBrand carBrand = carBrandRepository.findByCarBrandCode(code)
                 .orElseThrow(() -> new NotFoundEntityExceptionByCode(code, "CarBrand"));
 
-        if(carBrandRepository.existsCarBrandByCarBrandCode(carBrandModel.getCarBrandCode())) {
+        if(carBrandRepository.existsCarBrandByCarBrandCodeAndIdNot(carBrandModel.getCarBrandCode(), carBrand.getId())) {
             throw new MessageException("code already exists");
         }
 

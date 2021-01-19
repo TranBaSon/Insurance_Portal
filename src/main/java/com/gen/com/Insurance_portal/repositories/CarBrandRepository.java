@@ -9,5 +9,5 @@ import java.util.Optional;
 @Repository
 public interface CarBrandRepository extends JpaRepository<CarBrand, Long> {
     Optional<CarBrand> findByCarBrandCode(String code);
-    Boolean existsCarBrandByCarBrandCode(String code);
+    Boolean existsCarBrandByCarBrandCodeAndIdNot(String code, Long id);
 }
