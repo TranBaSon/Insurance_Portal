@@ -1,13 +1,11 @@
 package com.gen.com.Insurance_portal.models.RequestModels;
 
-import com.gen.com.Insurance_portal.entites.CarModel;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
-import java.util.Set;
 
 @Data
 @AllArgsConstructor
@@ -21,5 +19,5 @@ public class CarBrandModel {
     private String carBrandCode;
 
     @NotNull(message = "models is required!")
-    private Set<CarModel> models;
+    private String models;
 }

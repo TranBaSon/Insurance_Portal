@@ -67,7 +67,6 @@
 /Users/transon/workspace/aptech/Insurance_Portal/src/main/java/com/gen/com/Insurance_portal/services/impls/CloudinaryService.java
 /Users/transon/workspace/aptech/Insurance_Portal/src/main/java/com/gen/com/Insurance_portal/entites/RefreshToken.java
 /Users/transon/workspace/aptech/Insurance_Portal/src/main/java/com/gen/com/Insurance_portal/services/impls/TransactionHistoryService.java
-/Users/transon/workspace/aptech/Insurance_Portal/src/main/java/com/gen/com/Insurance_portal/controllers/auth/CarModelController.java
 /Users/transon/workspace/aptech/Insurance_Portal/src/main/java/com/gen/com/Insurance_portal/repositories/PartnerRepository.java
 /Users/transon/workspace/aptech/Insurance_Portal/src/main/java/com/gen/com/Insurance_portal/services/ICustomerService.java
 /Users/transon/workspace/aptech/Insurance_Portal/src/main/java/com/gen/com/Insurance_portal/entites/AbstractEntity.java
@@ -99,7 +98,6 @@
 /Users/transon/workspace/aptech/Insurance_Portal/src/main/java/com/gen/com/Insurance_portal/utils/JwtUtil.java
 /Users/transon/workspace/aptech/Insurance_Portal/src/main/java/com/gen/com/Insurance_portal/common/enums/SysAdminType.java
 /Users/transon/workspace/aptech/Insurance_Portal/src/main/java/com/gen/com/Insurance_portal/common/TwilioHelper.java
-/Users/transon/workspace/aptech/Insurance_Portal/src/main/java/com/gen/com/Insurance_portal/services/ICarModelService.java
 /Users/transon/workspace/aptech/Insurance_Portal/src/main/java/com/gen/com/Insurance_portal/common/enums/PartnerStatus.java
 /Users/transon/workspace/aptech/Insurance_Portal/src/main/java/com/gen/com/Insurance_portal/common/mappers/CustomerMapper.java
 /Users/transon/workspace/aptech/Insurance_Portal/src/main/java/com/gen/com/Insurance_portal/services/impls/ClaimsService.java
@@ -142,7 +140,6 @@
 /Users/transon/workspace/aptech/Insurance_Portal/src/main/java/com/gen/com/Insurance_portal/entites/Claims.java
 /Users/transon/workspace/aptech/Insurance_Portal/src/main/java/com/gen/com/Insurance_portal/repositories/ContractRepository.java
 /Users/transon/workspace/aptech/Insurance_Portal/src/main/java/com/gen/com/Insurance_portal/models/RequestModels/UsernameAndPasswordAuthentication.java
-/Users/transon/workspace/aptech/Insurance_Portal/src/main/java/com/gen/com/Insurance_portal/services/impls/CarModelService.java
 /Users/transon/workspace/aptech/Insurance_Portal/src/main/java/com/gen/com/Insurance_portal/models/RequestModels/UpdateProductModel.java
 /Users/transon/workspace/aptech/Insurance_Portal/src/main/java/com/gen/com/Insurance_portal/controllers/user/UContractController.java
 /Users/transon/workspace/aptech/Insurance_Portal/src/main/java/com/gen/com/Insurance_portal/services/ISysAdminService.java
@@ -153,7 +150,6 @@
 /Users/transon/workspace/aptech/Insurance_Portal/src/main/java/com/gen/com/Insurance_portal/models/RequestModels/ResendCodeModel.java
 /Users/transon/workspace/aptech/Insurance_Portal/src/main/java/com/gen/com/Insurance_portal/services/IProductService.java
 /Users/transon/workspace/aptech/Insurance_Portal/src/main/java/com/gen/com/Insurance_portal/entites/RoleAuthorityKey.java
-/Users/transon/workspace/aptech/Insurance_Portal/src/main/java/com/gen/com/Insurance_portal/repositories/CarModelRepository.java
 /Users/transon/workspace/aptech/Insurance_Portal/src/main/java/com/gen/com/Insurance_portal/controllers/SeedController.java
 /Users/transon/workspace/aptech/Insurance_Portal/src/main/java/com/gen/com/Insurance_portal/entites/ClaimsInfo.java
 /Users/transon/workspace/aptech/Insurance_Portal/src/main/java/com/gen/com/Insurance_portal/services/impls/AuthoritiesService.java
@@ -180,7 +176,6 @@
 /Users/transon/workspace/aptech/Insurance_Portal/src/main/java/com/gen/com/Insurance_portal/controllers/auth/TransactionHistoryController.java
 /Users/transon/workspace/aptech/Insurance_Portal/src/main/java/com/gen/com/Insurance_portal/repositories/RoleRepository.java
 /Users/transon/workspace/aptech/Insurance_Portal/src/main/java/com/gen/com/Insurance_portal/controllers/auth/CustomerContronller.java
-/Users/transon/workspace/aptech/Insurance_Portal/src/main/java/com/gen/com/Insurance_portal/entites/CarModel.java
 /Users/transon/workspace/aptech/Insurance_Portal/src/main/java/com/gen/com/Insurance_portal/controllers/auth/CarBrandController.java
 /Users/transon/workspace/aptech/Insurance_Portal/src/main/java/com/gen/com/Insurance_portal/services/ICloudinaryService.java
 /Users/transon/workspace/aptech/Insurance_Portal/src/main/java/com/gen/com/Insurance_portal/models/RequestModels/UpdateCarBrandModel.java

@@ -49,6 +49,12 @@ public class TransactionHistoryModel {
     @NotNull(message = "customerId is required!")
     private Long customerId;
 
-//    @NotBlank(message = "carModelCode is required!")
+    private String carBrandCode;
+
+    private String carBrandName;
+
     private String carModelCode;
+
+    private String carModelTitle;
+
 }

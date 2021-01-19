@@ -35,15 +35,13 @@ public class TransactionHistoryService extends AbstractService<TransactionHistor
     private final JwtUtil jwtTokenUtil;
     private final IUserService userService;
     private final IClaimsInfoService claimsInfoService;
-    private final ICarModelService carModelService;
 
     public TransactionHistoryService(TransactionHistoryRepository transactionHistoryRepository,
                                      CustomerService customerService,
                                      IProductService productService,
                                      IContractService contractService,
                                      JwtUtil jwtTokenUtil, IUserService userService,
-                                     IClaimsInfoService claimsInfoService,
-                                     ICarModelService carModelService) {
+                                     IClaimsInfoService claimsInfoService) {
         super(transactionHistoryRepository);
         this.transactionHistoryRepository = transactionHistoryRepository;
         this.customerService = customerService;
@@ -52,7 +50,6 @@ public class TransactionHistoryService extends AbstractService<TransactionHistor
         this.jwtTokenUtil = jwtTokenUtil;
         this.userService = userService;
         this.claimsInfoService = claimsInfoService;
-        this.carModelService = carModelService;
     }
 
     @Override
@@ -67,15 +64,6 @@ public class TransactionHistoryService extends AbstractService<TransactionHistor
         Customer customer = customerService.findById(transactionHistoryModel.getCustomerId())
                 .orElseThrow(() -> new NotFoundEntityException(transactionHistoryModel.getCustomerId(), "Customer"));
 
-        CarModel carModel = null;
-        CarBrand carBrand = null;
-
-        if (Strings.isNotEmpty(transactionHistoryModel.getCarModelCode())){
-            carModel = carModelService.findByCode(transactionHistoryModel.getCarModelCode())
-                    .orElseThrow(() -> new NotFoundEntityExceptionByCode(transactionHistoryModel.getCarModelCode(), "CarModel"));
-
-            carBrand = carModel.getCarBrand();
-        }
 
         Contract contract = new Contract();
         String contractCode = Helpper.genContractCode(product.getCode());
@@ -101,12 +89,17 @@ public class TransactionHistoryService extends AbstractService<TransactionHistor
         contract.setProductName(product.getName());
         contract.setProduct(product);
         contract.setProductCode(product.getCode());
+        if (Strings.isNotEmpty(transactionHistoryModel.getCarBrandName())){
+            contract.setCarBrandName(transactionHistoryModel.getCarBrandName());
+        }
+        if (Strings.isNotEmpty(transactionHistoryModel.getCarBrandCode())){
+            contract.setCarBrandCode(transactionHistoryModel.getCarBrandCode());
+        }
         if (Strings.isNotEmpty(transactionHistoryModel.getCarModelCode())){
-            assert carBrand != null;
-            contract.setCarBrandName(carBrand.getCarBrand());
-            contract.setCarBrandCode(carBrand.getCarBrandCode());
-            contract.setCarModelCode(carModel.getCode());
-            contract.setCarModelTitle(carModel.getTitle());
+            contract.setCarModelCode(transactionHistoryModel.getCarModelCode());
+        }
+        if (Strings.isNotEmpty(transactionHistoryModel.getCarModelTitle())){
+            contract.setCarModelTitle(transactionHistoryModel.getCarModelTitle());
         }
 
         Date activeDate = new Date();
