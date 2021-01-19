@@ -76,8 +76,11 @@ public class ProductService extends AbstractService<Product> implements IProduct
     public void update(UpdateProductModel productModel, Long id) throws ExecutionException, InterruptedException {
         Product product = findById(id).orElseThrow(() -> new NotFoundEntityException(id, "Product"));
 
-        Boolean existsByNameOrCodeAndIdNot = productRepository
-                .existsByNameOrCodeAndIdNot(productModel.getName(), productModel.getCode(), id);
+        Boolean existsByNameOrCodeAndIdNot = false;
+        if (!Strings.isBlank(productModel.getName()) || !Strings.isBlank(productModel.getCode())){
+            existsByNameOrCodeAndIdNot = productRepository
+                    .existsByNameOrCodeAndIdNot(productModel.getName(), productModel.getCode(), id);
+        }
 
         if (existsByNameOrCodeAndIdNot) {
             throw new MessageException("Name or code already exists.");

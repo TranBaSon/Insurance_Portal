@@ -445,9 +445,16 @@ public class SeedController {
         Authorities a101 = new Authorities(ClaimsCode.ClaimsStatus, "claims status", claimsGroup);
         Authorities a102 = new Authorities(ClaimsCode.RequiredClaims, "yếu cầu bồi thường", promoGroup);
 
-        List<Authorities> claimsAuthorities = Arrays.asList(a63, a64, a65);
+        List<Authorities> claimsAuthorities = Arrays.asList(a100, a101, a102);
         admin.getAuthorities().addAll(claimsAuthorities);
         authoritiesService.saveAll(claimsAuthorities);
+
+        AuthoritiesGroup allGroup = authoritiesGroupService.save(new AuthoritiesGroup("All"));
+        Authorities a103 = new Authorities("All_Authorities", "danh sách bồi t", allGroup);
+        admin.getAuthorities().add(a103);
+        authoritiesService.save(a103);
+
+
 
 
 

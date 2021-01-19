@@ -27,10 +27,6 @@ public class Contract extends AbstractEntity {
 
     private String code;
 
-    private String partner;
-
-    private String partnerCode;
-
     @Column(nullable = false)
     private String customerCode;
 
@@ -88,6 +84,14 @@ public class Contract extends AbstractEntity {
 
     private String productName;
 
+    private String carBrandCode;
+
+    private String carBrandName;
+
+    private String carModelCode;
+
+    private String carModelName;
+
     @JsonIgnore
     @OneToOne
     @JoinColumn(name = "product_id")
@@ -101,13 +105,17 @@ public class Contract extends AbstractEntity {
     @OneToOne(mappedBy = "contract", fetch = FetchType.LAZY)
     private TransactionHistory transactionHistory;
 
+    @ToStringExclude
+    @EqualsExclude
+    @JsonIgnore
+    @OneToOne(mappedBy = "contract")
+    private ClaimsInfo claimsInfo;
+
     @Override
     public String toString() {
         return "Contract{" +
                 "id=" + id +
                 ", code='" + code + '\'' +
-                ", partner='" + partner + '\'' +
-                ", partnerCode='" + partnerCode + '\'' +
                 ", customerCode='" + customerCode + '\'' +
                 ", idNumber='" + idNumber + '\'' +
                 ", status=" + status +

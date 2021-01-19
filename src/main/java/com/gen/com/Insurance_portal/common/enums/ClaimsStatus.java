@@ -1,7 +1,7 @@
 package com.gen.com.Insurance_portal.common.enums;
 
 public enum ClaimsStatus {
-    Waiting("chờ"),
+    Pending("đang chờ xử lý"),
     Done("hoàn thành");
 
     private String value;

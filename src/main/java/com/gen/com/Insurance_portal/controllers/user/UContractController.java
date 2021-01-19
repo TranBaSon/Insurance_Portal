@@ -35,4 +35,13 @@ public class UContractController {
         Object response = constractService.UGetList(new ParamsModel(filter, page, size, sort), token);
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
+
+    @Operation(summary = "Required Header { Authorization : bearer key }",security = { @SecurityRequirement(name = "bearer key") })
+    @GetMapping("/claims-info/{contractCode}")
+    public ResponseEntity<?> getClaimsInfoByContractCode(@PathVariable String contractCode) {
+        return new ResponseEntity<>(
+                constractService.getClaimsInfoByContractCode(contractCode),
+                HttpStatus.OK);
+    }
+
 }

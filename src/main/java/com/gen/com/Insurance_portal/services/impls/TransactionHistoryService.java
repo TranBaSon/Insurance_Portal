@@ -14,6 +14,7 @@ import com.gen.com.Insurance_portal.repositories.TransactionHistoryRepository;
 import com.gen.com.Insurance_portal.services.*;
 import com.gen.com.Insurance_portal.utils.JwtUtil;
 import com.gen.com.Insurance_portal.utils.Utils;
+import org.apache.logging.log4j.util.Strings;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -29,27 +30,29 @@ import java.util.stream.Collectors;
 public class TransactionHistoryService extends AbstractService<TransactionHistory> implements ITransactionHistoryService {
     private final TransactionHistoryRepository transactionHistoryRepository;
     private final ICustomerService customerService;
-    private final IPartnerService partnerService;
     private final IProductService productService;
     private final IContractService contractService;
     private final JwtUtil jwtTokenUtil;
     private final IUserService userService;
     private final IClaimsInfoService claimsInfoService;
+    private final ICarModelService carModelService;
 
     public TransactionHistoryService(TransactionHistoryRepository transactionHistoryRepository,
-                                     CustomerService customerService, IPartnerService partnerService,
-                                     IProductService productService, IContractService contractService,
+                                     CustomerService customerService,
+                                     IProductService productService,
+                                     IContractService contractService,
                                      JwtUtil jwtTokenUtil, IUserService userService,
-                                     IClaimsInfoService claimsInfoService) {
+                                     IClaimsInfoService claimsInfoService,
+                                     ICarModelService carModelService) {
         super(transactionHistoryRepository);
         this.transactionHistoryRepository = transactionHistoryRepository;
         this.customerService = customerService;
-        this.partnerService = partnerService;
         this.productService = productService;
         this.contractService = contractService;
         this.jwtTokenUtil = jwtTokenUtil;
         this.userService = userService;
         this.claimsInfoService = claimsInfoService;
+        this.carModelService = carModelService;
     }
 
     @Override
@@ -57,17 +60,27 @@ public class TransactionHistoryService extends AbstractService<TransactionHistor
 
         Product product = productService.findById(transactionHistoryModel.getProductId())
                 .orElseThrow(() -> new NotFoundEntityException(transactionHistoryModel.getProductId(), "Product"));
-
-        Partner partner = partnerService.findById(transactionHistoryModel.getPartnerId())
-                .orElseThrow(() -> new NotFoundEntityException(transactionHistoryModel.getPartnerId(), "Partner"));
+//
+//        Partner partner = partnerService.findById(transactionHistoryModel.getPartnerId())
+//                .orElseThrow(() -> new NotFoundEntityException(transactionHistoryModel.getPartnerId(), "Partner"));
 
         Customer customer = customerService.findById(transactionHistoryModel.getCustomerId())
                 .orElseThrow(() -> new NotFoundEntityException(transactionHistoryModel.getCustomerId(), "Customer"));
 
+        CarModel carModel = null;
+        CarBrand carBrand = null;
+
+        if (Strings.isNotEmpty(transactionHistoryModel.getCarModelCode())){
+            carModel = carModelService.findByCode(transactionHistoryModel.getCarModelCode())
+                    .orElseThrow(() -> new NotFoundEntityExceptionByCode(transactionHistoryModel.getCarModelCode(), "CarModel"));
+
+            carBrand = carModel.getCarBrand();
+        }
+
         Contract contract = new Contract();
-        String contractCode = Helpper.genContractCode(partner.getCode());
+        String contractCode = Helpper.genContractCode(product.getCode());
         while (contractService.existsByCode(contractCode)){
-            contractCode = Helpper.genContractCode(partner.getCode());
+            contractCode = Helpper.genContractCode(product.getCode());
         }
         contract.setCode(contractCode);
         contract.setPhoneNumber(transactionHistoryModel.getPhoneNumber());
@@ -84,13 +97,16 @@ public class TransactionHistoryService extends AbstractService<TransactionHistor
         contract.setPurchaseMethod(PurchaseMethod.Paypal);
         contract.setIdNumber(customer.getUser().getIdNumber());
         contract.setNumberPlate(transactionHistoryModel.getNumberPlate());
-        contract.setCarBrand(transactionHistoryModel.getCarBrand());
         contract.setCarMaker(transactionHistoryModel.getCarMaker());
-        contract.setPartner(partner.getName());
-        contract.setPartnerCode(partner.getCode());
         contract.setProductName(product.getName());
         contract.setProduct(product);
         contract.setProductCode(product.getCode());
+        if (Strings.isNotEmpty(transactionHistoryModel.getCarModelCode())){
+            contract.setCarBrandName(carBrand.getName());
+            contract.setCarBrandCode(carBrand.getCode());
+            contract.setCarModelCode(carModel.getCode());
+            contract.setCarModelName(carModel.getName());
+        }
 
         Date activeDate = new Date();
         if (product.getEffectiveDateType().equals(EffectiveDateType.NONE) ||
@@ -132,8 +148,6 @@ public class TransactionHistoryService extends AbstractService<TransactionHistor
         transactionHistory.setCustomer(customer);
         transactionHistory.setProductName(product.getName());
         transactionHistory.setProductCode(product.getCode());
-        transactionHistory.setPartnerName(partner.getName());
-        transactionHistory.setPartnerCode(partner.getCode());
         transactionHistory.setContractCode(contract.getCode());
         transactionHistory.setTransactionStatus(TransactionStatus.Success);
         transactionHistory.setContract(contractResult);

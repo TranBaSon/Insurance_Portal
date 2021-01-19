@@ -1,12 +1,14 @@
 package com.gen.com.Insurance_portal.common.mappers;
 
 import com.gen.com.Insurance_portal.entites.Claims;
+import com.gen.com.Insurance_portal.entites.ClaimsInfo;
 import com.gen.com.Insurance_portal.models.RequestModels.RequiredClaimsModel;
+import com.gen.com.Insurance_portal.models.responseModels.ClaimsInfoModel;
 import javax.annotation.Generated;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2021-01-17T18:04:10+0700",
+    date = "2021-01-19T16:09:36+0700",
     comments = "version: 1.3.0.Final, compiler: javac, environment: Java 1.8.0_265 (AdoptOpenJDK)"
 )
 public class ClaimsMapperImpl implements ClaimsMapper {
@@ -37,5 +39,30 @@ public class ClaimsMapperImpl implements ClaimsMapper {
         claims.setNote( requiredClaimsModel.getNote() );
 
         return claims;
+    }
+
+    @Override
+    public ClaimsInfoModel claimsToClaimsInto(ClaimsInfo claimsInfo) {
+        if ( claimsInfo == null ) {
+            return null;
+        }
+
+        ClaimsInfoModel claimsInfoModel = new ClaimsInfoModel();
+
+        claimsInfoModel.setProductCode( claimsInfo.getProductCode() );
+        claimsInfoModel.setCustomerCode( claimsInfo.getCustomerCode() );
+        claimsInfoModel.setContractCode( claimsInfo.getContractCode() );
+        claimsInfoModel.setComponentFee( claimsInfo.getComponentFee() );
+        claimsInfoModel.setNumberComponent( claimsInfo.getNumberComponent() );
+        claimsInfoModel.setScratchedFee( claimsInfo.getScratchedFee() );
+        claimsInfoModel.setNumberScratched( claimsInfo.getNumberScratched() );
+        claimsInfoModel.setRepaintFee( claimsInfo.getRepaintFee() );
+        claimsInfoModel.setNumberRepaint( claimsInfo.getNumberRepaint() );
+        claimsInfoModel.setBringingFee( claimsInfo.getBringingFee() );
+        claimsInfoModel.setNumberBringing( claimsInfo.getNumberBringing() );
+        claimsInfoModel.setRearViewMirror( claimsInfo.getRearViewMirror() );
+        claimsInfoModel.setNumberRearViewMirror( claimsInfo.getNumberRearViewMirror() );
+
+        return claimsInfoModel;
     }
 }

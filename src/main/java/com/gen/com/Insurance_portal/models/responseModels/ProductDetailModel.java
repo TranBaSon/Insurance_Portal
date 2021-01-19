@@ -4,13 +4,9 @@ import com.gen.com.Insurance_portal.common.enums.EffectiveDateType;
 import com.gen.com.Insurance_portal.common.enums.FeeType;
 import com.gen.com.Insurance_portal.common.enums.GenderApply;
 import com.gen.com.Insurance_portal.common.enums.ProductStatus;
-import com.gen.com.Insurance_portal.entites.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
-import javax.persistence.Column;
-import java.util.Set;
 
 @Data
 @AllArgsConstructor
@@ -70,8 +66,6 @@ public class ProductDetailModel {
     private Double priceObj;
 
     private String insuredRule;
-
-    private Set<Benefit> benefits;
 
     private Integer componentFee;  // bộ phận
 

@@ -46,33 +46,15 @@ public class TransactionHistory {
 
     private String productCode;
 
-    private String partnerName;
-
-    private String partnerCode;
-
     private Date effectiveDate;
 
     private Date expiredDate;
-
-//    private String ProductPackName;
-
-//    private Double Commission;
-
-//    private String errorCode;
-//
-//    private String errorMessage;
 
     private TransactionProcessName processName;
 
     private PaymentMethod paymentMethod;
 
     private TransactionStatus transactionStatus;
-
-//    private String proposalNum;
-//
-//    private String contractNo;
-
-//    private String subscriptionType;
 
     private String customerCode;
 

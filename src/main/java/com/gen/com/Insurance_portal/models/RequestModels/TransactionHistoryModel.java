@@ -22,9 +22,6 @@ public class TransactionHistoryModel {
     @NotBlank(message = "numberPlate is required!")
     private String numberPlate;
 
-    @NotBlank(message = "carBrand is required!")
-    private String carBrand;
-
     @NotBlank(message = "carMaker is required!")
     private String carMaker;
 
@@ -52,6 +49,6 @@ public class TransactionHistoryModel {
     @NotNull(message = "customerId is required!")
     private Long customerId;
 
-    @NotNull(message = "PartnerId is required!")
-    private Long PartnerId;
+//    @NotBlank(message = "carModelCode is required!")
+    private String carModelCode;
 }

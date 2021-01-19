@@ -6,7 +6,7 @@ import javax.annotation.Generated;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2021-01-17T18:04:10+0700",
+    date = "2021-01-19T16:09:36+0700",
     comments = "version: 1.3.0.Final, compiler: javac, environment: Java 1.8.0_265 (AdoptOpenJDK)"
 )
 public class ContractMapperImpl implements ContractMapper {
@@ -25,7 +25,6 @@ public class ContractMapperImpl implements ContractMapper {
         uContractModel.setStatus( contract.getStatus() );
         uContractModel.setEffectiveDate( contract.getEffectiveDate() );
         uContractModel.setFullName( contract.getFullName() );
-        uContractModel.setPartner( contract.getPartner() );
         uContractModel.setProductCode( contract.getProductCode() );
 
         return uContractModel;

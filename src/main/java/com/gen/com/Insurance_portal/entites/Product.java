@@ -94,14 +94,6 @@ public class Product extends AbstractEntity {
 
     private String insuredRule;
 
-    @OneToMany(mappedBy = "product")
-    private Set<Benefit> benefits;
-
-    @JsonIgnore
-    @ManyToOne
-    @JoinColumn(name = "target_group_id")
-    private TargetGroup targetGroup;
-
     @Column(nullable = false)
     private Integer componentFee;  // bộ phận
 
@@ -131,4 +123,6 @@ public class Product extends AbstractEntity {
 
     @Column(nullable = false)
     private Integer numberRearViewMirror;
+
+    private Double maximumCompensation = 200000000.0;
 }

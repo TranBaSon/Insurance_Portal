@@ -146,11 +146,15 @@ public class ClaimsService extends AbstractService<Claims> implements IClaimsSer
             }
         }
 
+        amount += repaintFeeAmount + bringingFeeAmount + rearViewMirrorAmount + componentFeeAmount + scratchedFeeAmount;
+
+        if (amount > contract.getProduct().getMaximumCompensation()) {
+            errors.put("maximumCompensation", "over compensation limit!");
+        }
+
         if (!errors.isEmpty()) {
             throw new ClaimsException(errors);
         }
-
-        amount += repaintFeeAmount + bringingFeeAmount + rearViewMirrorAmount + componentFeeAmount + scratchedFeeAmount;
 
         claims.setContract(contract);
         claims.setContractCode(contract.getCode());
@@ -158,7 +162,7 @@ public class ClaimsService extends AbstractService<Claims> implements IClaimsSer
         claims.setPartner(partner);
         claims.setPartnerCode(partner.getCode());
         claims.setPartnerName(partner.getName());
-        claims.setStatus(ClaimsStatus.Waiting);
+        claims.setStatus(ClaimsStatus.Pending);
         claims.setInsuranceRepaintFeeAmount(repaintFeeAmount);
         claims.setInsuranceBringingFeeAmount(bringingFeeAmount);
         claims.setInsuranceComponentFeeAmount(componentFeeAmount);
@@ -271,28 +275,5 @@ public class ClaimsService extends AbstractService<Claims> implements IClaimsSer
         claims.setStatus(status);
         update(claims);
     }
-
-    /*
-contractId: Number;
-customerId: String;
-numberPlate: string;
-name: string;
-repaintFee: boolean;  // Not eligible for repainting
-repaintFeeAmount: Number;
-bringingFee: boolean;  // Not eligible to bringing
-bringingFeeAmount: Number;
-rearViewMirror:boolean;  // Not eligible mirror warranty
-rearViewMirrorAmount: Number;
-componentFee: boolean;  // Not eligible car parts warranty
-componentFeeAmount: Number;
-scratchedFee: boolean; // Ineligible for scratches warranties
-scratchedFeeAmount: Number;
-
-// Garage Information
-partnerId: String;
-employeeName: String;
-employeePhoneNumber: String;
-note: String;
-*/
 
 }

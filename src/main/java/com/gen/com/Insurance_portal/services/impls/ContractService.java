@@ -2,11 +2,13 @@ package com.gen.com.Insurance_portal.services.impls;
 
 import com.gen.com.Insurance_portal.common.Helpper;
 import com.gen.com.Insurance_portal.common.enums.ContractStatus;
+import com.gen.com.Insurance_portal.common.mappers.ClaimsMapper;
 import com.gen.com.Insurance_portal.common.mappers.ContractMapper;
 import com.gen.com.Insurance_portal.entites.Contract;
 import com.gen.com.Insurance_portal.exceptions.MessageException;
 import com.gen.com.Insurance_portal.exceptions.NotFoundEntityExceptionByCode;
 import com.gen.com.Insurance_portal.models.RequestModels.ParamsModel;
+import com.gen.com.Insurance_portal.models.responseModels.ClaimsInfoModel;
 import com.gen.com.Insurance_portal.repositories.ContractRepository;
 import com.gen.com.Insurance_portal.services.IContractService;
 import com.gen.com.Insurance_portal.services.IUserService;
@@ -175,5 +177,13 @@ public class ContractService extends AbstractService<Contract> implements IContr
                 .orElseThrow(() -> new NotFoundEntityExceptionByCode(code, "Contract"));
         contract.setStatus(contractStatus);
         update(contract);
+    }
+
+    @Override
+    public ClaimsInfoModel getClaimsInfoByContractCode(String code) {
+        Contract contract = contractRepository.findByCode(code)
+                .orElseThrow(() -> new NotFoundEntityExceptionByCode(code, "Contract"));
+        ClaimsInfoModel response = ClaimsMapper.INSTANCE.claimsToClaimsInto(contract.getClaimsInfo());
+        return response;
     }
 }

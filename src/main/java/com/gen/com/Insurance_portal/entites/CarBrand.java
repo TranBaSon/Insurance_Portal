@@ -6,14 +6,15 @@ import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.HashSet;
 import java.util.Set;
 
 @AllArgsConstructor
 @NoArgsConstructor
-@EqualsAndHashCode(callSuper = true)
+@EqualsAndHashCode(onlyExplicitlyIncluded = true, callSuper = false)
 @Data
 @Entity
-public class Benefit extends AbstractEntity{
+public class CarBrand {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -21,17 +22,8 @@ public class Benefit extends AbstractEntity{
 
     private String name;
 
-    private String parentId;
+    private String code;
 
-    @ManyToOne
-    @JoinColumn(name = "product_id")
-    private Product product;
-
-    private Boolean isBenefitPlus;
-
-    private String description;
-
-    @OneToMany(mappedBy = "benefit")
-    private Set<BenefitSetting> benefitSettings;
-
+    @OneToMany(mappedBy = "carBrand")
+    private Set<CarModel> carModels = new HashSet<>();
 }

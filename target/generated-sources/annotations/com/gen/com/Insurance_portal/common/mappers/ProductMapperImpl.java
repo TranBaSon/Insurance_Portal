@@ -1,18 +1,15 @@
 package com.gen.com.Insurance_portal.common.mappers;
 
-import com.gen.com.Insurance_portal.entites.Benefit;
 import com.gen.com.Insurance_portal.entites.Product;
 import com.gen.com.Insurance_portal.models.RequestModels.CreateProductModel;
 import com.gen.com.Insurance_portal.models.RequestModels.UpdateProductModel;
 import com.gen.com.Insurance_portal.models.responseModels.ProductDetailModel;
 import com.gen.com.Insurance_portal.models.responseModels.ResponseProductModel;
-import java.util.HashSet;
-import java.util.Set;
 import javax.annotation.Generated;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2021-01-17T18:04:10+0700",
+    date = "2021-01-19T16:09:36+0700",
     comments = "version: 1.3.0.Final, compiler: javac, environment: Java 1.8.0_265 (AdoptOpenJDK)"
 )
 public class ProductMapperImpl implements ProductMapper {
@@ -111,10 +108,6 @@ public class ProductMapperImpl implements ProductMapper {
         productDetailModel.setVideoUrl( productModel.getVideoUrl() );
         productDetailModel.setPriceObj( productModel.getPriceObj() );
         productDetailModel.setInsuredRule( productModel.getInsuredRule() );
-        Set<Benefit> set = productModel.getBenefits();
-        if ( set != null ) {
-            productDetailModel.setBenefits( new HashSet<Benefit>( set ) );
-        }
         productDetailModel.setComponentFee( productModel.getComponentFee() );
         productDetailModel.setNumberComponent( productModel.getNumberComponent() );
         productDetailModel.setScratchedFee( productModel.getScratchedFee() );
