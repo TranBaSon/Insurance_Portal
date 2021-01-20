@@ -23,4 +23,10 @@ public class ClaimsConfigClient {
 
     @Lob
     private String claimConfigFormHeader;
+
+    public ClaimsConfigClient(String claimConfigFormBanner, String claimConfigFormBody, String claimConfigFormHeader) {
+        this.claimConfigFormBanner = claimConfigFormBanner;
+        this.claimConfigFormBody = claimConfigFormBody;
+        this.claimConfigFormHeader = claimConfigFormHeader;
+    }
 }

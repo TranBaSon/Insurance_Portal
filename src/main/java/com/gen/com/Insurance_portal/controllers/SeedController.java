@@ -33,6 +33,9 @@ public class SeedController {
     private final ISysAdminService sysAdminService;
     private final IPartnerService partnerService;
     private final IProductService productService;
+    private final ICarBrandService carBrandService;
+    private final IClaimsConfigClientService claimsConfigClientService;
+
 
     public SeedController(IRoleService roleService, IFAQService faqService,
                           IProductCategoryService productCategoryService,
@@ -40,7 +43,9 @@ public class SeedController {
                           IAuthoritiesService authoritiesService,
                           PasswordEncoder passwordEncoder,
                           IUserService userService,
-                          ISysAdminService sysAdminService, IPartnerService partnerService, IProductService productService) {
+                          ISysAdminService sysAdminService, IPartnerService partnerService,
+                          IProductService productService, ICarBrandService carBrandService,
+                          IClaimsConfigClientService claimsConfigClientService) {
 
         this.roleService = roleService;
         this.faqService = faqService;
@@ -52,6 +57,8 @@ public class SeedController {
         this.sysAdminService = sysAdminService;
         this.partnerService = partnerService;
         this.productService = productService;
+        this.carBrandService = carBrandService;
+        this.claimsConfigClientService = claimsConfigClientService;
     }
 
     @GetMapping
@@ -167,6 +174,12 @@ public class SeedController {
         roleService.save(new Role("customer role", "CUSTOMER"));
         roleService.save(new Role("partner role", "PARTNER"));
 
+        carBrandService.save(new CarBrand("Vinfast", "VIC", "[{\\\"title\\\":\\\"Lux SA2.0 2019\\\",\\\"code\\\":\\\"VICSA2019\\\",\\\"price\\\":\\\"100000\\\"},{\\\"title\\\":\\\"Lux A2.0 2019\\\",\\\"code\\\":\\\"VICA2019\\\",\\\"price\\\":\\\"50000\\\"},{\\\"title\\\":\\\"Fadil 2019\\\",\\\"code\\\":\\\"VICF\\\",\\\"price\\\":\\\"20000\\\"}]"));
+        carBrandService.save(new CarBrand("Huyndai", "HYN", "[{\\\"title\\\":\\\"Elantra 2019\\\",\\\"code\\\":\\\"HYNELT\\\",\\\"price\\\":\\\"30000\\\"}]"));
+
+        claimsConfigClientService.save(new ClaimsConfigClient("https://firebasestorage.googleapis.com/v0/b/insurance-admin-580a8.appspot.com/o/Admin%2FClaim%20Config%20Banner?alt=media&token=4a237b20-c3d6-4626-bd72-d7feb9207093",
+                                                                "<h3><strong>Reporting a Claim</strong></h3><p><br></p><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Quis ipsum suspendisse ultrices gravida. Risus commodo viverra maecenas accumsan lacus vel facilisis.</p><p>At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est ipsum dolor sit amet. Stet clita kasd gubergren, no sea takimata sanctus est sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren.</p>",
+                                                               "What Would You Like to Claim For?"));
 
         User user = new User();
         user.setGivenName("admin");

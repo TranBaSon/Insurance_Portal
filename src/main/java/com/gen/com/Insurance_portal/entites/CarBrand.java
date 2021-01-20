@@ -23,4 +23,10 @@ public class CarBrand {
     private String carBrandCode;
 
     private String models;
+
+    public CarBrand(String carBrand, String carBrandCode, String models) {
+        this.carBrand = carBrand;
+        this.carBrandCode = carBrandCode;
+        this.models = models;
+    }
 }
