@@ -21,6 +21,7 @@ public class ClaimsConfigController {
         this.claimsConfigClientService = claimsConfigClientService;
     }
 
+    @PreAuthorize(value = "permitAll()")
     @GetMapping
     public ResponseEntity<?> getAll(){
         return new ResponseEntity<>(claimsConfigClientService.findAll(), HttpStatus.OK);
@@ -35,6 +36,7 @@ public class ClaimsConfigController {
 
     }
 
+    @PreAuthorize(value = "permitAll()")
     @GetMapping("/{id}")
     public ResponseEntity<?> get(@PathVariable Long id){
         ClaimsConfigClient claimsConfig = claimsConfigClientService.findById(id)
