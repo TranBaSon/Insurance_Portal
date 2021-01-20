@@ -2,19 +2,6 @@
 # TWILIO
 # ===============================
 
-
-
-
-
-# ===============================
-# DATABASE
-# ===============================
-
-server:
-  port: 8080
-  error:
-    include-stacktrace: on_trace_param
-
 spring:
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver

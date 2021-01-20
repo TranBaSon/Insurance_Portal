@@ -73,20 +73,8 @@ CREATE TABLE `car_brand` (
   `id` bigint NOT NULL AUTO_INCREMENT,
   `car_brand` varchar(255) DEFAULT NULL,
   `car_brand_code` varchar(255) DEFAULT NULL,
+  `models` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
-DROP TABLE IF EXISTS `car_model`;
-CREATE TABLE `car_model` (
-  `id` bigint NOT NULL AUTO_INCREMENT,
-  `code` varchar(255) DEFAULT NULL,
-  `price` double DEFAULT NULL,
-  `title` varchar(255) DEFAULT NULL,
-  `car_brand_id` bigint DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `UK_950pb7olcd0jplckua7vf7t1e` (`code`),
-  KEY `FK9r90hp4dmt4wtv6mebm9bv5n3` (`car_brand_id`),
-  CONSTRAINT `FK9r90hp4dmt4wtv6mebm9bv5n3` FOREIGN KEY (`car_brand_id`) REFERENCES `car_brand` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 DROP TABLE IF EXISTS `claims`;
@@ -140,6 +128,15 @@ CREATE TABLE `claims` (
   CONSTRAINT `FKcc5d15hc607ial72lhw29lur4` FOREIGN KEY (`contract_id`) REFERENCES `contract` (`id`),
   CONSTRAINT `FKoe6dl2eyaqddpuqyhoqs635d` FOREIGN KEY (`partner_id`) REFERENCES `partner` (`id`),
   CONSTRAINT `FKrol4pvwwwx1lrjp286ggbihd1` FOREIGN KEY (`customer_id`) REFERENCES `customer` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+DROP TABLE IF EXISTS `claims_config_client`;
+CREATE TABLE `claims_config_client` (
+  `id` bigint NOT NULL AUTO_INCREMENT,
+  `claim_config_form_banner` longtext,
+  `claim_config_form_body` longtext,
+  `claim_config_form_header` longtext,
+  PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 DROP TABLE IF EXISTS `claims_info`;
