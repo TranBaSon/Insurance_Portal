@@ -34,4 +34,6 @@ public class ClaimsInfoModel {
     private Integer rearViewMirror;
 
     private Integer numberRearViewMirror;
+
+    private Double maximumCompensation;
 }

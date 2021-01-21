@@ -148,7 +148,7 @@ public class ClaimsService extends AbstractService<Claims> implements IClaimsSer
 
         amount += repaintFeeAmount + bringingFeeAmount + rearViewMirrorAmount + componentFeeAmount + scratchedFeeAmount;
 
-        if (amount > contract.getProduct().getMaximumCompensation()) {
+        if (amount > contract.getProduct().getPriceObj()) {
             errors.put("maximumCompensation", "over compensation limit!");
         }
 

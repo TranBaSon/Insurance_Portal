@@ -1,11 +1,14 @@
 package com.gen.com.Insurance_portal.controllers;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.gen.com.Insurance_portal.common.constanst.ClaimsCode;
 import com.gen.com.Insurance_portal.common.enums.*;
 import com.gen.com.Insurance_portal.entites.*;
 import com.gen.com.Insurance_portal.entites.ProductCategory;
 import com.gen.com.Insurance_portal.services.*;
 import io.swagger.v3.oas.annotations.Hidden;
+import org.json.JSONObject;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -14,7 +17,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 
 @Hidden
@@ -167,15 +172,26 @@ public class SeedController {
 
     @PreAuthorize("permitAll()")
     @RequestMapping("/authorities")
-    public String seedAuthorities() {
+    public String seedAuthorities() throws JsonProcessingException {
 
         Role admin = roleService.save(new Role("admin role", "ADMIN"));
         admin.setActive(true);
         roleService.save(new Role("customer role", "CUSTOMER"));
         roleService.save(new Role("partner role", "PARTNER"));
 
-        carBrandService.save(new CarBrand("Vinfast", "VIC", "[{\\\"title\\\":\\\"Lux SA2.0 2019\\\",\\\"code\\\":\\\"VICSA2019\\\",\\\"price\\\":\\\"100000\\\"},{\\\"title\\\":\\\"Lux A2.0 2019\\\",\\\"code\\\":\\\"VICA2019\\\",\\\"price\\\":\\\"50000\\\"},{\\\"title\\\":\\\"Fadil 2019\\\",\\\"code\\\":\\\"VICF\\\",\\\"price\\\":\\\"20000\\\"}]"));
-        carBrandService.save(new CarBrand("Huyndai", "HYN", "[{\\\"title\\\":\\\"Elantra 2019\\\",\\\"code\\\":\\\"HYNELT\\\",\\\"price\\\":\\\"30000\\\"}]"));
+
+        JSONObject jsonObject1 = new JSONObject("{\"models\":[{\"title\":\"Lux SA2.0 2019\",\"code\":\"VICSA2019\",\"price\":\"100000\"},{\"title\":\"Lux A2.0 2019\",\"code\":\"VICA2019\",\"price\":\"50000\"},{\"title\":\"Fadil 2019\",\"code\":\"VICF\",\"price\":\"20000\"}]}");
+        String models1 = jsonObject1.get("models").toString();
+
+        JSONObject jsonObject2 = new JSONObject("{\"models\":[{\"title\":\"Elantra 2019\",\"code\":\"HYNELT\",\"price\":\"30000\"}]}");
+        String models2 = jsonObject2.get("models").toString();
+
+        JSONObject jsonObject3 = new JSONObject("{\"models\":[{\"title\":\"MERCEDES - C300 2020\",\"code\":\"C300\",\"price\":\"50000\"},{\"title\":\"MERCEDES - C200 2020\",\"code\":\"C200\",\"price\":\"40000\"}]}");
+        String models3 = jsonObject3.get("models").toString();
+
+        carBrandService.save(new CarBrand("Vinfast", "VIC", models1));
+        carBrandService.save(new CarBrand("Huyndai", "HYN", models2));
+        carBrandService.save(new CarBrand("MERCEDES", "MEC", models3));
 
         claimsConfigClientService.save(new ClaimsConfigClient("https://firebasestorage.googleapis.com/v0/b/insurance-admin-580a8.appspot.com/o/Admin%2FClaim%20Config%20Banner?alt=media&token=4a237b20-c3d6-4626-bd72-d7feb9207093",
                                                                 "<h3><strong>Reporting a Claim</strong></h3><p><br></p><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Quis ipsum suspendisse ultrices gravida. Risus commodo viverra maecenas accumsan lacus vel facilisis.</p><p>At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est ipsum dolor sit amet. Stet clita kasd gubergren, no sea takimata sanctus est sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren.</p>",

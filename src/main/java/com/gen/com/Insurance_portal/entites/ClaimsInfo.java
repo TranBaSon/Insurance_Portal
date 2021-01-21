@@ -66,6 +66,7 @@ public class ClaimsInfo extends AbstractEntity{
 
     private Integer numberRearViewMirror;
 
+    private Double maximumCompensation = 200000000.0;
 }
 
 

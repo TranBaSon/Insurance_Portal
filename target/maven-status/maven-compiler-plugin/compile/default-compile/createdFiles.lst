@@ -118,6 +118,7 @@ com/gen/com/Insurance_portal/models/responseModels/ResponseObjectModel.class
 com/gen/com/Insurance_portal/entites/Role.class
 com/gen/com/Insurance_portal/models/responseModels/CustomerResponseModel.class
 com/gen/com/Insurance_portal/models/RequestModels/UsernameAndPasswordAuthentication.class
+com/gen/com/Insurance_portal/entites/CarModel.class
 com/gen/com/Insurance_portal/entites/RoleAuthority.class
 com/gen/com/Insurance_portal/services/impls/ClaimsConfigClientService.class
 com/gen/com/Insurance_portal/common/enums/TransactionStatus.class

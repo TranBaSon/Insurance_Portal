@@ -90,7 +90,7 @@ public class Product extends AbstractEntity {
 
     private String videoUrl;
 
-    private Double priceObj;
+    private Double priceObj = 200000000.0;
 
     private String insuredRule;
 
@@ -124,5 +124,4 @@ public class Product extends AbstractEntity {
     @Column(nullable = false)
     private Integer numberRearViewMirror;
 
-    private Double maximumCompensation = 200000000.0;
 }
