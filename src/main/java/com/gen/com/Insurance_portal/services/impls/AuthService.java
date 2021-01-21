@@ -207,7 +207,7 @@ public class AuthService implements IAuthService {
             customer.setCustomerCode(Utils.generateRandomUuid());
             customerRepository.save(customer);
 
-//            TwilioHelper.send(user.getPhoneNumber(), user.getPhoneCode());
+            TwilioHelper.send(user.getPhoneNumber(), user.getPhoneCode());
 
             return RegisterStatus.Succeeded;
         }

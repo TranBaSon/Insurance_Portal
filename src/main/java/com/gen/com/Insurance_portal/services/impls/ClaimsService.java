@@ -1,6 +1,7 @@
 package com.gen.com.Insurance_portal.services.impls;
 
 import com.gen.com.Insurance_portal.common.Helpper;
+import com.gen.com.Insurance_portal.common.TwilioHelper;
 import com.gen.com.Insurance_portal.common.enums.ClaimsStatus;
 import com.gen.com.Insurance_portal.common.mappers.ClaimsMapper;
 import com.gen.com.Insurance_portal.entites.*;
@@ -274,6 +275,8 @@ public class ClaimsService extends AbstractService<Claims> implements IClaimsSer
         Claims claims = claimsRepository.findById(id).orElseThrow(() -> new NotFoundEntityException(id, "Claims"));
         claims.setStatus(status);
         update(claims);
+        String content = "Money transfer is successful, " + claims.getContractCode() + " contract claim is completed.";
+        TwilioHelper.send("+84" + claims.getEmployeePhoneNumber(), content);
     }
 
 }
