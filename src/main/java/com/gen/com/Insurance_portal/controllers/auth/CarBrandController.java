@@ -23,7 +23,7 @@ public class CarBrandController {
         this.carBrandService = carBrandService;
     }
 
-    @PreAuthorize(value = "hasRole('All_Authorities')")
+    @PreAuthorize(value = "permitAll()")
     @GetMapping
     public ResponseEntity<?> getAll(){
         return new ResponseEntity<>(carBrandService.findAll(), HttpStatus.OK);
@@ -38,7 +38,7 @@ public class CarBrandController {
 
     }
 
-    @PreAuthorize(value = "hasRole('All_Authorities')")
+    @PreAuthorize(value = "permitAll()")
     @GetMapping("/{code}")
     public ResponseEntity<?> get(@PathVariable String code){
         CarBrand carBrand = carBrandService.findByCarBrandCode(code)
