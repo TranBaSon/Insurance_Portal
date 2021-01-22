@@ -54,9 +54,9 @@ public class ClaimsController {
     }
 
     @Operation(summary = "Required Header { Authorization : bearer key }",security = { @SecurityRequirement(name = "bearer key") })
-    @GetMapping("/{code}")
-    public ResponseEntity<?> getByContractCode(@PathVariable String code) {
-        Claims claims = claimsService.findByContractCode(code);
+    @GetMapping("/by-contract-code/{contractCode}")
+    public ResponseEntity<?> getByContractCode(@PathVariable String contractCode) {
+        Claims claims = claimsService.findByContractCode(contractCode);
         return new ResponseEntity<>(claims, HttpStatus.OK);
     }
 }
