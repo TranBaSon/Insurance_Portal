@@ -11,4 +11,5 @@ public interface IClaimsService extends IAbstractService<Claims> {
     Object UGetList(ParamsModel paramsModel, String token);
     Object GetList(ParamsModel paramsModel, String token);
     void status(Long id, ClaimsStatus status);
+    Claims findByContractCode(String code);
 }

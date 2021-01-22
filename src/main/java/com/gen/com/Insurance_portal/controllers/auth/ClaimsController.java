@@ -1,5 +1,7 @@
 package com.gen.com.Insurance_portal.controllers.auth;
 
+import com.gen.com.Insurance_portal.entites.Claims;
+import com.gen.com.Insurance_portal.exceptions.NotFoundEntityException;
 import com.gen.com.Insurance_portal.models.RequestModels.ClaimsStatusModel;
 import com.gen.com.Insurance_portal.models.RequestModels.ParamsModel;
 import com.gen.com.Insurance_portal.models.responseModels.ResponseMessageModel;
@@ -37,11 +39,24 @@ public class ClaimsController {
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
-//    @PreAuthorize(value = "hasRole('Partner_Status')")
     @Operation(summary = "Required Header { Authorization : bearer key }",security = { @SecurityRequirement(name = "bearer key") })
     @PostMapping("/status/{id}")
     public ResponseEntity<?> status(@PathVariable Long id, @RequestBody ClaimsStatusModel statusRequest) {
         claimsService.status(id, statusRequest.getStatus());
         return new ResponseEntity<>(new ResponseMessageModel(true), HttpStatus.OK);
+    }
+
+    @Operation(summary = "Required Header { Authorization : bearer key }",security = { @SecurityRequirement(name = "bearer key") })
+    @GetMapping("/{id}")
+    public ResponseEntity<?> get(@PathVariable Long id) {
+        Claims claims = claimsService.findById(id).orElseThrow(() -> new NotFoundEntityException(id, "Claims"));
+        return new ResponseEntity<>(claims, HttpStatus.OK);
+    }
+
+    @Operation(summary = "Required Header { Authorization : bearer key }",security = { @SecurityRequirement(name = "bearer key") })
+    @GetMapping("/{code}")
+    public ResponseEntity<?> getByContractCode(@PathVariable String code) {
+        Claims claims = claimsService.findByContractCode(code);
+        return new ResponseEntity<>(claims, HttpStatus.OK);
     }
 }

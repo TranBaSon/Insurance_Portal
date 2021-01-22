@@ -32,19 +32,17 @@ import java.util.Map;
 public class ClaimsService extends AbstractService<Claims> implements IClaimsService {
     private final ClaimsRepository claimsRepository;
     private final IClaimsInfoService claimsInfoService;
-    private final ICustomerService customerService;
     private final IContractService contractService;
     private final IPartnerService partnerService;
     private final JwtUtil jwtTokenUtil;
     private final IUserService userService;
 
     public ClaimsService(ClaimsRepository claimsRepository, IClaimsInfoService claimsInfoService,
-                         ICustomerService customerService, IContractService contractService,
+                         IContractService contractService,
                          IPartnerService partnerService, JwtUtil jwtTokenUtil, IUserService userService) {
         super(claimsRepository);
         this.claimsRepository = claimsRepository;
         this.claimsInfoService = claimsInfoService;
-        this.customerService = customerService;
         this.contractService = contractService;
         this.partnerService = partnerService;
         this.jwtTokenUtil = jwtTokenUtil;
@@ -277,6 +275,12 @@ public class ClaimsService extends AbstractService<Claims> implements IClaimsSer
         update(claims);
         String content = "Money transfer is successful, " + claims.getContractCode() + " contract claim is completed.";
         TwilioHelper.send("+84" + claims.getEmployeePhoneNumber(), content);
+    }
+
+    @Override
+    public Claims findByContractCode(String code) {
+        return claimsRepository.findClaimsByContractCode(code)
+                .orElseThrow(() -> new MessageException("not found claims have contractCode is " + code));
     }
 
 }
