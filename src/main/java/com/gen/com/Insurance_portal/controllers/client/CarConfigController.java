@@ -52,7 +52,7 @@ public class CarConfigController {
 
         carConfig.setCarConfigBannerFile(carConfigClient.getCarConfigBannerFile());
         carConfig.setCarConfigBodyContent(carConfigClient.getCarConfigBodyContent());
-        carConfig.setCarConfigHeaderContent(carConfig.getCarConfigHeaderContent());
+        carConfig.setCarConfigHeaderContent(carConfigClient.getCarConfigHeaderContent());
 
         carConfigClientService.update(carConfig);
         return  new ResponseEntity<>(new ResponseMessageModel(true), HttpStatus.OK);
