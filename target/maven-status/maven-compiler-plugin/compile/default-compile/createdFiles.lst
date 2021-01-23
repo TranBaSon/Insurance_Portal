@@ -15,8 +15,10 @@ com/gen/com/Insurance_portal/models/RequestModels/UserModel.class
 com/gen/com/Insurance_portal/entites/ArticleCategory.class
 com/gen/com/Insurance_portal/services/IRoleService.class
 com/gen/com/Insurance_portal/repositories/ClaimsInfoRepository.class
+com/gen/com/Insurance_portal/repositories/CarConfigClientRepository.class
 com/gen/com/Insurance_portal/services/IProductCategoryService.class
 com/gen/com/Insurance_portal/common/enums/PurchaseMethod.class
+com/gen/com/Insurance_portal/services/impls/CarConfigClientService.class
 com/gen/com/Insurance_portal/services/impls/SysAdminService.class
 com/gen/com/Insurance_portal/common/constanst/Constants.class
 com/gen/com/Insurance_portal/models/RequestModels/ProductStatusRequest.class
@@ -46,6 +48,7 @@ com/gen/com/Insurance_portal/models/RequestModels/RequestStatus.class
 com/gen/com/Insurance_portal/controllers/client/ClaimsConfigController.class
 com/gen/com/Insurance_portal/models/RequestModels/UpdateProductProviderModel.class
 com/gen/com/Insurance_portal/entites/Authorities.class
+com/gen/com/Insurance_portal/controllers/client/CarConfigController.class
 com/gen/com/Insurance_portal/common/enums/AutoExtendMethod.class
 com/gen/com/Insurance_portal/common/mappers/ProductMapperImpl.class
 com/gen/com/Insurance_portal/services/impls/ClaimsService.class
@@ -83,6 +86,7 @@ com/gen/com/Insurance_portal/services/IAuthoritiesGroupService.class
 com/gen/com/Insurance_portal/controllers/auth/ProductCategoryController.class
 com/gen/com/Insurance_portal/common/mappers/CustomerMapper.class
 com/gen/com/Insurance_portal/common/enums/FeeType.class
+com/gen/com/Insurance_portal/entites/CarConfigClient.class
 com/gen/com/Insurance_portal/entites/Claims.class
 com/gen/com/Insurance_portal/common/mappers/ProductCategoryMapper.class
 com/gen/com/Insurance_portal/controllers/auth/ContractController.class
@@ -103,6 +107,7 @@ com/gen/com/Insurance_portal/services/impls/CarBrandService.class
 com/gen/com/Insurance_portal/common/enums/GenderApply.class
 com/gen/com/Insurance_portal/models/RequestModels/UpdateCarBrandModel.class
 com/gen/com/Insurance_portal/models/RequestModels/UpdateCarModel.class
+com/gen/com/Insurance_portal/services/ICarConfigClientService.class
 com/gen/com/Insurance_portal/services/impls/CloudinaryService.class
 com/gen/com/Insurance_portal/common/Helpper.class
 com/gen/com/Insurance_portal/entites/AuthoritiesGroup.class

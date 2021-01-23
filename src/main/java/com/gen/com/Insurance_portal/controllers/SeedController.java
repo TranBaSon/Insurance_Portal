@@ -1,7 +1,6 @@
 package com.gen.com.Insurance_portal.controllers;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.gen.com.Insurance_portal.common.constanst.ClaimsCode;
 import com.gen.com.Insurance_portal.common.enums.*;
 import com.gen.com.Insurance_portal.entites.*;
@@ -17,9 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.Arrays;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 
 @Hidden
@@ -36,10 +33,10 @@ public class SeedController {
     private final PasswordEncoder passwordEncoder;
     private final IUserService userService;
     private final ISysAdminService sysAdminService;
-    private final IPartnerService partnerService;
     private final IProductService productService;
     private final ICarBrandService carBrandService;
     private final IClaimsConfigClientService claimsConfigClientService;
+    private final ICarConfigClientService carConfigClientService;
 
 
     public SeedController(IRoleService roleService, IFAQService faqService,
@@ -48,9 +45,10 @@ public class SeedController {
                           IAuthoritiesService authoritiesService,
                           PasswordEncoder passwordEncoder,
                           IUserService userService,
-                          ISysAdminService sysAdminService, IPartnerService partnerService,
+                          ISysAdminService sysAdminService,
                           IProductService productService, ICarBrandService carBrandService,
-                          IClaimsConfigClientService claimsConfigClientService) {
+                          IClaimsConfigClientService claimsConfigClientService,
+                          ICarConfigClientService carConfigClientService) {
 
         this.roleService = roleService;
         this.faqService = faqService;
@@ -60,10 +58,10 @@ public class SeedController {
         this.passwordEncoder = passwordEncoder;
         this.userService = userService;
         this.sysAdminService = sysAdminService;
-        this.partnerService = partnerService;
         this.productService = productService;
         this.carBrandService = carBrandService;
         this.claimsConfigClientService = claimsConfigClientService;
+        this.carConfigClientService = carConfigClientService;
     }
 
     @GetMapping
@@ -71,38 +69,7 @@ public class SeedController {
         return "Welcome to here!";
     }
 
-    @PreAuthorize("permitAll()")
-    @GetMapping("/role")
-    public String seedRole() {
 
-
-        List<Authorities> authorities = authoritiesService.findAll();
-
-        Role admin = roleService.save(new Role("admin role", "ADMIN", authorities));
-        Role customer = roleService.save(new Role("customer role", "CUSTOMER"));
-        Role partner = roleService.save(new Role("partner role", "PARTNER"));
-
-
-        User user = new User();
-        user.setGivenName("admin");
-        user.setSurname("admin");
-        user.setRole(admin);
-        user.setEmail("admin@gmail.com");
-        user.setUsername("admin");
-        user.setPassword(passwordEncoder.encode("Admin@12345"));
-        user.setGender(Gender.NONE);
-        user.setIsActive(true);
-        user.setFromLegacySystem(true);
-        User newUser = userService.save(user);
-
-        SysAdmin sysAdmin = new SysAdmin();
-        sysAdmin.setUser(user);
-        sysAdmin.setIsActive(true);
-        sysAdmin.setType(SysAdminType.ADMIN);
-        sysAdminService.save(sysAdmin);
-
-        return "seed succeed!";
-    }
 
     @PreAuthorize("permitAll()")
     @GetMapping("/common")
@@ -124,20 +91,6 @@ public class SeedController {
 
         List<FAQ> faqs = Arrays.asList(faq1, faq2, faq3, faq4, faq5);
         faqService.saveAll(faqs);
-
-//        Partner partner = new Partner();
-//        partner.setAppellation("MR.");
-//        partner.setCode("PRUU");
-//        partner.setEmail("prudential@gmail.com");
-//        partner.setContact("2");
-//        partner.setHotline("1");
-//        partner.setIntroductionContent("Prudential");
-//        partner.setIntroductionContent("Prudential");
-//        partner.setName("Prudential");
-//        partner.setPhoneNumber("0383860666");
-//        partner.setStatus(PartnerStatus.APPROVED);
-//
-//        Partner partnerResult = partnerService.save(partner);
 
         Product product = new Product();
         product.setEffectiveDateRangeSelectionNumber(0);
@@ -196,6 +149,9 @@ public class SeedController {
         claimsConfigClientService.save(new ClaimsConfigClient("https://firebasestorage.googleapis.com/v0/b/insurance-admin-580a8.appspot.com/o/Admin%2FClaim%20Config%20Banner?alt=media&token=4a237b20-c3d6-4626-bd72-d7feb9207093",
                                                                 "<h3><strong>Reporting a Claim</strong></h3><p><br></p><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Quis ipsum suspendisse ultrices gravida. Risus commodo viverra maecenas accumsan lacus vel facilisis.</p><p>At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est ipsum dolor sit amet. Stet clita kasd gubergren, no sea takimata sanctus est sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren.</p>",
                                                                "What Would You Like to Claim For?"));
+
+
+        carConfigClientService.save(new CarConfigClient("banner file ?", "header content ?", "body content?"));
 
         User user = new User();
         user.setGivenName("admin");
