@@ -7,12 +7,10 @@ com/gen/com/Insurance_portal/controllers/auth/AuthController.class
 com/gen/com/Insurance_portal/models/RequestModels/CarBrandModel.class
 com/gen/com/Insurance_portal/common/enums/SysAdminType.class
 com/gen/com/Insurance_portal/common/enums/PaymentStatus.class
-com/gen/com/Insurance_portal/entites/Article.class
 com/gen/com/Insurance_portal/models/responseModels/ResponseMessageModel.class
 com/gen/com/Insurance_portal/common/mappers/ProductCategoryMapperImpl.class
 com/gen/com/Insurance_portal/entites/Contract.class
 com/gen/com/Insurance_portal/models/RequestModels/UserModel.class
-com/gen/com/Insurance_portal/entites/ArticleCategory.class
 com/gen/com/Insurance_portal/services/IRoleService.class
 com/gen/com/Insurance_portal/repositories/ClaimsInfoRepository.class
 com/gen/com/Insurance_portal/repositories/CarConfigClientRepository.class
@@ -40,7 +38,6 @@ com/gen/com/Insurance_portal/controllers/user/UContractController.class
 com/gen/com/Insurance_portal/common/mappers/UserMapperImpl.class
 com/gen/com/Insurance_portal/common/mappers/CustomerMapperImpl.class
 com/gen/com/Insurance_portal/services/impls/TransactionHistoryService.class
-com/gen/com/Insurance_portal/services/impls/FAQService.class
 com/gen/com/Insurance_portal/common/enums/ContractStatus.class
 com/gen/com/Insurance_portal/common/mappers/ClaimsMapperImpl.class
 com/gen/com/Insurance_portal/common/enums/PolicyGroup.class
@@ -157,8 +154,6 @@ com/gen/com/Insurance_portal/models/RequestModels/CreatePartnerModel.class
 com/gen/com/Insurance_portal/services/IAbstractService.class
 com/gen/com/Insurance_portal/controllers/auth/ClaimsController.class
 com/gen/com/Insurance_portal/models/RequestModels/CreateProductCategoryModel.class
-com/gen/com/Insurance_portal/services/IFAQService.class
-com/gen/com/Insurance_portal/entites/FAQ.class
 com/gen/com/Insurance_portal/services/impls/ProductService.class
 com/gen/com/Insurance_portal/services/IClaimsConfigClientService.class
 com/gen/com/Insurance_portal/common/enums/PartnerStatus.class
@@ -189,7 +184,6 @@ com/gen/com/Insurance_portal/common/enums/Gender.class
 com/gen/com/Insurance_portal/utils/Utils.class
 com/gen/com/Insurance_portal/repositories/ClaimsRepository.class
 com/gen/com/Insurance_portal/utils/SortUtil.class
-com/gen/com/Insurance_portal/repositories/FAQRepository.class
 com/gen/com/Insurance_portal/repositories/PartnerRepository.class
 com/gen/com/Insurance_portal/services/impls/AbstractService.class
 com/gen/com/Insurance_portal/models/responseModels/ResponseProductModel.class

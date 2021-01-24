@@ -1,41 +1,4 @@
 
-
-DROP TABLE IF EXISTS `article`;
-CREATE TABLE `article` (
-  `id` bigint NOT NULL AUTO_INCREMENT,
-  `created_at` datetime(6) DEFAULT NULL,
-  `created_by` varchar(255) DEFAULT NULL,
-  `deleted_at` datetime(6) DEFAULT NULL,
-  `is_active` bit(1) DEFAULT NULL,
-  `is_deleted` bit(1) DEFAULT NULL,
-  `updated_at` datetime(6) DEFAULT NULL,
-  `updated_by` varchar(255) DEFAULT NULL,
-  `article_image` varchar(255) DEFAULT NULL,
-  `content` longtext NOT NULL,
-  `post_date` datetime(6) NOT NULL,
-  `short_description` varchar(255) DEFAULT NULL,
-  `title` varchar(255) NOT NULL,
-  `article_category_id` bigint DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  KEY `FKiu3gnbl8tvk86o04rnm0jr0py` (`article_category_id`),
-  CONSTRAINT `FKiu3gnbl8tvk86o04rnm0jr0py` FOREIGN KEY (`article_category_id`) REFERENCES `article_category` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
-DROP TABLE IF EXISTS `article_category`;
-CREATE TABLE `article_category` (
-  `id` bigint NOT NULL AUTO_INCREMENT,
-  `created_at` datetime(6) DEFAULT NULL,
-  `created_by` varchar(255) DEFAULT NULL,
-  `deleted_at` datetime(6) DEFAULT NULL,
-  `is_active` bit(1) DEFAULT NULL,
-  `is_deleted` bit(1) DEFAULT NULL,
-  `updated_at` datetime(6) DEFAULT NULL,
-  `updated_by` varchar(255) DEFAULT NULL,
-  `name` varchar(255) NOT NULL,
-  `short_description` varchar(255) DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
 DROP TABLE IF EXISTS `authorities`;
 CREATE TABLE `authorities` (
   `id` bigint NOT NULL AUTO_INCREMENT,
@@ -74,6 +37,15 @@ CREATE TABLE `car_brand` (
   `car_brand` varchar(255) DEFAULT NULL,
   `car_brand_code` varchar(255) DEFAULT NULL,
   `models` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+DROP TABLE IF EXISTS `car_config_client`;
+CREATE TABLE `car_config_client` (
+  `id` bigint NOT NULL AUTO_INCREMENT,
+  `car_config_banner_file` longtext,
+  `car_config_body_content` longtext,
+  `car_config_header_content` longtext,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -241,21 +213,6 @@ CREATE TABLE `customer` (
   PRIMARY KEY (`id`),
   KEY `FKj8dlm21j202cadsbfkoem0s58` (`user_id`),
   CONSTRAINT `FKj8dlm21j202cadsbfkoem0s58` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
-DROP TABLE IF EXISTS `faq`;
-CREATE TABLE `faq` (
-  `id` bigint NOT NULL AUTO_INCREMENT,
-  `created_at` datetime(6) DEFAULT NULL,
-  `created_by` varchar(255) DEFAULT NULL,
-  `deleted_at` datetime(6) DEFAULT NULL,
-  `is_active` bit(1) DEFAULT NULL,
-  `is_deleted` bit(1) DEFAULT NULL,
-  `updated_at` datetime(6) DEFAULT NULL,
-  `updated_by` varchar(255) DEFAULT NULL,
-  `content` longtext,
-  `title` varchar(255) DEFAULT NULL,
-  PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 DROP TABLE IF EXISTS `partner`;
@@ -472,4 +429,3 @@ CREATE TABLE `user` (
   KEY `FKn82ha3ccdebhokx3a8fgdqeyy` (`role_id`),
   CONSTRAINT `FKn82ha3ccdebhokx3a8fgdqeyy` FOREIGN KEY (`role_id`) REFERENCES `role` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
