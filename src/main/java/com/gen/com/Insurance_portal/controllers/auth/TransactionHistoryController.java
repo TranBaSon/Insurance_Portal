@@ -3,6 +3,7 @@ package com.gen.com.Insurance_portal.controllers.auth;
 import com.gen.com.Insurance_portal.models.RequestModels.ParamsModel;
 import com.gen.com.Insurance_portal.models.RequestModels.TransactionHistoryModel;
 import com.gen.com.Insurance_portal.models.responseModels.ResponseMessageModel;
+import com.gen.com.Insurance_portal.models.responseModels.TransactionHistoryResponse;
 import com.gen.com.Insurance_portal.services.ITransactionHistoryService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
@@ -26,8 +27,8 @@ public class TransactionHistoryController {
 
     @PostMapping
     public ResponseEntity<?> create(@RequestBody @Valid TransactionHistoryModel transactionHistoryModel) {
-        transactionHistoryService.create(transactionHistoryModel);
-        return new ResponseEntity<>(new ResponseMessageModel(true), HttpStatus.OK);
+        TransactionHistoryResponse response = transactionHistoryService.create(transactionHistoryModel);
+        return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
     @PreAuthorize(value = "hasRole('HistoryTransaction_list')")
@@ -47,20 +48,4 @@ public class TransactionHistoryController {
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
-//    @Operation(summary = "Required Header { Authorization : bearer key }",security = { @SecurityRequirement(name = "bearer key") })
-//    @GetMapping("/{code}")
-//    public ResponseEntity<?> getOne(@PathVariable String code) {
-//        return new ResponseEntity<>(
-//                new ResponseObjectModel(true, transactionHistoryService.findByTransactionCode(code)),
-//                HttpStatus.OK);
-//    }
-//
-//    @Operation(summary = "Required Header { Authorization : bearer key }",security = { @SecurityRequirement(name = "bearer key") })
-//    @GetMapping("/{id}")
-//    public ResponseEntity<?> getOneById(@PathVariable Long id) {
-//        return new ResponseEntity<>(
-//                new ResponseObjectModel(true, transactionHistoryService.findById(id)
-//                        .orElseThrow(() -> new NotFoundEntityException(id, "TransactionHistory"))),
-//                HttpStatus.OK);
-//    }
 }

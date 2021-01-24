@@ -165,6 +165,7 @@ com/gen/com/Insurance_portal/common/enums/PartnerStatus.class
 com/gen/com/Insurance_portal/exceptions/CustomGlobalExceptionHandler.class
 com/gen/com/Insurance_portal/models/RequestModels/ResendCodeModel.class
 com/gen/com/Insurance_portal/services/ISysAdminService.class
+com/gen/com/Insurance_portal/models/responseModels/TransactionHistoryResponse.class
 com/gen/com/Insurance_portal/exceptions/MessageException.class
 com/gen/com/Insurance_portal/models/responseModels/UTransactionHistoryModel.class
 com/gen/com/Insurance_portal/entites/Partner.class

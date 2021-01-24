@@ -62,6 +62,7 @@
 /Users/transon/workspace/aptech/Insurance_Portal/src/main/java/com/gen/com/Insurance_portal/entites/User.java
 /Users/transon/workspace/aptech/Insurance_Portal/src/main/java/com/gen/com/Insurance_portal/models/responseModels/CarModel.java
 /Users/transon/workspace/aptech/Insurance_Portal/src/main/java/com/gen/com/Insurance_portal/common/enums/Gender.java
+/Users/transon/workspace/aptech/Insurance_Portal/src/main/java/com/gen/com/Insurance_portal/models/responseModels/TransactionHistoryResponse.java
 /Users/transon/workspace/aptech/Insurance_Portal/src/main/java/com/gen/com/Insurance_portal/entites/CarBrand.java
 /Users/transon/workspace/aptech/Insurance_Portal/src/main/java/com/gen/com/Insurance_portal/configs/ApplicationSecurityConfig.java
 /Users/transon/workspace/aptech/Insurance_Portal/src/main/java/com/gen/com/Insurance_portal/models/RequestModels/UserModel.java

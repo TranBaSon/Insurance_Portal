@@ -10,6 +10,7 @@ import com.gen.com.Insurance_portal.exceptions.NotFoundEntityException;
 import com.gen.com.Insurance_portal.exceptions.NotFoundEntityExceptionByCode;
 import com.gen.com.Insurance_portal.models.RequestModels.ParamsModel;
 import com.gen.com.Insurance_portal.models.RequestModels.TransactionHistoryModel;
+import com.gen.com.Insurance_portal.models.responseModels.TransactionHistoryResponse;
 import com.gen.com.Insurance_portal.repositories.TransactionHistoryRepository;
 import com.gen.com.Insurance_portal.services.*;
 import com.gen.com.Insurance_portal.utils.JwtUtil;
@@ -53,7 +54,7 @@ public class TransactionHistoryService extends AbstractService<TransactionHistor
     }
 
     @Override
-    public void create(TransactionHistoryModel transactionHistoryModel) {
+    public TransactionHistoryResponse create(TransactionHistoryModel transactionHistoryModel) {
 
         Product product = productService.findById(transactionHistoryModel.getProductId())
                 .orElseThrow(() -> new NotFoundEntityException(transactionHistoryModel.getProductId(), "Product"));
@@ -174,6 +175,10 @@ public class TransactionHistoryService extends AbstractService<TransactionHistor
         claimsInfo.setContractCode(contract.getCode());
         claimsInfoService.save(claimsInfo);
 
+        TransactionHistoryResponse response = TransactionHistoryMapper.INSTANCE
+                .transactionHistoryModelToResponse(transactionHistoryModel);
+        response.setContractCode(contractCode);
+        return response;
     }
 
     @Override
