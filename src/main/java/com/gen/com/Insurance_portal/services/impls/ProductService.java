@@ -2,7 +2,6 @@ package com.gen.com.Insurance_portal.services.impls;
 
 import com.gen.com.Insurance_portal.common.enums.ProductStatus;
 import com.gen.com.Insurance_portal.common.mappers.ProductMapper;
-import com.gen.com.Insurance_portal.entites.Partner;
 import com.gen.com.Insurance_portal.entites.Product;
 import com.gen.com.Insurance_portal.entites.ProductCategory;
 import com.gen.com.Insurance_portal.exceptions.MessageException;
@@ -14,34 +13,25 @@ import com.gen.com.Insurance_portal.models.RequestModels.UpdateProductModel;
 import com.gen.com.Insurance_portal.models.responseModels.ProductDetailModel;
 import com.gen.com.Insurance_portal.models.responseModels.ResponseProductModel;
 import com.gen.com.Insurance_portal.repositories.ProductRepository;
-import com.gen.com.Insurance_portal.services.ICloudinaryService;
 import com.gen.com.Insurance_portal.services.IProductCategoryService;
-import com.gen.com.Insurance_portal.services.IPartnerService;
 import com.gen.com.Insurance_portal.services.IProductService;
 import org.apache.logging.log4j.util.Strings;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutionException;
 import java.util.stream.Collectors;
 
 @Service
 public class ProductService extends AbstractService<Product> implements IProductService {
     private final ProductRepository productRepository;
-    private final ICloudinaryService cloudinaryService;
-    private final IPartnerService productProviderService;
     private final IProductCategoryService productCategoryService;
 
     public ProductService(ProductRepository productRepository,
-                          ICloudinaryService cloudinaryService,
-                          IPartnerService productProviderService,
                           IProductCategoryService productCategoryService) {
 
         super(productRepository);
         this.productRepository = productRepository;
-        this.cloudinaryService = cloudinaryService;
-        this.productProviderService = productProviderService;
         this.productCategoryService = productCategoryService;
     }
 
@@ -76,13 +66,13 @@ public class ProductService extends AbstractService<Product> implements IProduct
     public void update(UpdateProductModel productModel, Long id) throws ExecutionException, InterruptedException {
         Product product = findById(id).orElseThrow(() -> new NotFoundEntityException(id, "Product"));
 
-        Boolean existsByNameOrCodeAndIdNot = false;
+        Boolean existsByCodeAndIdIsNot = false;
         if (!Strings.isBlank(productModel.getName()) || !Strings.isBlank(productModel.getCode())){
-            existsByNameOrCodeAndIdNot = productRepository
-                    .existsByNameOrCodeAndIdNot(productModel.getName(), productModel.getCode(), id);
+            existsByCodeAndIdIsNot = productRepository
+                    .existsByCodeAndIdIsNot(productModel.getCode(), id);
         }
 
-        if (existsByNameOrCodeAndIdNot) {
+        if (existsByCodeAndIdIsNot) {
             throw new MessageException("Name or code already exists.");
         }
 
@@ -148,10 +138,13 @@ public class ProductService extends AbstractService<Product> implements IProduct
         Product product = productRepository.findByCode(code)
                 .orElseThrow(() -> new NotFoundEntityExceptionByCode(code, "Product"));
 
-        Boolean existsByNameOrCodeAndIdNot = productRepository
-                .existsByNameOrCodeAndIdNot(productModel.getName(), productModel.getCode(), product.getId());
+        Boolean existsByCodeAndIdIsNot = false;
+        if (!Strings.isBlank(productModel.getName()) || !Strings.isBlank(productModel.getCode())){
+            existsByCodeAndIdIsNot = productRepository
+                    .existsByCodeAndIdIsNot(productModel.getCode(), product.getId());
+        }
 
-        if (existsByNameOrCodeAndIdNot) {
+        if (existsByCodeAndIdIsNot) {
             throw new MessageException("Name or code already exists.");
         }
 
