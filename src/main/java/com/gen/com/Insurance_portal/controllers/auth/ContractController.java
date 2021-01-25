@@ -1,6 +1,9 @@
 package com.gen.com.Insurance_portal.controllers.auth;
 
 import com.gen.com.Insurance_portal.common.enums.ContractStatus;
+import com.gen.com.Insurance_portal.entites.Claims;
+import com.gen.com.Insurance_portal.entites.Contract;
+import com.gen.com.Insurance_portal.exceptions.NotFoundEntityException;
 import com.gen.com.Insurance_portal.models.RequestModels.ParamsModel;
 import com.gen.com.Insurance_portal.models.RequestModels.RequestStatus;
 import com.gen.com.Insurance_portal.models.responseModels.ResponseMessageModel;
@@ -38,6 +41,13 @@ public class ContractController {
 
         Object response = contractService.getList(new ParamsModel(filter, page, size, sort), false);
         return new ResponseEntity<>(response, HttpStatus.OK);
+    }
+
+    @Operation(summary = "Required Header { Authorization : bearer key }",security = { @SecurityRequirement(name = "bearer key") })
+    @GetMapping("/{id}")
+    public ResponseEntity<?> get(@PathVariable Long id) {
+        Contract contract = contractService.findById(id).orElseThrow(() -> new NotFoundEntityException(id, "Contract"));
+        return new ResponseEntity<>(contract, HttpStatus.OK);
     }
 
     @Operation(summary = "Required Header { Authorization : bearer key }",security = { @SecurityRequirement(name = "bearer key") },
